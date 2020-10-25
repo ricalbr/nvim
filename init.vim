@@ -152,5 +152,3 @@ source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
 source $HOME/.config/nvim/plug-config/vim-surround.vim
-
-set sw=4

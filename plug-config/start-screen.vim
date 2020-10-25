@@ -25,6 +25,7 @@ let  g:startify_bookmarks =  [
     \ {'v': '~/.config/nvim'},
     \ {'d': '~/.dotfiles' },
     \ {'g': '~/git'},
+    \ {'z':  ['zsh', '~/.zshrc'] },
     \ ]
 
 " custom commands
@@ -35,7 +36,6 @@ let g:startify_commands = [
     \ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
     \ {'uc': ['Update coc Plugins', ':CocUpdate']},
     \ {'h':  ['Help', ':help']},
-    \ {'z':  ['zsh', '~/.zshrc'] },
     \ ]
 
 let g:startify_enable_special = 0
