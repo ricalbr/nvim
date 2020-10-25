@@ -142,11 +142,19 @@ hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
 "   PLUGINS AND FUNCTIONALITIES
 source $HOME/.config/nvim/plug-config/autopairs.vim
+" source $HOME/.config/nvim/plug-config/deoplete.vim
+" source $HOME/.config/nvim/plug-config/floaterm.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/vimtex.vim
+" source $HOME/.config/nvim/plug-config/templates.vim
+" source $HOME/.config/nvim/plug-config/vbox.vim
 source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/markdown-preview.vim
+" source $HOME/.config/nvim/plug-config/nerdtree.vim
+" source $HOME/.config/nvim/plug-config/pandoc.vim
+" source $HOME/.config/nvim/plug-config/sneak.vim
+" source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/semshi.vim
 source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
