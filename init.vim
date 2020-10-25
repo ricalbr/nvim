@@ -4,6 +4,7 @@ set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
+set smartindent         " C-like indenting
 set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
 set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
