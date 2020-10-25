@@ -25,7 +25,7 @@ let  g:startify_bookmarks =  [
     \ {'v': '~/.config/nvim'},
     \ {'d': '~/.dotfiles' },
     \ {'g': '~/git'},
-    \ {'z':  ['zsh', '~/.zshrc'] },
+    \ {'z': '~/.zshrc' },
     \ ]
 
 " custom commands
