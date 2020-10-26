@@ -122,7 +122,8 @@ autocmd VimEnter *
 
 
 "   THEMING
-colorscheme jellybeans
+" colorscheme peachpuff                                 " light colorscheme
+colorscheme jellybeans                                  " dark colorscheme
 source $HOME/.config/nvim/themes/airline.vim
 
 hi Pmenu guibg='#00010a' guifg=white                    " popup menu colors
