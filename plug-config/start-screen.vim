@@ -17,7 +17,7 @@ let g:startify_fortune_use_unicode = 1
 let g:webdevicons_enable_startify = 1
 
 function! StartifyEntryFormat()
-        return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+        return 'WebDevIconsGetFileTypeSymbol(absolute_path) ."  ". entry_path'
     endfunction
 
 " bookmark examples
