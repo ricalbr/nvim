@@ -1,4 +1,7 @@
-
+"
+" INIT.VIM
+"
+" rcrlbr
 
 set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
