@@ -4,7 +4,7 @@ au BufWritePre * :%s/\s\+$//e                           " remove trailing whites
 au CursorHold * silent call CocActionAsync('highlight') " highlight match on cursor hold
 
 " enable spell only if file type is normal text
-let spellable = ['markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
+let spellable = ['markdown', 'gitcommit', 'txt', 'tex', 'text', 'liquid', 'rst']
 autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
 
 " coc completion popup
