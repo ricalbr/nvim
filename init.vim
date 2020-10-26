@@ -95,6 +95,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'honza/vim-snippets'                               " actual snippets
     Plug 'sheerun/vim-polyglot'                             " improved syntax
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
+    Plug 'jiangmiao/auto-pairs'                             " auto-pairs utility
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
     Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
