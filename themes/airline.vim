@@ -1,4 +1,4 @@
-let g:airline_theme='bubblegum'
+let g:airline_theme='transparent'
 let g:airline_skip_empty_sections = 1
 let g:airline_section_warning = ''
 let g:airline_section_x=''
