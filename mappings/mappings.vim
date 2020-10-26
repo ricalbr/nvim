@@ -123,6 +123,9 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" spell checker
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " overload q and w command
 :command! Q q
 :command! W w
