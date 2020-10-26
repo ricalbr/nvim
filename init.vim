@@ -39,6 +39,8 @@ set lazyredraw
 set redrawtime=10000
 set synmaxcol=180
 set re=1
+setlocal spell
+set spelllang=it,en_gb
 
 " required by coc
 set hidden
@@ -122,17 +124,18 @@ autocmd VimEnter *
 
 
 "   THEMING
-" colorscheme peachpuff                                 " light colorscheme
-colorscheme jellybeans                                  " dark colorscheme
+set background=light
+colorscheme solarized8_high                               " light colorscheme
+colorscheme nord                                          " dark colorscheme
 source $HOME/.config/nvim/themes/airline.vim
 
-hi Pmenu guibg='#00010a' guifg=white                    " popup menu colors
-hi Comment gui=italic cterm=italic                      " italic comments
-hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
-hi NonText guifg=bg                                     " mask ~ on empty lines
-hi clear CursorLineNr                                   " use the theme color for relative number
-hi CursorLineNr gui=bold                                " make relative number bold
-hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
+hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
+hi Comment gui=italic cterm=italic                        " italic comments
+hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE            " search string highlight color
+hi NonText guifg=bg                                       " mask ~ on empty lines
+hi clear CursorLineNr                                     " use the theme color for relative number
+hi CursorLineNr gui=bold                                  " make relative number bold
+hi SpellBad guifg=NONE gui=bold,undercurl                 " misspelled words
 
 " colors for git (especially the gutter)
 hi DiffAdd  guibg=#0f111a guifg=#43a047
