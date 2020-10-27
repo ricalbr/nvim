@@ -1,7 +1,7 @@
 "
 " INIT.VIM
 "
-" rcrlbr
+" @rcrlbr
 
 set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
@@ -87,7 +87,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline'                          " airline status bar
     Plug 'vim-airline/vim-airline-themes'                   " airline themes
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-    Plug 'rafi/awesome-vim-colorschemes'                    " vim-colorschemes collection
+    Plug 'arcticicestudio/nord-vim'                         " nord colorschemes
+    Plug 'mswift42/vim-themes'                              " soft colorschemes
     Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
     "}}}
 
@@ -114,7 +115,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
     " LaTeX
-    " Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     Plug 'lervag/vimtex'
 
 call plug#end()
@@ -127,9 +127,8 @@ autocmd VimEnter *
 
 
 "   THEMING
-set background=light
-colorscheme solarized8_high                               " light colorscheme
 colorscheme nord                                          " dark colorscheme
+" colorscheme soft-stone                                  " light colorscheme
 source $HOME/.config/nvim/themes/airline.vim
 
 hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
@@ -138,7 +137,8 @@ hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE            " search string highli
 hi NonText guifg=bg                                       " mask ~ on empty lines
 hi clear CursorLineNr                                     " use the theme color for relative number
 hi CursorLineNr gui=bold                                  " make relative number bold
-hi SpellBad guifg=NONE gui=bold,undercurl                 " misspelled words
+hi SpellBad guifg=NONE gui=undercurl                      " misspelled words in GUI
+hi SpellBad cterm=undercurl,bold                          " misspelled words in terminal
 
 " colors for git (especially the gutter)
 hi DiffAdd  guibg=#0f111a guifg=#43a047
