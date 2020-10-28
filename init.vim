@@ -100,7 +100,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'SirVer/ultisnips'                                 " snippets manager
     Plug 'honza/vim-snippets'                               " actual snippets
     Plug 'sheerun/vim-polyglot'                             " improved syntax
-    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
     Plug 'jiangmiao/auto-pairs'                             " auto-pairs utility
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
@@ -162,7 +161,6 @@ source $HOME/.config/nvim/plug-config/markdown-preview.vim
 " source $HOME/.config/nvim/plug-config/pandoc.vim
 " source $HOME/.config/nvim/plug-config/sneak.vim
 " source $HOME/.config/nvim/plug-config/quickscope.vim
-source $HOME/.config/nvim/plug-config/semshi.vim
 source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
