@@ -1,7 +1,7 @@
 "" the essentials
 nnoremap <Space> <nop>
 let mapleader="\<Space>"
-" nmap \ <leader>q
+nmap \ <leader>q
 map <F6> :Startify <CR>
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
@@ -31,6 +31,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" horizontal navigation
+nnoremap <S-h> g^
+nnoremap <S-l> g$
+vnoremap <S-h> g^
+vnoremap <S-l> g$
+
 " disable hl with 2 esc
 noremap <silent><esc> <esc>:noh<CR><esc>
 
@@ -52,14 +58,13 @@ nmap <F1> <plug>(fzf-maps-n)
 imap <F1> <plug>(fzf-maps-i)
 vmap <F1> <plug>(fzf-maps-x)
 
-"" coc
-
+"" CoC
 " use tab to navigate snippet placeholders
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use enter to accept snippet expansion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -95,6 +100,11 @@ nmap <leader>gb :Gblame<CR>
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+
+" LaTeX bindings
+nnoremap <space>l :VimtexCompile<CR>
+nnoremap <space>i :VimtexTocToggle<CR>
+nnoremap <space>p :VimtexView<CR>
 
 " formatting parenthesis for programming
 inoremap { {}<Left>
