@@ -88,7 +88,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline-themes'                   " airline themes
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
     Plug 'arcticicestudio/nord-vim'                         " nord colorschemes
-    Plug 'mswift42/vim-themes'                              " soft colorschemes
     Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
     "}}}
 
@@ -106,7 +105,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
     Plug 'tpope/vim-surround'
     Plug 'mhinz/vim-startify'                               " cool start up screen
-    Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
+    Plug 'psliwka/vim-smoothie'                             " smooth scrolling
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
     Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 
@@ -127,7 +126,7 @@ autocmd VimEnter *
 
 "   THEMING
 colorscheme nord                                          " dark colorscheme
-" colorscheme soft-stone                                  " light colorscheme
+" colorscheme soft                                          " light colorscheme
 source $HOME/.config/nvim/themes/airline.vim
 
 hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
