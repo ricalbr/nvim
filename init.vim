@@ -99,7 +99,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
     Plug 'SirVer/ultisnips'                                 " snippets manager
     Plug 'honza/vim-snippets'                               " actual snippets
-    Plug 'sheerun/vim-polyglot'                             " improved syntax
     Plug 'jiangmiao/auto-pairs'                             " auto-pairs utility
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
