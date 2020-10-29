@@ -46,11 +46,11 @@ command! -nargs=0 Format :call CocAction('format')
 " organize imports
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" check if last inserted char is a backspace (used by coc pmenu)
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" " check if last inserted char is a backspace (used by coc pmenu)
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 " show docs on things with K
 function! s:show_documentation()
