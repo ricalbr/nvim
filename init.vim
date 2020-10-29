@@ -7,11 +7,11 @@ set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
-set smartindent         " C-like indenting
+set smartindent                                         " C-like indenting
 set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
 set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
+set fillchars+=vert:\▏                                  " requires a patched nerd font
 set wrap breakindent                                    " wrap long lines to the width set by tw
 set encoding=utf-8                                      " text encoding
 set number                                              " enable numbers on the left
@@ -38,12 +38,15 @@ set path+=.,**
 set nocursorline
 set nocursorcolumn
 set scrolljump=5
+set scrolloff=8
+set sidescrolloff=5
 set lazyredraw
 set redrawtime=10000
 set synmaxcol=180
 set re=1
 setlocal spell
 set spelllang=it,en_gb
+set noswapfile
 
 " required by coc
 set hidden
@@ -85,9 +88,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " ================= looks and GUI stuff ================== "{{{
 
     Plug 'vim-airline/vim-airline'                          " airline status bar
-    Plug 'vim-airline/vim-airline-themes'                   " airline themes
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-    Plug 'arcticicestudio/nord-vim'                         " nord colorschemes
     Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
     "}}}
 
@@ -103,7 +104,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
     Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-surround'                               " surround stuff
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
@@ -138,10 +139,10 @@ hi CursorLineNr gui=bold                                  " make relative number
 hi SpellBad guifg=NONE gui=undercurl                      " misspelled words in GUI
 hi SpellBad cterm=undercurl,bold                          " misspelled words in terminal
 
-" colors for git (especially the gutter)
-hi DiffAdd  guibg=#0f111a guifg=#43a047
-hi DiffChange guibg=#0f111a guifg=#fdd835
-hi DiffRemoved guibg=#0f111a guifg=#e53935
+" " colors for git (especially the gutter)
+" hi DiffAdd  guibg=#0f111a guifg=#43a047
+" hi DiffChange guibg=#0f111a guifg=#fdd835
+" hi DiffRemoved guibg=#0f111a guifg=#e53935
 
 " coc multi cursor highlight color
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
