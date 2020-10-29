@@ -1,6 +1,5 @@
 {
   // normal settings
-  "coc.preferences.noselect": false,
   "coc.preferences.colorSupport": true,
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.formatOnSaveFiletypes": [
@@ -11,7 +10,8 @@
     "markdown",
     "typescript",
     "python",
-    "cpp"
+    "cpp",
+    "tex"
   ],
 
   // suggest settings
@@ -69,7 +69,6 @@
   "list.selectedSignText": " ",
 
   // explorer
-  "explorer.width": 15,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": true,
@@ -86,8 +85,5 @@
   "python.autoComplete.addBrackets": true,
   "python.jediEnabled": false,
   "html.autoClosingTags": true,
-  "snippets.ultisnips.directories": [
-    "UltiSnips",
-    "~/.config/nvim/utils/snips"
-  ],
+  "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
 }
