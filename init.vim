@@ -90,6 +90,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline'                          " airline status bar
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
     Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
+    Plug 'preocanin/greenwint'
     "}}}
 
     " ================= Functionalities ================= "{{{
@@ -125,8 +126,8 @@ autocmd VimEnter *
 
 
 "   THEMING
-colorscheme nord                                          " dark colorscheme
-" colorscheme soft                                          " light colorscheme
+" colorscheme nord                                          " dark colorscheme
+colorscheme soft                                          " light colorscheme
 source $HOME/.config/nvim/themes/airline.vim
 
 hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
