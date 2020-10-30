@@ -38,7 +38,7 @@ set path+=.,**
 set nocursorline
 set nocursorcolumn
 set scrolljump=5
-set scrolloff=8
+set scrolloff=5
 set sidescrolloff=5
 set lazyredraw
 set redrawtime=10000

@@ -22,7 +22,7 @@ function! StartifyEntryFormat()
 
 " bookmark examples
 let  g:startify_bookmarks =  [
-    \ {'v': '~/.config/nvim'},
+    \ {'v': '~/.config/nvim/init.vim'},
     \ {'d': '~/.dotfiles' },
     \ {'g': '~/git'},
     \ {'z': '~/.zshrc' },
