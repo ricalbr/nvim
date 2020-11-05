@@ -11,7 +11,6 @@ endif
 set t_Co=256
 let g:colors_name = "soft"
 
-
 " Define reusable colorvariables.
 let s:bg="#efece3"
 let s:fg="#000000"
@@ -53,7 +52,7 @@ exe 'hi WildMenu guifg='s:str' guibg='s:bg
 exe 'hi Boolean guifg='s:const
 exe 'hi Character guifg='s:const
 exe 'hi Comment guifg='s:comment
-exe 'hi Conditional guifg='s:keyword
+exe 'hi Conditional guifg='s:keyword' gui=bold'
 exe 'hi Constant guifg='s:const
 exe 'hi Todo guibg='s:bg
 exe 'hi Define guifg='s:keyword

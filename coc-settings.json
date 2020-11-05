@@ -53,7 +53,7 @@
   // diagnostic settings
   "diagnostic.displayByAle": false,
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.errorSign": "✘",
+  "diagnostic.errorSign": "❌",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "",
