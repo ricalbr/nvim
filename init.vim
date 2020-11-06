@@ -88,7 +88,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Looks and GUI stuff
     Plug 'vim-airline/vim-airline'                          " airline status bar
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-    Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
+    " Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
 
     " Functionalities
     Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
@@ -100,8 +100,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-python/python-syntax'                         " enhanced Python syntax
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
-    Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-    Plug 'tpope/vim-dispatch'                               " asynchronous build and test dispatcher
+    " Plug 'tpope/vim-dispatch'                               " asynchronous build and test dispatcher
     Plug 'tpope/vim-surround'                               " surround stuff
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
