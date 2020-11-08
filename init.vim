@@ -2,9 +2,13 @@
 " INIT.VIM
 "
 " @rcrlbr
+set nocp
+filetype plugin on
+filetype indent on
+syntax enable
 
 set termguicolors                                       " Opaque Background
-set mouse=a                                             " enable mouse scrolling
+set mouse-=a                                            " disable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
 set smartindent                                         " C-like indenting
@@ -12,18 +16,16 @@ set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
 set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
 set fillchars+=vert:\▏                                  " requires a patched nerd font
-set wrap breakindent                                    " wrap long lines to the width set by tw
+" set wrap break indent                                    " wrap long lines to the width set by two
 set encoding=utf-8                                      " text encoding
-set number                                              " enable numbers on the left
-set relativenumber                                      " current line is 0
+set number relativenumber                               " enable relative numbers on the left
 set title                                               " tab title as file name
-set noshowmode                                          " dont show current mode below statusline
+set noshowmode                                          " don't show current mode below statusline
 set noshowcmd                                           " to get rid of display of last command
 set conceallevel=2                                      " set this so we wont break indentation plugin
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
 set tw=90                                               " auto wrap lines that are longer than that
-set emoji                                               " enable emojis
 set history=1000                                        " history limit
 set backspace=indent,eol,start                          " sensible backspacing
 set undofile                                            " enable persistent undo
@@ -35,8 +37,8 @@ set grepprg=rg\ --vimgrep                               " use rg as default grep
 
 " performance tweaks
 set path+=.,**
-set nocursorline
-set nocursorcolumn
+" set nocursorline
+" set nocursorcolumn
 set scrolljump=5
 set scrolloff=5
 set sidescrolloff=5
@@ -64,14 +66,14 @@ let loaded_netrw = 0                                    " diable netrw
 let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
+let g:loaded_ruby_provider = expand('/usr/bin/ruby')
 let g:python3_host_prog = expand('/usr/bin/python3')
-let g:python_host_prog = '/usr/bin/python'              " Python2 PATH
+" let g:python_host_prog = '/usr/bin/python'              " Python2 PATH
 
 
 "   FUNCTIONS, AUTOCMDs AND MAPPINGS"
 source $HOME/.config/nvim/functions/functions.vim
-source $HOME/.config/nvim/mappings/mappings.vim
+source $HOME/.config/nvim/keymap/mappings.vim
 
 
 "   VIM-PLUG AND PLUGINS
@@ -87,8 +89,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Looks and GUI stuff
     Plug 'vim-airline/vim-airline'                          " airline status bar
+    Plug 'vim-airline/vim-airline-themes'                   " airline status bar
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-    " Plug 'vimwiki/vimwiki'                                  " wiki for notes and diary
 
     " Functionalities
     Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
@@ -96,22 +98,28 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
     Plug 'SirVer/ultisnips'                                 " snippets manager
     Plug 'honza/vim-snippets'                               " actual snippets
-    Plug 'bfrg/vim-cpp-modern'                              " enhanced C/C++ syntax
-    Plug 'vim-python/python-syntax'                         " enhanced Python syntax
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
-    " Plug 'tpope/vim-dispatch'                               " asynchronous build and test dispatcher
     Plug 'tpope/vim-surround'                               " surround stuff
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
     Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 
+    " C/C++
+    Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}              " enhanced C/C++ syntax
+
+    " Python
+    Plug 'cjrh/vim-conda', {'for': 'python'}                " conda integration
+    Plug 'vim-python/python-syntax', {'for': 'python'}      " enhanced Python syntax
+
     " Markdown
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'iamcco/markdown-preview.nvim', {
+        \'do': 'cd app && yarn install',
+        \'for': 'markdown'}                                 " Markdown live preview
 
     " LaTeX
-    Plug 'lervag/vimtex'
+    Plug 'lervag/vimtex', {'for': 'tex'}                    " LaTeX extension for VIM
 
 call plug#end()
 
@@ -123,8 +131,8 @@ autocmd VimEnter *
 
 "   THEMING
 colorscheme soft                                          " light colorscheme
-colorscheme dark
-source $HOME/.config/nvim/themes/airline.vim
+colorscheme dark                                          " dark colorshceme
+let g:airline_theme='transparent'
 
 hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
 hi Comment gui=italic cterm=italic                        " italic comments
@@ -135,27 +143,18 @@ hi CursorLineNr gui=bold                                  " make relative number
 hi SpellBad guifg=NONE gui=undercurl                      " misspelled words in GUI
 hi SpellBad cterm=undercurl,bold                          " misspelled words in terminal
 
-" " colors for git (especially the gutter)
-" hi DiffAdd  guibg=#0f111a guifg=#43a047
-" hi DiffChange guibg=#0f111a guifg=#fdd835
-" hi DiffRemoved guibg=#0f111a guifg=#e53935
-
 " coc multi cursor highlight color
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 let g:python_highlight_all = 1
 
 "   PLUGINS AND FUNCTIONALITIES
-source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/coc.vim
-source $HOME/.config/nvim/plug-config/vimtex.vim
-" source $HOME/.config/nvim/plug-config/templates.vim
-" source $HOME/.config/nvim/plug-config/vbox.vim
-source $HOME/.config/nvim/plug-config/start-screen.vim
+source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/markdown-preview.vim
-" source $HOME/.config/nvim/plug-config/pandoc.vim
-" source $HOME/.config/nvim/plug-config/sneak.vim
-" source $HOME/.config/nvim/plug-config/quickscope.vim
+source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
+source $HOME/.config/nvim/plug-config/vim-conda.vim
 source $HOME/.config/nvim/plug-config/vim-surround.vim
+source $HOME/.config/nvim/plug-config/vimtex.vim
