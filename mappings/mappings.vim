@@ -21,6 +21,10 @@ vnoremap <LeftRelease> "+y<LeftRelease>
 vnoremap <C-c> "+y<CR>
 vnoremap <C-x> "+d<CR>
 
+" move visual selection
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " switch between splits using ctrl + {h,j,k,l}
 inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
@@ -46,6 +50,26 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " fugitive mappings
 nmap <leader>gd :Gdiffsplit<CR>
 nmap <leader>gb :Gblame<CR>
+
+"" TERMINAL
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"                                      " map <ESC> for exiting terminal
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'    " simulate i<C-R>
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+inoremap <C-h> <C-\><C-N><C-w>h
+inoremap <C-j> <C-\><C-N><C-w>j
+inoremap <C-k> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" add new lines in NORMAL mode
+nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " formatting parenthesis for programming
 inoremap { {}<Left>
@@ -78,9 +102,9 @@ imap <right> <nop>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " overload q and w command
-:command! Q q
-:command! W w
-:command! Wq wq
+command! Q q
+command! W w
+command! Wq wq
 
 " C++
 " Build for debugging
@@ -92,5 +116,6 @@ autocmd filetype cpp nnoremap <F9> :!gdb ./%:r<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> !g++ -std=c++14 -m64 -O3 -I include % -o %:r <CR>
 
 " PYTHON
+autocmd FileType python map <F4> :CondaChangeEnv<CR>
 autocmd FileType python map <buffer> <F7> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F7> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
