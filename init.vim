@@ -73,7 +73,7 @@ let g:python3_host_prog = expand('/usr/bin/python3')
 
 "   FUNCTIONS, AUTOCMDs AND MAPPINGS"
 source $HOME/.config/nvim/functions/functions.vim
-source $HOME/.config/nvim/keymap/mappings.vim
+source $HOME/.config/nvim/mappings/mappings.vim
 
 
 "   VIM-PLUG AND PLUGINS
