@@ -6,6 +6,8 @@ set nocp
 filetype plugin on
 filetype indent on
 syntax enable
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " Accurate colors for alacritty
+let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
 
 set termguicolors                                       " Opaque Background
 set mouse-=a                                            " disable mouse scrolling
@@ -66,9 +68,8 @@ let loaded_netrw = 0                                    " diable netrw
 let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = expand('/usr/bin/ruby')
+let g:loaded_ruby_provider = 0
 let g:python3_host_prog = expand('/usr/bin/python3')
-" let g:python_host_prog = '/usr/bin/python'              " Python2 PATH
 
 
 "   FUNCTIONS, AUTOCMDs AND MAPPINGS"
