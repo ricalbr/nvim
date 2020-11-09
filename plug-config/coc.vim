@@ -15,6 +15,13 @@ let g:coc_global_extensions = [
             \'coc-marketplace',
             \'coc-highlight',
             \'coc-vimtex',
+            \'coc-html',
+            \'coc-tsserver',
+            \'coc-css',
+            \'coc-cssmodules',
+            \'coc-tslint',
+            \'coc-fzf-preview',
+            \'coc-yaml',
             \]
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
