@@ -116,6 +116,6 @@ autocmd filetype cpp nnoremap <F9> :!gdb ./%:r<CR>
 autocmd filetype cpp nnoremap <F5> :w <bar> !g++ -std=c++14 -m64 -O3 -I include % -o %:r <CR>
 
 " PYTHON
-autocmd FileType python map <F4> :CondaChangeEnv<CR>
+autocmd FileType python map <F4> :CocCommand python.setInterpreter<CR>
 autocmd FileType python map <buffer> <F7> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F7> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>

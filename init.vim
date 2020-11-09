@@ -110,7 +110,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}              " enhanced C/C++ syntax
 
     " Python
-    Plug 'cjrh/vim-conda', {'for': 'python'}                " conda integration
     Plug 'vim-python/python-syntax', {'for': 'python'}      " enhanced Python syntax
 
     " Markdown
