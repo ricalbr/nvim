@@ -90,7 +90,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Looks and GUI stuff
     Plug 'vim-airline/vim-airline'                          " airline status bar
-    Plug 'vim-airline/vim-airline-themes'                   " airline status bar
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
 
     " Functionalities
