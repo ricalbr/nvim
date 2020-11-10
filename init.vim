@@ -6,10 +6,11 @@ set nocp
 filetype plugin on
 filetype indent on
 syntax enable
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " Accurate colors for alacritty
-let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
 
 set termguicolors                                       " Opaque Background
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " Accurate colors for alacritty
+let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
+set shell=/usr/bin/zsh
 set mouse-=a                                            " disable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
@@ -60,7 +61,7 @@ set cmdheight=1
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
-
+set pumheight=12                                        " number of suggestions in menu
 
 "   PLUGINS CONFIGURATION"
 "" built in plugins
