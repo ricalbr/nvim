@@ -20,7 +20,7 @@
   "suggest.snippetIndicator": "",
   "suggest.removeDuplicateItems": true,
   "suggest.triggerAfterInsertEnter": true,
-  "suggest.timeout": 2000,
+  "suggest.timeout": 500,
   "suggest.minTriggerInputLength": 1,
   "suggest.completionItemKindLabels": {
     "function": "\uf794",
@@ -84,6 +84,7 @@
   // other stuff (language specific)
   "python.autoComplete.addBrackets": true,
   "python.jediEnabled": false,
+  "python.venvFolders": ["$HOME/miniconda3/envs/"],
   "html.autoClosingTags": true,
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
 }
