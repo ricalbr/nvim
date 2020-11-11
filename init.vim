@@ -7,9 +7,6 @@ filetype plugin on
 filetype indent on
 syntax enable
 
-set termguicolors                                       " Opaque Background
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " Accurate colors for alacritty
-let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
 set shell=/usr/bin/zsh
 set mouse-=a                                            " disable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
@@ -130,7 +127,13 @@ autocmd VimEnter *
   \| endif
 
 "   THEMING
-colorscheme soft                                          " light colorscheme
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " enable real colors
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors                                       " opaque background
+endif
+
+" colorscheme soft                                          " light colorscheme
 colorscheme dark                                          " dark colorshceme
 let g:airline_theme='transparent'
 
