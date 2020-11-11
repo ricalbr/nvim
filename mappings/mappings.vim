@@ -106,16 +106,3 @@ command! Q q
 command! W w
 command! Wq wq
 
-" C++
-" Build for debugging
-autocmd filetype cpp nnoremap <buffer> <F7> :w <bar> !g++ -std=c++11 -Wall -m64 -g -I include % -o %:r <CR>
-autocmd filetype cpp nnoremap <buffer> <F8> :!./%:r<CR>
-" Debugging
-autocmd filetype cpp nnoremap <buffer> <F9> :!gdb ./%:r<CR>
-"   Release
-autocmd filetype cpp nnoremap <buffer> <F5> :w <bar> !g++ -std=c++14 -m64 -O3 -I include % -o %:r <CR>
-
-" PYTHON
-autocmd FileType python map <buffer> <F4> :CocCommand python.setInterpreter<CR>
-autocmd FileType python map <buffer> <F7> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F7> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
