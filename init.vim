@@ -101,6 +101,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'                               " surround stuff
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
+    Plug 'mizlan/termbufm'                                  " terminal wrapper inside nvim
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
     Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 
@@ -158,6 +159,6 @@ source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
-source $HOME/.config/nvim/plug-config/vim-conda.vim
+source $HOME/.config/nvim/plug-config/termbufm.vim
 source $HOME/.config/nvim/plug-config/vim-surround.vim
 source $HOME/.config/nvim/plug-config/vimtex.vim
