@@ -83,7 +83,7 @@
 
   // other stuff (language specific)
   "python.autoComplete.addBrackets": true,
-  "python.jediEnabled": true,
+  "python.jediEnabled": false,
   "python.venvFolders": ["$HOME/miniconda3/envs/"],
   "html.autoClosingTags": true,
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
