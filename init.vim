@@ -89,7 +89,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Looks and GUI stuff
     Plug 'vim-airline/vim-airline'                          " airline status bar
     Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-    Plug 'rcrlbr/vim-colors'                                " colorschemes
+    Plug 'ricalbr/vim-colors'                                " colorschemes
 
     " Functionalities
     Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
