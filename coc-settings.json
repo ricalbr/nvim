@@ -84,6 +84,7 @@
   // other stuff (language specific)
   "python.autoComplete.addBrackets": true,
   "python.jediEnabled": false,
+  "python.condaPath": "~/.miniconda/bin/conda",
   "python.venvFolders": ["$HOME/miniconda3/envs/"],
   "html.autoClosingTags": true,
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"]
