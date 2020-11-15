@@ -33,9 +33,3 @@ let g:vimtex_quickfix_ignored_warnings = [
 
 " let g:vimtex_log_verbose = "0"
 
-" LaTeX bindings
-nnoremap <space>ll :VimtexCompile<CR>
-nnoremap <space>lt :VimtexTocToggle<CR>
-nnoremap <space>lv :VimtexView<CR>
-nnoremap <space>lc :VimtexClean<CR>
-
