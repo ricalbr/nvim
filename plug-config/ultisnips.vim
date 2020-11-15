@@ -1,5 +1,5 @@
 " `snips` is the directory in nvim
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+let g:UltiSnipsSnippetDirectories=["ultisnip", "snips"]
 
 " shortcut to go to next position
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
