@@ -14,8 +14,8 @@ let g:termbufm_code_scripts = {
 command! TBuild call TermBufMExecCodeScript(&filetype, 'build')
 command! TRun call TermBufMExecCodeScript(&filetype, 'run')
 
-nnoremap <silent> <leader>kk :TBuild<CR>
-nnoremap <silent> <leader>kl :TRun<CR>
+nnoremap <silent> <leader>jj :TBuild<CR>
+nnoremap <silent> <leader>jk :TRun<CR>
 
 " toggle the window (show/hide) and toggle INSERT mode
 nnoremap <silent> <leader>yy :call TermBufMToggle()<CR>i
