@@ -159,7 +159,6 @@ source $HOME/.config/nvim/plug-config/markdown-preview.vim
 source $HOME/.config/nvim/plug-config/start-screen.vim
 source $HOME/.config/nvim/plug-config/tmux-navigator.vim
 source $HOME/.config/nvim/plug-config/ultisnips.vim
-source $HOME/.config/nvim/plug-config/vim-commentary.vim
 source $HOME/.config/nvim/plug-config/termbufm.vim
 source $HOME/.config/nvim/plug-config/vim-surround.vim
 source $HOME/.config/nvim/plug-config/vimtex.vim
