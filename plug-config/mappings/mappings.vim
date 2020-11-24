@@ -2,7 +2,7 @@
 nnoremap <Space> <nop>
 let mapleader="\<Space>"
 nmap \ <leader>q
-map <F6> :Startify <CR>
+map <F2> :Startify <CR>
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
 nmap <leader>w :w<CR>
