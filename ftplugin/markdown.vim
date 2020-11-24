@@ -1,8 +1,8 @@
 " MARKDOWN
 
 " commment string
-autocmd FileType markdown setlocal commentstring=<!--%s-->
+autocmd FileType markdown setlocal commentstring=<!--\ %s\ -->
 
-" Live Preview
+" Live Preview mapping
 noremap <buffer> <leader>ll :MarkdownPreview<CR>
 noremap <buffer> <leader>lk :MarkdownPreviewStop<CR>
