@@ -41,7 +41,7 @@ set scrolloff=5
 set sidescrolloff=5
 set lazyredraw
 set redrawtime=10000
-set synmaxcol=180
+set synmaxcol=0
 set re=1
 setlocal spell
 set spelllang=it,en_gb
