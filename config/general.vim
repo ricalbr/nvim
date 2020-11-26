@@ -13,7 +13,7 @@ set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
 set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
 set fillchars+=vert:\▏                                  " requires a patched nerd font
-" set wrap break indent                                    " wrap long lines to the width set by two
+set wrap breakindent                                    " wrap long lines to the width set by tw
 set encoding=utf-8                                      " text encoding
 set number relativenumber                               " enable relative numbers on the left
 set title                                               " tab title as file name
@@ -34,8 +34,8 @@ set grepprg=rg\ --vimgrep                               " use rg as default grep
 
 " performance tweaks
 set path+=.,**
-" set nocursorline
-" set nocursorcolumn
+set nocursorline
+set nocursorcolumn
 set scrolljump=5
 set scrolloff=5
 set sidescrolloff=5
@@ -43,9 +43,11 @@ set lazyredraw
 set redrawtime=10000
 set synmaxcol=0
 set re=1
+set noswapfile
+
+" spelling
 setlocal spell
 set spelllang=it,en_gb
-set noswapfile
 
 " required by coc
 set hidden
