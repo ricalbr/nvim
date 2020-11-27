@@ -22,7 +22,7 @@ set noshowcmd                                           " to get rid of display 
 set conceallevel=2                                      " set this so we wont break indentation plugin
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
-set tw=90                                               " auto wrap lines that are longer than that
+set tw=80                                               " auto wrap lines that are longer than that
 set history=1000                                        " history limit
 set backspace=indent,eol,start                          " sensible backspacing
 set undofile                                            " enable persistent undo
