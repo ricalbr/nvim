@@ -57,16 +57,20 @@ autocmd VimEnter *
   \| endif
 
 "   THEMING
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"                  " enable real colors
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors                                       " opaque background
+if (empty($TMUX))
+  if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
 
 " colorscheme soft                                          " light colorscheme
 colorscheme dark                                          " dark colorshceme
 let g:airline_theme='transparent'
 
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE      " transparent background
 hi Pmenu guibg='#00010a' guifg=white                      " popup menu colors
 hi Comment gui=italic cterm=italic                        " italic comments
 hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE            " search string highlight color
@@ -78,6 +82,7 @@ hi SpellBad cterm=undercurl,bold                          " misspelled words in 
 
 " coc multi cursor highlight color
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+
 let g:python_highlight_all = 1
 
 "   FUNCTIONS, AUTOCMDs AND MAPPINGS"
