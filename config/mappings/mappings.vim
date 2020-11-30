@@ -100,7 +100,6 @@ imap <right> <nop>
 
 " spell checker
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-nnoremap <C-l> [s1z=`]a<c-g>u
 
 " overload q and w command
 command! Q q
