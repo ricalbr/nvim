@@ -66,5 +66,6 @@ let g:omni_sql_no_default_maps = 1                      " disable sql omni compl
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
-let g:python3_host_prog = expand('/usr/bin/python3')
+" let g:python3_host_prog = expand('/usr/bin/python3')
+let g:python3_host_prog = '/home/$USER/miniconda3/bin/python3'
 
