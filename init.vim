@@ -1,7 +1,7 @@
 "
 " INIT.VIM
 "
-" @rcrlbr
+" @ricalbr
 
 "   VIM-PLUG AND PLUGINS
 " auto-install vim-plug
@@ -30,7 +30,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'                               " surround stuff
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
-    Plug 'mizlan/termbufm'                                  " terminal wrapper inside nvim
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
     Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 
