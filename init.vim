@@ -28,6 +28,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'                             " better commenting
     Plug 'tpope/vim-fugitive'                               " git support
     Plug 'tpope/vim-surround'                               " surround stuff
+    Plug 'rhysd/clever-f.vim'                               " navigate just with f/F/t/T
     Plug 'mhinz/vim-startify'                               " cool start up screen
     Plug 'psliwka/vim-smoothie'                             " smooth scrolling
     Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
@@ -90,12 +91,12 @@ source $HOME/.config/nvim/functions/functions.vim
 source $HOME/.config/nvim/config/mappings/mappings.vim
 
 "   PLUGINS AND FUNCTIONALITIES
+source $HOME/.config/nvim/config/cleverf.vim
 source $HOME/.config/nvim/config/coc.vim
 source $HOME/.config/nvim/config/fzf.vim
 source $HOME/.config/nvim/config/markdown-preview.vim
 source $HOME/.config/nvim/config/start-screen.vim
 source $HOME/.config/nvim/config/tmux-navigator.vim
 source $HOME/.config/nvim/config/ultisnips.vim
-source $HOME/.config/nvim/config/termbufm.vim
 source $HOME/.config/nvim/config/vim-surround.vim
 source $HOME/.config/nvim/config/vimtex.vim
