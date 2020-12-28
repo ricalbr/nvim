@@ -53,9 +53,9 @@ map <leader>n :CocCommand explorer<CR>
 " Use enter to accept snippet expansion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
-" multi cursor shortcuts
-nmap <silent> <C-a> <Plug>(coc-cursors-word)
-xmap <silent> <C-a> <Plug>(coc-cursors-range)
+" " multi cursor shortcuts
+" nmap <silent> <C-a> <Plug>(coc-cursors-word)
+" xmap <silent> <C-a> <Plug>(coc-cursors-range)
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
