@@ -5,6 +5,7 @@ let g:coc_global_extensions = [
             \'coc-cmake',
             \'coc-css',
             \'coc-cssmodules',
+            \'coc-explorer',
             \'coc-fzf-preview',
             \'coc-git',
             \'coc-highlight',
@@ -45,6 +46,9 @@ inoremap <silent><expr> <TAB>
 		  \ <SID>check_back_space() ? "\<TAB>" :
 		  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"Explorer
+map <leader>n :CocCommand explorer<CR>
 
 " Use enter to accept snippet expansion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
