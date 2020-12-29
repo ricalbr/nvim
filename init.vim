@@ -21,6 +21,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Functionalities
     Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
+    Plug 'antoinemadec/FixCursorHold.nvim'                  " fix CusorHold performances
+    Plug 'liuchengxu/vista.vim'                             " tagbar w/ctags
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
     Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
     Plug 'SirVer/ultisnips'                                 " snippets manager
@@ -84,6 +86,7 @@ hi SpellBad cterm=undercurl,bold                          " misspelled words in 
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
 let g:python_highlight_all = 1
+let g:cursorhold_updatetime = 100
 
 "   FUNCTIONS, AUTOCMDs AND MAPPINGS"
 source $HOME/.config/nvim/config/general.vim
@@ -100,3 +103,4 @@ source $HOME/.config/nvim/config/tmux-navigator.vim
 source $HOME/.config/nvim/config/ultisnips.vim
 source $HOME/.config/nvim/config/vim-surround.vim
 source $HOME/.config/nvim/config/vimtex.vim
+source $HOME/.config/nvim/config/vista.vim
