@@ -1,1 +1,2 @@
-set fo+=cro
+" format options
+set fo+=co
