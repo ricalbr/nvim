@@ -1,4 +1,5 @@
-au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
+" functions and autocmds
+
 au FileType help wincmd L                               " open help in vertical split
 au BufWritePre * :%s/\s\+$//e                           " remove trailing whitespaces before saving
 au CursorHold * silent call CocActionAsync('highlight') " highlight match on cursor hold
