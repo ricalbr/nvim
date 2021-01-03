@@ -11,7 +11,7 @@ set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
 set smartindent                                         " C-like indenting
 set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
-set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
+set list listchars=trail:·,tab:•-                       " use tab to navigate in list mode
 set fillchars+=vert:\▏                                  " requires a patched nerd font
 set wrap breakindent                                    " wrap long lines to the width set by tw
 set encoding=utf-8                                      " text encoding
