@@ -59,7 +59,7 @@
   "diagnostic.hintSign": "",
   "diagnostic.refreshAfterSave": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+  "diagnostic.virtualTextPrefix": " ⚫ ",
   "diagnostic.virtualText": true,
   "diagnostic.enableMessage": "never",
 
