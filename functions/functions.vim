@@ -61,3 +61,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" remove numbers in terminal buffer
+augroup TerminalBuffer
+  autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
