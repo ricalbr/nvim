@@ -4,26 +4,26 @@ set backspace=indent,eol,start
 set hidden
 set noswapfile
 
-set shell=/usr/bin/zsh
+set shell=/usr/bin/bash
+set rnu
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent
 set smartindent
 set expandtab smarttab
 set incsearch ignorecase smartcase hlsearch
+set splitright
+set splitbelow
+set undofile
+set undodir=/tmp
 
 set path+=.,**
+set scrolljump=5
+set scrolloff=5
+set sidescrolloff=5
+set lazyredraw
+set redrawtime=10000
+set synmaxcol=0
 
-" MAPPINGS
-nnoremap <Space> <nop>
-let mapleader="\<Space>"
-nmap \ <leader>q
-nmap <leader>r :so ~/.config/nvim/minimal_init.vim<CR>
-nmap <leader>q :bd<CR>
-nmap <leader>w :w<CR>
-nnoremap <leader>t :filetype detect <CR>
-nmap <Tab> :bnext<CR>
-nmap <S-Tab> :bprevious<CR>
-
-" file explorer
+" File Explorer
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
@@ -50,6 +50,17 @@ endfunction
 
 noremap <leader>n :call ToggleNetrw()<CR>
 
+" MAPPINGS
+nnoremap <Space> <nop>
+let mapleader="\<Space>"
+nmap \ <leader>q
+nmap <leader>r :so ~/.config/nvim/minimal_init.vim<CR>
+nmap <leader>q :bd<CR>
+nmap <leader>w :w<CR>
+nnoremap <leader>t :filetype detect <CR>
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
+
 " emulate windows copy, cut behavior
 vnoremap <LeftRelease> "+y<LeftRelease>
 vnoremap <C-c> "+y<CR>
@@ -64,6 +75,12 @@ inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
+
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -92,15 +109,9 @@ inoremap {{ {
 inoremap {} {}
 
 " mapping C-S to save the file, in all the modes
-nnoremap <silent><c-s> :<c-u>update<CR>
-vnoremap <silent><c-s> <c-c>:update<CR>gv
-inoremap <silent><c-s> <c-o>:update<CR><Esc>
-
-" kill bad habits
-" noremap h <nop>
-" noremap j <nop>
-" noremap k <nop>
-" noremap l <nop>
+nnoremap <silent><C-s> :<c-u>update<CR>
+vnoremap <silent><C-s> <c-c>:update<CR>gv
+inoremap <silent><C-s> <c-o>:update<CR><Esc>
 
 map <up> <nop>
 map <down> <nop>
@@ -116,4 +127,3 @@ imap <right> <nop>
 command! Q q
 command! W w
 command! Wq wq
-
