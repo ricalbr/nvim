@@ -32,4 +32,3 @@ let g:vimtex_quickfix_ignored_warnings = [
       \ ]
 
 " let g:vimtex_log_verbose = "0"
-
