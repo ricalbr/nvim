@@ -24,6 +24,7 @@ function! StartifyEntryFormat()
 let  g:startify_bookmarks =  [
     \ {'v': '~/.config/nvim/init.vim'},
     \ {'c': '~/.config/nvim/coc-settings.json' },
+    \ {'f': '~/.config/fish/config.fish' },
     \ {'z': '~/.zshrc' },
     \ ]
 
