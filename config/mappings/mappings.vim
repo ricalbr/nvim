@@ -12,9 +12,8 @@ nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 noremap <leader>e :PlugInstall<CR>
 
-" new line in normal mode and back
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
+" new line in normal mode
+nnoremap <expr> <Enter> &buftype ==# 'quickfix' ? "\<CR>" : 'o<ESC>'
 
 " emulate windows copy, cut behavior
 vnoremap <LeftRelease> "+y<LeftRelease>
@@ -24,16 +23,6 @@ vnoremap <C-x> "+d<CR>
 " move visual selection
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" switch between splits using ctrl + {h,j,k,l}
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " horizontal navigation
 nnoremap <S-h> g^
@@ -54,18 +43,6 @@ nmap <leader>gb :Gblame<CR>
 "" TERMINAL
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"                                      " map <ESC> for exiting terminal
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'    " simulate i<C-R>
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " add new lines in NORMAL mode
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
