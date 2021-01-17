@@ -4,7 +4,7 @@ filetype plugin on
 filetype indent on
 syntax enable
 
-set shell=/usr/bin/zsh
+set shell=/usr/bin/bash
 set mouse-=a                                            " disable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
