@@ -23,6 +23,11 @@ set lazyredraw
 set redrawtime=10000
 set synmaxcol=0
 
+" spelling
+setlocal spell
+set spellfile=~/.config/nvim/spell/en.utf-8.add
+set spelllang=it,en_gb
+
 " File Explorer
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
