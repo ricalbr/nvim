@@ -47,6 +47,7 @@ set noswapfile
 
 " spelling
 setlocal spell
+set spellfile=~/.config/nvim/spell/en.utf-8.add
 set spelllang=it,en_gb
 
 " required by coc
