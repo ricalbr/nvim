@@ -12,6 +12,9 @@ nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 noremap <leader>e :PlugInstall<CR>
 
+" Join lines keepin the cursor position
+:nnoremap <silent> J :let p=getpos('.')<bar>join<bar>call setpos('.', p)<cr>
+
 " new line in normal mode
 nnoremap <expr> <Enter> &buftype ==# 'quickfix' ? "\<CR>" : 'o<ESC>'
 
@@ -43,6 +46,10 @@ nmap <leader>gb :Gblame<CR>
 "" TERMINAL
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"                                      " map <ESC> for exiting terminal
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'    " simulate i<C-R>
+
+" retain visual selection after `>` or `<`
+vnoremap > >gv
+vnoremap < <gv
 
 " add new lines in NORMAL mode
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
