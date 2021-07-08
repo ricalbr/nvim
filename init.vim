@@ -37,11 +37,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " C/C++
     Plug 'bfrg/vim-cpp-modern', {'for': 'cpp'}              " enhanced C/C++ syntax
+    Plug 'xavierd/clang_complete', {'for': 'cpp'}           " enhanced C/C++ syntax
 
     " Python
     Plug 'vim-python/python-syntax', {'for': 'python'}      " enhanced Python syntax
 
     " Markdown
+    Plug 'reedes/vim-pencil'                                " prose utility
+    ", {'for': 'markdown, text'}                                " prose utility
     Plug 'iamcco/markdown-preview.nvim', {
         \'do': 'cd app && yarn install',
         \'for': 'markdown'}                                 " Markdown live preview
@@ -100,6 +103,7 @@ source $HOME/.config/nvim/config/markdown-preview.vim
 source $HOME/.config/nvim/config/start-screen.vim
 source $HOME/.config/nvim/config/tmux-navigator.vim
 source $HOME/.config/nvim/config/ultisnips.vim
+source $HOME/.config/nvim/config/vim-pencil.vim
 source $HOME/.config/nvim/config/vim-surround.vim
 source $HOME/.config/nvim/config/vimtex.vim
 source $HOME/.config/nvim/config/vista.vim
