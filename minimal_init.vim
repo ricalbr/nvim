@@ -66,6 +66,13 @@ nnoremap <leader>t :filetype detect <CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
+" Join lines keepin the cursor position
+:nnoremap <silent> J :let p=getpos('.')<bar>join<bar>call setpos('.', p)<cr>
+
+" retain visual selection after `>` or `<`
+vnoremap > >gv
+vnoremap < <gv
+
 " emulate windows copy, cut behavior
 vnoremap <LeftRelease> "+y<LeftRelease>
 vnoremap <C-c> "+y<CR>
