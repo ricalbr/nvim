@@ -90,3 +90,10 @@ command! Q q
 command! W w
 command! Wq wq
 
+" file under cursor
+function! OpenFileInPrevWindow()
+    let cfile = expand("<cfile>")
+    wincmd p
+    execute "edit " . cfile
+endfunction
+nmap <F8> :call OpenFileInPrevWindow()<CR>
