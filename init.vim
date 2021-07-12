@@ -44,7 +44,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Markdown
     Plug 'reedes/vim-pencil'                                " prose utility
-    ", {'for': 'markdown, text'}                                " prose utility
     Plug 'iamcco/markdown-preview.nvim', {
         \'do': 'cd app && yarn install',
         \'for': 'markdown'}                                 " Markdown live preview
