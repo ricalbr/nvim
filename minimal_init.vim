@@ -53,7 +53,6 @@ function! ToggleNetrw()
     endif
 endfunction
 
-noremap <leader>n :call ToggleNetrw()<CR>
 
 " MAPPINGS
 nnoremap <Space> <nop>
@@ -65,6 +64,7 @@ nmap <leader>w :w<CR>
 nnoremap <leader>t :filetype detect <CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
+noremap <leader>n :call ToggleNetrw()<CR>
 
 " Join lines keepin the cursor position
 :nnoremap <silent> J :let p=getpos('.')<bar>join<bar>call setpos('.', p)<cr>
