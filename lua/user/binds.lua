@@ -14,38 +14,29 @@ vim.api.nvim_command('command! Wq wq')
 vim.cmd.cnoreabbrev({ 'w!!', 'w !sudo tee > /dev/null %<CR>' })
 
 -- set leader key
-map('n', '<Space>', '<nop>', opts)
 vim.g.mapleader = ' '
-vim.b.mapleader = ' '
-
-map('n', '\\', ':bd<CR>', opts)
 
 -- juggling with files w/ telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fs', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- map('n', '<Leader>s', ':sfind *')
--- map('n', '<Leader>v', ':vert sfind *')
--- map('n', '<Leader>t', ':tabfind *')
+vim.keymap.set('n', '<leader>ff', ':lua require"telescope.builtin".find_files(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
+vim.keymap.set('n', '<leader>fg', ':lua require"telescope.builtin".live_grep(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
+vim.keymap.set('n', '<leader>fb', ':lua require"telescope.builtin".buffers(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
+vim.keymap.set('n', '<leader>fh', ':lua require"telescope.builtin".help_tags(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
 
+map('n', '\\', ':bd<CR>', opts)
+map('n', '<leader>nt', ':tabnew<CR>', opts)
+map('n', '<leader>dt', ':tabclose<CR>', opts)
 map('n', '<Tab>', ':bnext<CR>', opts)
 map('n', '<S-Tab>', ':bprevious<CR>', opts)
 map('n', '<Leader>d', ':w !diff % -<CR>', opts)
-map('n', '<Leader>r', ':retab<CR>', opts)
+map('n', '<Leader>re', ':retab<CR>', opts)
 
--- mapping C-S to save the file, in all the modes
-map('n', '<C-s>', '<C-u>:Update<CR>', opts)
-map('v', '<C-s>', '<C-c>:Update<CR>gv', opts)
-map('i', '<C-s>', '<C-o>:Update<CR>', opts)
+-- mapping C-s to save the file, in all the modes
+map('n', '<C-s>', '<Esc>:Update<CR>', opts)
+map('v', '<C-s>', '<Esc>:Update<CR>gv', opts)
+map('i', '<C-s>', '<Esc>:Update<CR>', opts)
 
 -- join lines keepin the cursor position
 map('n', 'J', ':let p=getpos(".")<bar>join<bar>call setpos(".", p)<CR>', opts)
-
--- capital Y standard behaviour
-map('n', 'Y', 'y$', opts)
 
 -- move vertically by visual line (don't skip wrapped lines)
 map('n', 'j', 'gj', opts)
@@ -54,10 +45,6 @@ map('n', 'k', 'gk', opts)
 -- retain visual selection after `>` or `<`
 map('v', '>', '>gv', opts)
 map('v', '<', '<gv', opts)
-
--- move visual selection
-map('x', 'J', ':move ">+1<CR>gv=gv"', opts)
-map('x', 'K', ':move "<-2<CR>gv=gv"', opts)
 
 -- argslist navigation
 map('n', '[a', ':previous<CR>', opts)
@@ -85,7 +72,7 @@ map('t', '<C-j>', '<C-\\><C-N><C-w>j', term_opts)
 map('t', '<C-k>', '<C-\\><C-N><C-w>k', term_opts)
 map('t', '<C-l>', '<C-\\><C-N><C-w>l', term_opts)
 
--- " window management
+-- window management
 map('n', '<Leader>0', '<C-w>=', opts)
 map('n', '<Leader>+', ':vertical resize +10<CR>', opts)
 map('n', '<Leader>-', ':vertical resize -10<CR>', opts)
@@ -101,3 +88,17 @@ map('i', '<Up>', '<NOP>', opts)
 map('i', '<Left>', '<NOP>', opts)
 map('i', '<Right>', '<NOP>', opts)
 
+-- gitsigns
+local _, gitsigns = pcall(require, "gitsigns")
+gitsigns.setup {
+  on_attach = function()
+    map('n', '<Leader>sh', ':Gitsigns stage_hunk<CR>', opts)
+    map('n', '<Leader>rh', ':Gitsigns reset_hunk<CR>', opts)
+    map('n', '<Leader>nh', ':Gitsigns next_hunk<CR>', opts)
+    map('n', '<Leader>ph', ':Gitsigns prev_hunk<CR>', opts)
+    map('n', '<Leader>pvh', ':Gitsigns preview_hunk<CR>', opts)
+  end
+}
+
+-- nvim-tree
+map('n', '<Leader>nn', ':NvimTreeToggle<CR>')
