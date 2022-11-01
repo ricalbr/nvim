@@ -101,24 +101,24 @@ syntax match gcVariable "\$"
 
 syntax match gcString "\v\"([^"]*)\""
 
-highlight def link gcComment Comment
-highlight def link gcGCodes gcodeCommand
-highlight def link gcMCodes gcodeCommand
-highlight def link gcFunction gcodeFunction
-highlight def link gcXAxis gcodeAxis
-highlight def link gcYAxis gcodeAxis
-highlight def link gcZAxis gcodeAxis
-highlight def link gcUAxis gcodeAxis
-highlight def link gcFeed gcodeCommand
-highlight def link gcRotationParam gcodeRotationParam
-highlight def link gcUserParam gcodeRotationParam
-highlight def link gcIter gcodeIter
-highlight def link gcStatus gcodeStatus
-highlight def link gcVariable gcodeVariable
-highlight def link gcOperator gcodeOperator
-highlight def link gcMath gcodeOperator
-highlight def link gcHashtag gcodeHashtag
-highlight def link gcString gcodeString
-highlight def link gcError gcodeError
+highlight def link gcComment TSComment
+highlight def link gcGCodes TSMethod
+highlight def link gcMCodes TSMethod
+highlight def link gcFunction TSFunction
+highlight def link gcXAxis TSNamespace
+highlight def link gcYAxis TSNamespace
+highlight def link gcZAxis TSNamespace
+highlight def link gcUAxis TSNamespace
+highlight def link gcFeed TSMethod
+highlight def link gcRotationParam TSParameter
+highlight def link gcUserParam TSParameter
+highlight def link gcIter TSRepeat
+highlight def link gcStatus TSBoolean
+highlight def link gcVariable TSVariable
+highlight def link gcOperator TSOperator
+highlight def link gcMath TSOperator
+highlight def link gcHashtag TSField
+highlight def link gcString TSString
+highlight def link gcError TSError
 
 let b:current_syntax = "gcode"
