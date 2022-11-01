@@ -67,17 +67,39 @@ vim.opt.fillchars = {
 vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.linebreak = true
--- vim.opt.diffopt: append{'foldcolumn:0', 'vertical'}
+vim.opt.diffopt: append{'foldcolumn:0', 'vertical'}
 vim.g.splitvertical = true
 vim.g.splitright = true
 vim.g.splitbelow = true
 
 -- folding options
 vim.opt.foldlevelstart = 99
--- qui è un buon punto per partire https://github.com/wincent/wincent/commit/6c98fcb169345131e37e856d6ea2d264e61f3820
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
--- vim.opt.foldtext = 'user.foldtext()'
+-- pretty-fold setup{{{
+require('pretty-fold').setup({
+   sections = {
+      left = { 'content', },
+      right = { ' ', 'number_of_folded_lines', ' ',
+         function(config) return config.fill_char:rep(3) end
+      }
+   },
+   fill_char = '·',
+   remove_fold_markers = true,
+   keep_indentation = true,
+   process_comment_signs = 'spaces',
+   comment_signs = {},
+   stop_words = {
+      '@brief%s*', -- (for C++) Remove '@brief' and all spaces after.
+   },
+   add_close_pattern = true, -- true, 'last_line' or false
+   matchup_patterns = {
+      {  '{', '}' },
+      { '%(', ')' }, -- % to escape lua pattern char
+      { '%[', ']' }, -- % to escape lua pattern char
+   },
+   ft_ignore = { 'neorg' },
+})-- }}}
 
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wildignore:append { '*.bak', '*.swp', '*.swo', '*.a', '*.o', '*.so', '*.pyc', '*.class', '*.jpg', '*.jpeg',

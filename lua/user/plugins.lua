@@ -70,6 +70,7 @@ return packer.startup(function(use)
     use 'lewis6991/gitsigns.nvim'
     use 'numToStr/Comment.nvim'
     use 'lewis6991/impatient.nvim'
+    use 'anuvyklack/pretty-fold.nvim'
 
     use 'rhysd/clever-f.vim'
     use 'Raimondi/delimitMate'
