@@ -100,6 +100,20 @@ augroup END
 vim.opt.termguicolors = true
 require('rose-pine').setup({
     dark_variant = 'moon',
+    bold_vert_split = false,
+    dim_nc_background = false,
+    disable_background = false,
+    disable_float_background = false,
+    disable_italics = false,
+
+    highlight_groups = {
+        ColorColumn = { bg = 'rose' },
+        Normal = {bg = 'none'},
+        SignColumn = {bg = 'none'},
+        GitSignsAdd = {fg = '#68d98a'},
+        GitSignsChange = {fg = 'gold'},
+        GitSignsDelete = {fg = 'love'},
+    }
 })
 vim.cmd [[colorscheme rose-pine]]
 
@@ -110,8 +124,6 @@ require('lualine').setup {
         component_separators = { left = '', right = '' },
     }
 }
-vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
-vim.cmd [[hi SignColumn guibg=NONE ctermbg=NONE]]
 -- }}}
 
 -- treesitter {{{
