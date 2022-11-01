@@ -1,17 +1,14 @@
 -- G-code
 
 -- basic settings
-vim.opts.tabstop = 4
-vim.opts.softtabstop = 4
-vim.opts.shiftwidth = 4
-vim.opts.formatoptions = 'tcq'
-vim.opts.expandtab = true
-vim.opts.autoindent = true
-vim.opts.encoding = 'utf-8'
-vim.opts.fileformat = 'unix'
-vim.opts.textwidth = 179
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.formatoptions = 'tcq'
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.fileformat = 'unix'
 
 -- set comment string
-vim.bo.commentstring = '; '
-
+vim.bo.commentstring = ';%s'
 
