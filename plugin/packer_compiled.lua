@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -114,11 +119,6 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["darkplus.nvim"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
-    url = "https://github.com/lunarvim/darkplus.nvim"
-  },
   delimitMate = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/delimitMate",
@@ -133,6 +133,26 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -149,6 +169,11 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/material.vim",
     url = "https://github.com/kaicataldo/material.vim"
   },
+  neovim = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -159,10 +184,20 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -179,20 +214,20 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
-  ["python-syntax"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/python-syntax",
-    url = "https://github.com/vim-python/python-syntax"
-  },
   ripgrep = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/ripgrep",
     url = "https://github.com/BurntSushi/ripgrep"
   },
-  tabular = {
+  ["sqlite.lua"] = {
     loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/tabular",
-    url = "https://github.com/godlygeek/tabular"
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/sqlite.lua",
+    url = "https://github.com/kkharji/sqlite.lua"
+  },
+  ["telescope-frecency.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim",
+    url = "https://github.com/nvim-telescope/telescope-frecency.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -204,30 +239,10 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-colors",
     url = "https://github.com/ricalbr/vim-colors"
   },
-  ["vim-commentary"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-commentary",
-    url = "https://github.com/tpope/vim-commentary"
-  },
   ["vim-cool"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-cool",
     url = "https://github.com/romainl/vim-cool"
-  },
-  ["vim-cpp-modern"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-cpp-modern",
-    url = "https://github.com/bfrg/vim-cpp-modern"
-  },
-  ["vim-flake8"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-flake8",
-    url = "https://github.com/nvie/vim-flake8"
-  },
-  ["vim-gitgutter"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
-    url = "https://github.com/airblade/vim-gitgutter"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -238,11 +253,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  vimColors = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vimColors",
-    url = "https://github.com/jyota/vimColors"
   }
 }
 
