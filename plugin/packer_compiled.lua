@@ -174,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/neovim",
     url = "https://github.com/rose-pine/neovim"
   },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -228,6 +233,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/sqlite.lua",
     url = "https://github.com/kkharji/sqlite.lua"
+  },
+  ["telescope-conda.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/telescope-conda.nvim",
+    url = "https://github.com/IllustratedMan-code/telescope-conda.nvim"
   },
   ["telescope-frecency.nvim"] = {
     loaded = true,
