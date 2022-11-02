@@ -2,12 +2,12 @@
 -- @ricalbr
 
 -- fix path {{{
-vim.opt.runtimepath: prepend('$XDG_CONFIG_HOME/nvim')
-vim.opt.runtimepath: append('$XDG_DATA_HOME/nvim')
-vim.opt.runtimepath: append('$XDG_CONFIG_HOME/nvim/after')
+vim.opt.runtimepath:prepend('$XDG_CONFIG_HOME/nvim')
+vim.opt.runtimepath:append('$XDG_DATA_HOME/nvim')
+vim.opt.runtimepath:append('$XDG_CONFIG_HOME/nvim/after')
 
 vim.cmd [[ let &packpath = &runtimepath ]]
-vim.opt.packpath: append('$XDG_DATA_HOME/nvim/*')
+vim.opt.packpath:append('$XDG_DATA_HOME/nvim/*')
 -- }}}
 
 require('user.plugins')
@@ -67,7 +67,7 @@ vim.opt.fillchars = {
 vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.linebreak = true
-vim.opt.diffopt: append{'foldcolumn:0', 'vertical'}
+vim.opt.diffopt:append { 'foldcolumn:0', 'vertical' }
 vim.g.splitvertical = true
 vim.g.splitright = true
 vim.g.splitbelow = true
@@ -78,28 +78,28 @@ vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- pretty-fold setup{{{
 require('pretty-fold').setup({
-   sections = {
-      left = { 'content', },
-      right = { ' ', 'number_of_folded_lines', ' ',
-         function(config) return config.fill_char:rep(3) end
-      }
-   },
-   fill_char = '·',
-   remove_fold_markers = true,
-   keep_indentation = true,
-   process_comment_signs = 'spaces',
-   comment_signs = {},
-   stop_words = {
-      '@brief%s*', -- (for C++) Remove '@brief' and all spaces after.
-   },
-   add_close_pattern = true, -- true, 'last_line' or false
-   matchup_patterns = {
-      {  '{', '}' },
-      { '%(', ')' }, -- % to escape lua pattern char
-      { '%[', ']' }, -- % to escape lua pattern char
-   },
-   ft_ignore = { 'neorg' },
-})-- }}}
+    sections = {
+        left = { 'content', },
+        right = { ' ', 'number_of_folded_lines', ' ',
+            function(config) return config.fill_char:rep(3) end
+        }
+    },
+    fill_char = '·',
+    remove_fold_markers = true,
+    keep_indentation = true,
+    process_comment_signs = 'spaces',
+    comment_signs = {},
+    stop_words = {
+        '@brief%s*', -- (for C++) Remove '@brief' and all spaces after.
+    },
+    add_close_pattern = true, -- true, 'last_line' or false
+    matchup_patterns = {
+        { '{', '}' },
+        { '%(', ')' }, -- % to escape lua pattern char
+        { '%[', ']' }, -- % to escape lua pattern char
+    },
+    ft_ignore = { 'neorg' },
+}) -- }}}
 
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wildignore:append { '*.bak', '*.swp', '*.swo', '*.a', '*.o', '*.so', '*.pyc', '*.class', '*.jpg', '*.jpeg',
@@ -130,11 +130,11 @@ require('rose-pine').setup({
 
     highlight_groups = {
         ColorColumn = { bg = 'rose' },
-        Normal = {bg = 'none'},
-        SignColumn = {bg = 'none'},
-        GitSignsAdd = {fg = '#68d98a'},
-        GitSignsChange = {fg = 'gold'},
-        GitSignsDelete = {fg = 'love'},
+        Normal = { bg = 'none' },
+        SignColumn = { bg = 'none' },
+        GitSignsAdd = { fg = '#68d98a' },
+        GitSignsChange = { fg = 'gold' },
+        GitSignsDelete = { fg = 'love' },
     }
 })
 vim.cmd [[colorscheme rose-pine]]
@@ -166,19 +166,22 @@ configs.setup {
 -- telescope {{{
 local status_ok, telescope = pcall(require, 'telescope')
 if not status_ok then
-  return
+    return
 end
 
 telescope.load_extension('frecency')
-telescope.setup{
-  defaults = {
-    path_display = { "smart" },
-    mappings = {
-        i = {
-            ["?"] =require("telescope.actions.layout").toggle_preview, -- preview is disabled by default
+telescope.setup {
+    defaults = {
+        path_display = { "smart" },
+        mappings = {
+            i = {
+                ["?"] = require("telescope.actions.layout").toggle_preview, -- preview is disabled by default
+            },
         },
     },
-  },
+    extensions = {
+        conda = { home = "$HOME/miniconda3/" }
+    },
 }
 -- }}}
 
@@ -219,10 +222,17 @@ vim.cmd.cnoreabbrev({ 'w!!', 'w !sudo tee > /dev/null %<CR>' })
 vim.g.mapleader = ' '
 
 -- juggling with files w/ telescope
-vim.keymap.set('n', '<leader>ff', ':lua require"telescope.builtin".find_files(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
-vim.keymap.set('n', '<leader>fg', ':lua require"telescope.builtin".live_grep(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
-vim.keymap.set('n', '<leader>fb', ':lua require"telescope.builtin".buffers(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
-vim.keymap.set('n', '<leader>fh', ':lua require"telescope.builtin".help_tags(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
+vim.keymap.set('n', '<leader>ff',
+    ':lua require"telescope.builtin".find_files(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
+    opts)
+vim.keymap.set('n', '<leader>fg',
+    ':lua require"telescope.builtin".live_grep(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
+    opts)
+vim.keymap.set('n', '<leader>fb',
+    ':lua require"telescope.builtin".buffers(require("telescope.themes").get_dropdown({ previewer = false }))<CR>', opts)
+vim.keymap.set('n', '<leader>fh',
+    ':lua require"telescope.builtin".help_tags(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
+    opts)
 
 map('n', '\\', ':bd<CR>', opts)
 map('n', '<leader>nt', ':tabnew<CR>', opts)
@@ -293,14 +303,17 @@ map('i', '<Right>', '<NOP>', opts)
 -- gitsigns
 local _, gitsigns = pcall(require, "gitsigns")
 gitsigns.setup {
-  on_attach = function()
-    map('n', '<Leader>sh', ':Gitsigns stage_hunk<CR>', opts)
-    map('n', '<Leader>rh', ':Gitsigns reset_hunk<CR>', opts)
-    map('n', '<Leader>nh', ':Gitsigns next_hunk<CR>', opts)
-    map('n', '<Leader>ph', ':Gitsigns prev_hunk<CR>', opts)
-    map('n', '<Leader>pvh', ':Gitsigns preview_hunk<CR>', opts)
-  end
+    on_attach = function()
+        map('n', '<Leader>sh', ':Gitsigns stage_hunk<CR>', opts)
+        map('n', '<Leader>rh', ':Gitsigns reset_hunk<CR>', opts)
+        map('n', '<Leader>nh', ':Gitsigns next_hunk<CR>', opts)
+        map('n', '<Leader>ph', ':Gitsigns prev_hunk<CR>', opts)
+        map('n', '<Leader>pvh', ':Gitsigns preview_hunk<CR>', opts)
+    end
 }
+
+-- telescope
+vim.api.nvim_command('command Conda :lua require"telescope".extensions.conda.conda(require("telescope.themes").get_cursor())')
 
 -- nvim-tree
 map('n', '<Leader>nn', ':NvimTreeToggle<CR>')
