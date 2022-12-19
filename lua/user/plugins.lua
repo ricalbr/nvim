@@ -74,8 +74,21 @@ return packer.startup(function(use)
     use 'numToStr/Comment.nvim'
     use 'lewis6991/impatient.nvim'
     use 'anuvyklack/pretty-fold.nvim'
+    use 'ggandor/leap.nvim'
+    use {
+      'gorbit99/codewindow.nvim',
+      config = function()
+        local codewindow = require('codewindow')
+        codewindow.setup(
+        {
+            border = "rounded",
+        }
+        )
+        codewindow.apply_default_keybinds()
+      end,
+    }
 
-    use 'rhysd/clever-f.vim'
+    -- use 'rhysd/clever-f.vim'
     use 'Raimondi/delimitMate'
     use 'romainl/vim-cool'
     use 'tpope/vim-repeat'
