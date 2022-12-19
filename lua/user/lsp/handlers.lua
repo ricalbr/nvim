@@ -15,7 +15,7 @@ M.setup = function()
 
 	local config = {
 		-- disable virtual text
-		virtual_text = true,
+		virtual_text = false,
 		-- show signs
 		signs = {
 			active = signs,
@@ -77,7 +77,7 @@ local lsp_keymaps = function(bufnr)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
 	vim.keymap.set("n", "<leader>gr", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
-	vim.keymap.set("n", "<leader>lf", function()
+	vim.keymap.set("n", "<leader>fm", function()
 		vim.lsp.buf.format({ async = true })
 	end, bufopts)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format {async= true}' ]])
