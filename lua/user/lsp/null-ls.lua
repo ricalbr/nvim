@@ -13,11 +13,12 @@ null_ls.setup({
 	debug = false,
 	sources = {
 		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-		formatting.black.with({ extra_args = { "--fast" } }),
-		formatting.clang_format,
+		formatting.black.with({ extra_args = { "--fast", "--skip-string-normalization", "--line-length=120" } }),
+		formatting.isort,
+		diagnostics.flake8,
 		formatting.stylua,
-		-- diagnostics.flake8,
-		-- diagnostics.clang_check,
+		formatting.clang_format,
+		diagnostics.clang_check,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
