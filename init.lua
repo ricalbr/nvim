@@ -101,6 +101,7 @@ require("packer").startup(function(use)
 	use("rhysd/clever-f.vim")
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
+	use("nathom/filetype.nvim")
 
 	-- set up your configuration after cloning packer.nvim
 	if is_bootstrap then
@@ -121,6 +122,16 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = vim.fn.expand("$MYVIMRC"),
 })
 require("impatient") -- improve plugin performances
+require("filetype").setup({
+	overrides = {
+		extensions = {
+			pgm = "gcode",
+			gcode = "gcode",
+			g = "gcode",
+			ngc = "gcode",
+		},
+	},
+})
 -- }}}
 
 -- basic options {{{

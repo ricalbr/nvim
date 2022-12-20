@@ -119,21 +119,15 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["codewindow.nvim"] = {
-    config = { "\27LJ\2\nW\0\0\3\0\4\0\b6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0019\1\3\0B\1\1\1K\0\1\0\27apply_default_keybinds\nsetup\15codewindow\frequire\0" },
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/codewindow.nvim",
-    url = "https://github.com/gorbit99/codewindow.nvim"
-  },
-  delimitMate = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/delimitMate",
-    url = "https://github.com/Raimondi/delimitMate"
-  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
+  },
+  ["filetype.nvim"] = {
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/filetype.nvim",
+    url = "https://github.com/nathom/filetype.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -184,6 +178,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
+  ["nvim-autopairs"] = {
+    config = { "\27LJ\2\nÅ\1\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\30enable_check_bracket_line\1\rcheck_ts\2\22ignored_next_char\v[%w%.]\nsetup\19nvim-autopairs\frequire\0" },
+    loaded = true,
+    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -275,11 +275,6 @@ _G.packer_plugins = {
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-colors",
     url = "https://github.com/ricalbr/vim-colors"
   },
-  ["vim-cool"] = {
-    loaded = true,
-    path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-cool",
-    url = "https://github.com/romainl/vim-cool"
-  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/ricalbr/.local/share/nvim/site/pack/packer/start/vim-repeat",
@@ -293,10 +288,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: codewindow.nvim
-time([[Config for codewindow.nvim]], true)
-try_loadstring("\27LJ\2\nW\0\0\3\0\4\0\b6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0019\1\3\0B\1\1\1K\0\1\0\27apply_default_keybinds\nsetup\15codewindow\frequire\0", "config", "codewindow.nvim")
-time([[Config for codewindow.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\nÅ\1\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\30enable_check_bracket_line\1\rcheck_ts\2\22ignored_next_char\v[%w%.]\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
