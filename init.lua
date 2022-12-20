@@ -684,11 +684,11 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 })
-require("lua.lsp")
+require("lsp")
 -- }}}
 
 -- other plugins {{{
 require("Comment").setup()
-require("lua.nvimtree")
-require("lua.gitsigns")
+require("nvimtree")
+require("gitsigns")
 -- }}}
