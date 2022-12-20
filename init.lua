@@ -78,28 +78,27 @@ require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 	use("nvim-telescope/telescope-frecency.nvim")
-
 	use("kkharji/sqlite.lua")
 	use("BurntSushi/ripgrep") -- grepper (suggested dependency)
 
 	-- other lua plugins
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({
+				enable_check_bracket_line = false, -- Don't add pairs if it already has a close pair in the same line
+				ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
+				check_ts = true, -- use treesitter to check for a pair.
+			})
+		end,
+	})
 	use("nvim-tree/nvim-tree.lua")
 	use("nvim-lualine/lualine.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("numToStr/Comment.nvim")
 	use("lewis6991/impatient.nvim")
 	use("anuvyklack/pretty-fold.nvim")
-	use({
-		"gorbit99/codewindow.nvim",
-		config = function()
-			local codewindow = require("codewindow")
-			codewindow.setup()
-			codewindow.apply_default_keybinds()
-		end,
-	})
 	use("rhysd/clever-f.vim")
-	use("Raimondi/delimitMate")
-	use("romainl/vim-cool")
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
 
