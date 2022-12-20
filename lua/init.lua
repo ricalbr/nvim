@@ -245,13 +245,38 @@ vim.opt.omnifunc = "syntaxcomplete#Complete"
 -- }}}
 
 -- autocommands {{{
-vim.cmd([[
-augroup Operations
-  autocmd!
-  autocmd BufReadPost * call autocmdfunctions#LastPosition()
-  autocmd BufWritePre * call autocmdfunctions#RmvTrailingSpaces()
-augroup END
-]])
+-- remove all trailing whitespace on save
+local api = vim.api
+local TrimWhiteSpaceGrp = api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
+api.nvim_create_autocmd("BufWritePre", {
+	command = [[:%s/\s\+$//e]],
+	group = TrimWhiteSpaceGrp,
+})
+
+-- highlight on yank
+local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
+api.nvim_create_autocmd("TextYankPost", {
+	command = "silent! lua vim.highlight.on_yank()",
+	group = yankGrp,
+})
+
+-- go to last loc when opening a buffer
+api.nvim_create_autocmd(
+	"BufReadPost",
+	{ command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
+)
+
+-- don't auto comment new line
+api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+
+-- enable spell checking for certain file types
+api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.txt", "*.md", "*.tex" },
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = "en,it"
+	end,
+})
 -- }}}
 
 -- colorscheme {{{
