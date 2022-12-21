@@ -1,15 +1,6 @@
 -- init.lua
 -- @ricalbr
 
--- path {{{
-vim.opt.runtimepath:prepend("$XDG_CONFIG_HOME/nvim")
-vim.opt.runtimepath:append("$XDG_DATA_HOME/nvim")
-vim.opt.runtimepath:append("$XDG_CONFIG_HOME/nvim/after")
-
-vim.cmd([[ let &packpath = &runtimepath ]])
-vim.opt.packpath:append("$XDG_DATA_HOME/nvim/*")
--- }}}
-
 -- plugins {{{
 -- install packer automatically
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -20,16 +11,27 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
+local function get_config(name)
+	return string.format('require("lua/config/%s")', name)
+end
+
 -- install plugins
 require("packer").startup(function(use)
 	-- base plugins
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
+	use("lewis6991/impatient.nvim") -- optimize packer with caching
+	use({
+		"nathom/filetype.nvim",
+		config = function()
+			require("filetype").setup({
+				overrides = { extensions = { pgm = "gcode", gcode = "gcode", g = "gcode", ngc = "gcode" } },
+			})
+		end,
+	})
 
 	-- colorschemes and icons
-	use("kaicataldo/material.vim")
-	use("nvim-tree/nvim-web-devicons")
 	use("rose-pine/neovim")
 	use("navarasu/onedark.nvim")
 	use("ricalbr/vim-colors")
@@ -41,10 +43,13 @@ require("packer").startup(function(use)
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"glepnir/lspsaga.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
 			"j-hui/fidget.nvim", -- Useful status updates for LSP
-			"jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
 		},
+	})
+
+	use({ -- for formatters and linters
+		"jose-elias-alvarez/null-ls.nvim",
+		config = get_config("null-ls"),
 	})
 
 	use({ -- autocompletion and snippets
@@ -67,6 +72,7 @@ require("packer").startup(function(use)
 		run = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 		end,
+		config = get_config("treesitter"),
 	})
 	use({ -- additional text objects via treesitter
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -74,8 +80,12 @@ require("packer").startup(function(use)
 	})
 
 	-- telescope
-	-- Fuzzy Finder (files, lsp, etc)
-	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
+	use({
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = get_config("telescope"),
+	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 	use("nvim-telescope/telescope-frecency.nvim")
 	use("kkharji/sqlite.lua")
@@ -92,16 +102,42 @@ require("packer").startup(function(use)
 			})
 		end,
 	})
-	use("nvim-tree/nvim-tree.lua")
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = { "nvim-tree/nvim-web-devicons", "kaicataldo/material.vim" },
+		opt = true,
+		cmd = "NvimTreeToggle",
+		config = get_config("nvim-tree"),
+	})
 	use("nvim-lualine/lualine.nvim")
-	use("lewis6991/gitsigns.nvim")
-	use("numToStr/Comment.nvim")
-	use("lewis6991/impatient.nvim")
+
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = get_config("gitsigns"),
+	})
+
 	use("anuvyklack/pretty-fold.nvim")
-	use("rhysd/clever-f.vim")
+	use({
+		"echasnovski/mini.jump",
+		branch = "stable",
+		config = function()
+			require("mini.jump").setup()
+		end,
+	})
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 	use("tpope/vim-repeat")
-	use("tpope/vim-surround")
-	use("nathom/filetype.nvim")
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup()
+		end,
+	})
+	use("dstein64/vim-startuptime")
 
 	-- set up your configuration after cloning packer.nvim
 	if is_bootstrap then
@@ -121,25 +157,34 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = packer_group,
 	pattern = vim.fn.expand("$MYVIMRC"),
 })
+local builtins = {
+	"gzip",
+	"zip",
+	"zipPlugin",
+	"tar",
+	"tarPlugin",
+	"getscript",
+	"getscriptPlugin",
+	"vimball",
+	"vimballPlugin",
+	"2html_plugin",
+	"matchit",
+	"matchparen",
+	"logiPat",
+	"rrhelper",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+}
+
+for _, plugin in ipairs(builtins) do
+	vim.g["loaded_" .. plugin] = 1
+end
 require("impatient") -- improve plugin performances
-require("filetype").setup({
-	overrides = {
-		extensions = {
-			pgm = "gcode",
-			gcode = "gcode",
-			g = "gcode",
-			ngc = "gcode",
-		},
-	},
-})
 -- }}}
 
 -- basic options {{{
-
--- disable netrw, use nvim-tree instead
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -309,7 +354,6 @@ require("rose-pine").setup({
 	},
 })
 vim.cmd([[colorscheme rose-pine]])
--- vim.cmd([[colorscheme onedark]])
 
 require("lualine").setup({
 	options = {
@@ -440,123 +484,8 @@ map("i", "<Up>", "<NOP>", opts)
 map("i", "<Left>", "<NOP>", opts)
 map("i", "<Right>", "<NOP>", opts)
 
--- gitsigns
-local _, gitsigns = pcall(require, "gitsigns")
-gitsigns.setup({
-	on_attach = function()
-		map("n", "<Leader>sh", ":Gitsigns stage_hunk<CR>", opts)
-		map("n", "<Leader>rh", ":Gitsigns reset_hunk<CR>", opts)
-		map("n", "<Leader>nh", ":Gitsigns next_hunk<CR>", opts)
-		map("n", "<Leader>ph", ":Gitsigns prev_hunk<CR>", opts)
-		map("n", "<Leader>pvh", ":Gitsigns preview_hunk<CR>", opts)
-	end,
-})
-
 -- nvim-tree
 map("n", "<Leader>nn", ":NvimTreeToggle<CR>")
--- }}}
-
--- treesitter {{{
-require("nvim-treesitter.configs").setup({
-	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "typescript", "help" },
-	highlight = {
-		enable = true,
-		disable = { "" }, -- list of language that will be disabled
-		additional_vim_regex_highlighting = false,
-	},
-	indent = { enable = true, disable = { "python" } },
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<c-space>",
-			node_incremental = "<c-space>",
-			scope_incremental = "<c-s>",
-			node_decremental = "<c-backspace>",
-		},
-	},
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-			keymaps = {
-				-- You can use the capture groups defined in textobjects.scm
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-			},
-		},
-		move = {
-			enable = true,
-			set_jumps = true, -- whether to set jumps in the jumplist
-			goto_next_start = {
-				["]m"] = "@function.outer",
-				["]]"] = "@class.outer",
-			},
-			goto_next_end = {
-				["]M"] = "@function.outer",
-				["]["] = "@class.outer",
-			},
-			goto_previous_start = {
-				["[m"] = "@function.outer",
-				["[["] = "@class.outer",
-			},
-			goto_previous_end = {
-				["[M"] = "@function.outer",
-				["[]"] = "@class.outer",
-			},
-		},
-		swap = {
-			enable = true,
-			swap_next = {
-				["<leader>a"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["<leader>A"] = "@parameter.inner",
-			},
-		},
-	},
-})
--- }}}
-
--- telescope {{{
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-	return
-end
-
-pcall(require("telescope").load_extension, "fzf")
-pcall(require("telescope").load_extension, "frecency")
-telescope.setup({
-	defaults = {
-		path_display = { "smart" },
-		mappings = {
-			i = {
-				["?"] = require("telescope.actions.layout").toggle_preview, -- preview is disabled by default
-			},
-		},
-	},
-})
-
--- keymaps
-vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
-vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer]" })
-
-vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 -- }}}
 
 -- completion and lsp {{{
@@ -694,11 +623,5 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 })
-require("lsp")
--- }}}
-
--- other plugins {{{
-require("Comment").setup()
-require("nvimtree")
-require("gitsigns")
+-- require("lsp")
 -- }}}
