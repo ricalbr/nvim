@@ -11,13 +11,13 @@ require("gitsigns").setup({
 		changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
 	},
 
-	-- on_attach = function()
-	-- 	vim.keymap.set("n", "<Leader>sh", ":Gitsigns stage_hunk<CR>", opts)
-	-- 	vim.keymap.set("n", "<Leader>rh", ":Gitsigns reset_hunk<CR>", opts)
-	-- 	vim.keymap.set("n", "<Leader>nh", ":Gitsigns next_hunk<CR>", opts)
-	-- 	vim.keymap.set("n", "<Leader>ph", ":Gitsigns prev_hunk<CR>", opts)
-	-- 	vim.keymap.set("n", "<Leader>pvh", ":Gitsigns preview_hunk<CR>", opts)
-	-- end,
+	on_attach = function()
+		vim.keymap.set("n", "<Leader>sh", ":Gitsigns stage_hunk<CR>", opts)
+		vim.keymap.set("n", "<Leader>rh", ":Gitsigns reset_hunk<CR>", opts)
+		vim.keymap.set("n", "<Leader>nh", ":Gitsigns next_hunk<CR>", opts)
+		vim.keymap.set("n", "<Leader>ph", ":Gitsigns prev_hunk<CR>", opts)
+		vim.keymap.set("n", "<Leader>pvh", ":Gitsigns preview_hunk<CR>", opts)
+	end,
 
 	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`

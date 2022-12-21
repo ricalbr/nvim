@@ -12,8 +12,19 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 local function get_config(name)
-	return string.format('require("lua/config/%s")', name)
+	return string.format('require("config/%s")', name)
 end
+
+require("packer").init({
+	enable = true, -- enable profiling via :PackerCompile profile=true
+	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+	max_jobs = 20, -- limit the number of simultaneous jobs. nil means no limit. Set to 20 in order to prevent PackerSync form being "stuck" -> https://github.com/wbthomason/packer.nvim/issues/746
+	display = { -- have packer use a popup window
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
 
 -- install plugins
 require("packer").startup(function(use)
@@ -34,7 +45,6 @@ require("packer").startup(function(use)
 	-- colorschemes and icons
 	use("rose-pine/neovim")
 	use("navarasu/onedark.nvim")
-	use("ricalbr/vim-colors")
 
 	use({ -- lsp
 		"neovim/nvim-lspconfig",
@@ -43,8 +53,22 @@ require("packer").startup(function(use)
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"glepnir/lspsaga.nvim",
-			"j-hui/fidget.nvim", -- Useful status updates for LSP
+			"j-hui/fidget.nvim",
 		},
+	})
+
+	use({ -- Useful status updates for LSP
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	})
+
+	use({
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
 	})
 
 	use({ -- for formatters and linters
@@ -157,6 +181,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = packer_group,
 	pattern = vim.fn.expand("$MYVIMRC"),
 })
+
+require("impatient") -- improve plugin performances
+
+-- avoid loading unwanted plugins in vim/vimfiles
+vim.cmd("set rtp-=/usr/share/vim/vimfiles")
+
+-- don't load built-in plugins
 local builtins = {
 	"gzip",
 	"zip",
@@ -181,7 +212,6 @@ local builtins = {
 for _, plugin in ipairs(builtins) do
 	vim.g["loaded_" .. plugin] = 1
 end
-require("impatient") -- improve plugin performances
 -- }}}
 
 -- basic options {{{
@@ -353,7 +383,7 @@ require("rose-pine").setup({
 		GitSignsDelete = { fg = "love" },
 	},
 })
-vim.cmd([[colorscheme rose-pine]])
+vim.cmd("colorscheme rose-pine")
 
 require("lualine").setup({
 	options = {
@@ -392,32 +422,6 @@ vim.cmd.cnoreabbrev({ "w!!", "w !sudo tee > /dev/null %<CR>" })
 
 -- set leader key
 vim.g.mapleader = " "
-
--- juggling with files w/ telescope
-vim.keymap.set(
-	"n",
-	"<leader>ff",
-	':lua require"telescope.builtin".find_files(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
-	opts
-)
-vim.keymap.set(
-	"n",
-	"<leader>fg",
-	':lua require"telescope.builtin".live_grep(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
-	opts
-)
-vim.keymap.set(
-	"n",
-	"<leader>fb",
-	':lua require"telescope.builtin".buffers(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
-	opts
-)
-vim.keymap.set(
-	"n",
-	"<leader>fh",
-	':lua require"telescope.builtin".help_tags(require("telescope.themes").get_dropdown({ previewer = false }))<CR>',
-	opts
-)
 
 map("n", "\\", ":bd<CR>", opts)
 map("n", "<leader>nt", ":tabnew<CR>", opts)
@@ -486,6 +490,7 @@ map("i", "<Right>", "<NOP>", opts)
 
 -- nvim-tree
 map("n", "<Leader>nn", ":NvimTreeToggle<CR>")
+
 -- }}}
 
 -- completion and lsp {{{
@@ -529,9 +534,6 @@ local on_attach = function(_, bufnr)
 	end, { desc = "Format current buffer with LSP" })
 end
 
--- setup mason so it can manage external tooling
-require("mason").setup()
-
 -- enable the following language servers
 local servers = { "clangd", "pyright", "tsserver", "sumneko_lua" }
 require("mason-lspconfig").setup({
@@ -549,20 +551,16 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
--- turn on lsp status information
-require("fidget").setup()
-
--- python
+-- python{{{
 require("lspconfig").pyright.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-})
+}) -- }}}
 
--- lua
+-- lua{{{
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-
 require("lspconfig").sumneko_lua.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -580,48 +578,8 @@ require("lspconfig").sumneko_lua.setup({
 		},
 	},
 })
+-- }}}
 
 -- nvim-cmp setup
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-	},
-})
--- require("lsp")
+require("config.cmp")
 -- }}}
