@@ -31,6 +31,7 @@ require('lazy').setup({
         'nvim-lualine/lualine.nvim',
         { 'numToStr/Comment.nvim',  opts = {} },
         { 'kylechui/nvim-surround', opts = {} },
+        { 'stevearc/oil.nvim',      opts = {}, },
         { 'folke/which-key.nvim',   opts = {} },
         {
             "nathom/filetype.nvim",
@@ -189,7 +190,6 @@ vim.g.netrw_winsize = 25
 -- }}}
 
 -- basic options {{{
-vim.opt.viminfo = "%,<800,'10,/50,:100,h,f0,n~/.config/nvim/cache/.viminfo"
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -435,7 +435,7 @@ map("i", "<Left>", "<NOP>", opts)
 map("i", "<Right>", "<NOP>", opts)
 
 -- nvim-tree
-map("n", "<Leader>nn", ":NvimTreeToggle<CR>")
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- diagnostic keymaps
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
