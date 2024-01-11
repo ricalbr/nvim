@@ -77,15 +77,13 @@ require('lazy').setup({
 
         {
             'lukas-reineke/indent-blankline.nvim', -- add indentation guides even on blank lines
-            -- See `:help ibl`
-            main = 'ibl',
+            main = 'ibl',                          -- see `:help ibl`
             opts = {},
         },
 
         {
             "nvim-neorg/neorg",
             build = ":Neorg sync-parsers",
-            run = ":Neorg sync-parsers",
             -- tag = "*",
             dependencies = { "nvim-lua/plenary.nvim" },
             config = function()
@@ -103,6 +101,7 @@ require('lazy').setup({
                     },
                 }
             end,
+            run = ":Neorg sync-parsers",
         },
 
         {
@@ -190,13 +189,14 @@ vim.g.netrw_winsize = 25
 -- }}}
 
 -- basic options {{{
+vim.opt.viminfo = "%,<800,'10,/50,:100,h,f0,n~/.config/nvim/cache/.viminfo"
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.clipboard = "unnamedplus"
+vim.g.clipboard = "unnamedplus"
 vim.opt.cindent = true
 vim.opt.cinoptions = ":.5s,>1s,p0,t0,(0,g2"
 vim.opt.cinwords = "if,else,while,do,for,switch,case,class,try"
