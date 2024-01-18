@@ -1,4 +1,4 @@
--- markdown
+-- vimwiki
 
 -- markdown specific text format
 vim.opt.linebreak = true
