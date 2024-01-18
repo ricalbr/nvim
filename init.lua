@@ -24,21 +24,69 @@ require('lazy').setup({
 
         'lewis6991/impatient.nvim', -- optimize packer with caching
         'rose-pine/neovim',         -- colorscheme
-        { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
         'tpope/vim-fugitive',
         'tpope/vim-repeat',
         'anuvyklack/pretty-fold.nvim',
         'nvim-lualine/lualine.nvim',
         { 'numToStr/Comment.nvim',  opts = {} },
         { 'kylechui/nvim-surround', opts = {} },
-        { 'stevearc/oil.nvim',      opts = {}, },
+        { 'stevearc/oil.nvim',      opts = {} },
         { 'folke/which-key.nvim',   opts = {} },
+        { 'folke/twilight.nvim',    opts = {} },
+        { 'echasnovski/mini.align', version = '*' },
         {
-            "nathom/filetype.nvim",
+            'nathom/filetype.nvim',
             config = function()
                 require("filetype").setup({
-                    overrides = { extensions = { pgm = "gcode", gcode = "gcode", g = "gcode", ngc = "gcode", } },
+                    overrides = { extensions = { pgm = "gcode", gcode = "gcode", g = "gcode", ngc = "gcode", } }
                 })
+            end,
+        },
+
+        {
+            'folke/zen-mode.nvim',
+            opts = {
+                window = {
+                    backdrop = 0.5, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+                    width = 120,    -- width of the Zen window
+                    height = 1,     -- height of the Zen window
+                    -- by default, no options are changed for the Zen window
+                    -- uncomment any of the options below, or add other vim.wo options you want to apply
+                    options = {
+                        -- signcolumn = "no", -- disable signcolumn
+                        number = false,         -- disable number column
+                        relativenumber = false, -- disable relative numbers
+                        cursorline = false,     -- disable cursorline
+                        cursorcolumn = false,   -- disable cursor column
+                        foldcolumn = "0",       -- disable fold column
+                        list = false,           -- disable whitespace characters
+                    },
+                },
+                plugins = {
+                    -- disable some global vim options (vim.o...)
+                    -- comment the lines to not apply the options
+                    options = {
+                        enabled = true,
+                        ruler = false,             -- disables the ruler text in the cmd line area
+                        showcmd = false,           -- disables the command in the last line of the screen
+                    },
+                    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+                    gitsigns = { enabled = true }, -- disables git signs
+                },
+            }
+        },
+
+        {
+            "vimwiki/vimwiki",
+            init = function()
+                vim.g.vimwiki_list = {
+                    {
+                        path = '~/notes',
+                        syntax = 'markdown',
+                        ext = '.md',
+                    },
+                }
+                vim.g.vimwiki_global_ext = 0
             end,
         },
 
@@ -55,16 +103,16 @@ require('lazy').setup({
         },
 
         {
-            'hrsh7th/nvim-cmp',         -- autocompletion
+            'hrsh7th/nvim-cmp', -- autocompletion
+            event = "InsertEnter",
             dependencies = {
-                'l3mon4d3/luasnip',     -- snippet engine & its associated nvim-cmp source
-                'saadparwaiz1/cmp_luasnip',
-                'hrsh7th/cmp-nvim-lsp', -- adds lsp completion capabilities
-                'hrsh7th/cmp-path',
-                'hrsh7th/cmp-cmdline',
-                'hrsh7th/cmp-nvim-lua',
-                'rafamadriz/friendly-snippets', -- adds a number of user-friendly snippets
-                'L3MON4D3/LuaSnip',
+                { 'L3MON4D3/LuaSnip',             event = "InsertEnter" },
+                { 'saadparwaiz1/cmp_luasnip',     event = "InsertEnter" },
+                { 'hrsh7th/cmp-nvim-lsp',         event = "InsertEnter" },
+                { 'hrsh7th/cmp-path',             event = "InsertEnter" },
+                { 'hrsh7th/cmp-cmdline',          event = "InsertEnter" },
+                { 'hrsh7th/cmp-nvim-lua',         event = "InsertEnter" },
+                { 'rafamadriz/friendly-snippets', event = "InsertEnter" },
             },
         },
 
@@ -82,33 +130,47 @@ require('lazy').setup({
             opts = {},
         },
 
-        {
-            "nvim-neorg/neorg",
-            build = ":Neorg sync-parsers",
-            -- tag = "*",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            config = function()
-                require("neorg").setup {
-                    load = {
-                        ["core.defaults"] = {},  -- Loads default behaviour
-                        ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                        ["core.dirman"] = {      -- Manages Neorg workspaces
-                            config = {
-                                workspaces = {
-                                    notes = "~/notes",
-                                },
-                            },
-                        },
-                    },
-                }
-            end,
-            run = ":Neorg sync-parsers",
-        },
-
-        {
-            "folke/zen-mode.nvim",
-            opts = {}
-        },
+        -- {
+        --     'nvim-neorg/neorg',
+        --     build = ":Neorg sync-parsers",
+        --     dependencies = { "nvim-lua/plenary.nvim" },
+        --     config = function()
+        --         require("neorg").setup {
+        --             load = {
+        --                 ["core.defaults"] = {}, -- loads default behaviour
+        --                 ["core.dirman"] = {     -- manages neorg workspaces
+        --                     config = {
+        --                         workspaces = {
+        --                             main = "~/notes",
+        --                             phd = "~/notes/phd",
+        --                         },
+        --                         autochdir = false,
+        --                         default_workspace = "main",
+        --                     }
+        --                 },
+        --                 ["core.concealer"] = {},
+        --                 ["core.keybinds"] = {
+        --                     config = {
+        --                         default_keybinds = true,
+        --                     },
+        --                 },
+        --                 ["core.presenter"] = {
+        --                     config = {
+        --                         zen_mode = "truezen",
+        --                     },
+        --                 },
+        --                 ["core.journal"] = {},
+        --                 ["core.export"] = {},
+        --                 -- ["core.ui.calendar"] = {},
+        --                 ["core.export.markdown"] = {
+        --                     config = {
+        --                         extensions = "all",
+        --                     }
+        --                 },
+        --             },
+        --         }
+        --     end,
+        -- },
 
         -- fuzzy finder (files, lsp, etc)
         {
@@ -128,6 +190,13 @@ require('lazy').setup({
             },
             config = require("config/telescope"),
         },
+
+        -- { -- for formatters and linters
+        --     'nvimtools/none-ls.nvim',
+        --     config = function()
+        --         require("config/none-ls")
+        --     end
+        -- },
 
         {
             -- highlight, edit, and navigate code
@@ -472,7 +541,7 @@ vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] }
 
 -- enable spell checking for certain file types
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = { "*.txt", "*.md", "*.tex" },
+    pattern = { "*.txt", "*.norg", "*.md", "*.tex" },
     callback = function()
         vim.opt.spell = true
         vim.opt.spelllang = "en,it"
@@ -485,7 +554,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.defer_fn(function()
     require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+        ensure_installed = { 'c', 'cpp', 'lua', 'python', 'vimdoc', 'latex', 'vim', 'bash', 'norg' },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
@@ -495,7 +564,10 @@ vim.defer_fn(function()
         ignore_install = {},
         -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
         modules = {},
-        highlight = { enable = true },
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = { 'org' },
+        },
         indent = { enable = true },
         incremental_selection = {
             enable = true,
