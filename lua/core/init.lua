@@ -6,7 +6,8 @@ local g = vim.g
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = ''
+require 'core.clipboard'
 opt.cursorline = false
 
 -- Indenting
@@ -16,10 +17,10 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
 opt.smartcase = true
-opt.mouse = "a"
+opt.mouse = 'a'
 
 -- Numbers
 opt.number = true
@@ -28,9 +29,9 @@ opt.relativenumber = true
 opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append "sI"
+opt.shortmess:append 'sI'
 
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
@@ -40,143 +41,157 @@ g.swapfile = false
 
 -- folding options
 opt.foldlevelstart = 99
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+opt.whichwrap:append '<>[]hl'
 
-g.mapleader = " "
-g.maplocalleader = " "
+g.mapleader = ' '
+g.maplocalleader = ' '
 
 -- avoid loading unwanted plugins in vim/vimfiles
-vim.cmd("set rtp-=/usr/share/vim/vimfiles")
+vim.cmd 'set rtp-=/usr/share/vim/vimfiles'
 
 -- disable some default providers
-for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
-    vim.g["loaded_" .. provider .. "_provider"] = 0
+for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
+  vim.g['loaded_' .. provider .. '_provider'] = 0
 end
 -- disable built-in plugins
-local builtins = { "gzip", "zip", "zipPlugin", "tar", "tarPlugin", "getscript", "getscriptPlugin", "vimball",
-    "vimballPlugin", "2html_plugin", "matchit", "matchparen", "logiPat", "rrhelper", "netrw", "netrwPlugin",
-    "netrwSettings", "netrwFileHandlers", }
+local builtins = {
+  'gzip',
+  'zip',
+  'zipPlugin',
+  'tar',
+  'tarPlugin',
+  'getscript',
+  'getscriptPlugin',
+  'vimball',
+  'vimballPlugin',
+  '2html_plugin',
+  'matchit',
+  'matchparen',
+  'logiPat',
+  'rrhelper',
+  'netrw',
+  'netrwPlugin',
+  'netrwSettings',
+  'netrwFileHandlers',
+}
 for _, plugin in ipairs(builtins) do
-    vim.g["loaded_" .. plugin] = true
+  vim.g['loaded_' .. plugin] = true
 end
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
-vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
+local is_windows = vim.loop.os_uname().sysname == 'Windows_NT'
+vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or ':') .. vim.env.PATH
 -- }}}
 
 -- autocmds {{{
 local autocmd = vim.api.nvim_create_autocmd
 
 -- dont list quickfix buffers
-autocmd("FileType", {
-    pattern = "qf",
-    callback = function()
-        vim.opt_local.buflisted = false
-    end,
+autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
 })
 
 -- map q to :close for utility buffers
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = {
-        "netrw",
-        "Jaq",
-        "qf",
-        "git",
-        "help",
-        "man",
-        "lspinfo",
-        "oil",
-        "spectre_panel",
-        "lir",
-        "DressingSelect",
-        "tsplayground",
-        "",
-    },
-    callback = function()
-        vim.cmd [[
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = {
+    'netrw',
+    'Jaq',
+    'qf',
+    'git',
+    'help',
+    'man',
+    'lspinfo',
+    'oil',
+    'spectre_panel',
+    'lir',
+    'DressingSelect',
+    'tsplayground',
+    '',
+  },
+  callback = function()
+    vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR>
       set nobuflisted
     ]]
-    end,
+  end,
 })
 
 -- warn if buffer has been modified outside of vim
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    pattern = { "*" },
-    callback = function()
-        vim.cmd "checktime"
-    end,
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  pattern = { '*' },
+  callback = function()
+    vim.cmd 'checktime'
+  end,
 })
 
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-    callback = function()
-        local status_ok, luasnip = pcall(require, "luasnip")
-        if not status_ok then
-            return
-        end
-        if luasnip.expand_or_jumpable() then
-            -- ask maintainer for option to make this silent
-            -- luasnip.unlink_current()
-            vim.cmd [[silent! lua require("luasnip").unlink_current()]]
-        end
-    end,
+vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+  callback = function()
+    local status_ok, luasnip = pcall(require, 'luasnip')
+    if not status_ok then
+      return
+    end
+    if luasnip.expand_or_jumpable() then
+      -- ask maintainer for option to make this silent
+      -- luasnip.unlink_current()
+      vim.cmd [[silent! lua require("luasnip").unlink_current()]]
+    end
+  end,
 })
 
 -- remove trailing white spaces on save
-local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-    command = [[:%s/\s\+$//e]],
-    group = TrimWhiteSpaceGrp,
+local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup('TrimWhiteSpaceGrp', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  command = [[:%s/\s\+$//e]],
+  group = TrimWhiteSpaceGrp,
 })
 
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
 })
 
 -- go to last location when opening a buffer
-vim.api.nvim_create_autocmd(
-    "BufReadPost",
-    { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
-)
+vim.api.nvim_create_autocmd('BufReadPost', { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
 
 -- don't auto comment new line
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    callback = function()
-        vim.cmd "set formatoptions-=cro"
-    end,
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  callback = function()
+    vim.cmd 'set formatoptions-=cro'
+  end,
 })
 
 -- enable spell checking for certain file types
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = { "*.txt", "*.md", "*.tex" },
-    callback = function()
-        vim.opt.spell = true
-        vim.opt.spelllang = "en,it"
-    end,
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.txt', '*.md', '*.tex' },
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = 'en,it'
+  end,
 })
 -- }}}
 
 -- command {{{
 -- overload q and w command
-vim.api.nvim_command("command! Q q")
-vim.api.nvim_command("command! W w")
-vim.api.nvim_command("command! Wq wq")
+vim.api.nvim_command 'command! Q q'
+vim.api.nvim_command 'command! W w'
+vim.api.nvim_command 'command! Wq wq'
 
 -- write file with sudo
-vim.cmd.cnoreabbrev({ "w!!", "w !sudo tee > /dev/null %<CR>" })
+vim.cmd.cnoreabbrev { 'w!!', 'w !sudo tee > /dev/null %<CR>' }
 -- }}}
