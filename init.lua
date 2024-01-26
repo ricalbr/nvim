@@ -4,107 +4,7 @@
 -- set <space> as the leader key
 --  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
 require 'core'
-
--- key bindings {{{
-local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
-
-keymap({ 'n', 'v' }, '<Space>', '', opts)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- keymaps for better default experience
-keymap('n', '\\', ':bd<CR>', opts)
-keymap('n', '<leader>nt', ':tabnew<CR>', opts)
-keymap('n', '<leader>dt', ':tabclose<CR>', opts)
-keymap('n', '<Tab>', ':bnext<CR>', opts)
-keymap('n', '<S-Tab>', ':bprevious<CR>', opts)
-keymap('n', '<Leader>re', ':retab<CR>', opts)
-
--- mapping C-s to save the file, in all the modes
-keymap('n', '<C-s>', '<Esc>:Update<CR>', opts)
-keymap('v', '<C-s>', '<Esc>:Update<CR>gv', opts)
-keymap('i', '<C-s>', '<Esc>:Update<CR>', opts)
-
--- keep searches centered on screen
-keymap('n', 'n', 'nzz', opts)
-keymap('n', 'N', 'Nzz', opts)
-keymap('n', '*', '*zz', opts)
-keymap('n', '#', '#zz', opts)
-keymap('n', 'g*', 'g*zz', opts)
-keymap('n', 'g#', 'g#zz', opts)
-
--- join lines keepin the cursor position
-keymap('n', 'J', ':let p=getpos(".")<bar>join<bar>call setpos(".", p)<CR>', opts)
-
--- move vertically by visual line (don't skip wrapped lines)
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- retain visual selection after `>` or `<`
-keymap('v', '<', '<gv', opts)
-keymap('v', '>', '>gv', opts)
-
--- argslist navigation
-keymap('n', '[a', ':previous<CR>', opts)
-keymap('n', ']a', ':next<CR>', opts)
-keymap('n', '[A', ':first<CR>', opts)
-keymap('n', ']A', ':last<CR>', opts)
-
--- quickfix list navigation
-keymap('n', '[q', ':cp<CR>', opts)
-keymap('n', ']q', ':cn<CR>', opts)
-
--- paste without overriding the register
-keymap('x', 'p', [["_dP]])
-
--- switch between splits using ctrl + {h,j,k,l}
-keymap('i', '<C-h>', '<C-\\><C-N><C-w>h', opts)
-keymap('i', '<C-j>', '<C-\\><C-N><C-w>j', opts)
-keymap('i', '<C-k>', '<C-\\><C-N><C-w>k', opts)
-keymap('i', '<C-l>', '<C-\\><C-N><C-w>l', opts)
-
-keymap('n', '<C-h>', '<C-\\><C-N><C-w>h', opts)
-keymap('n', '<C-j>', '<C-\\><C-N><C-w>j', opts)
-keymap('n', '<C-k>', '<C-\\><C-N><C-w>k', opts)
-keymap('n', '<C-l>', '<C-\\><C-N><C-w>l', opts)
-
-keymap('t', '<C-h>', '<C-\\><C-N><C-w>h', term_opts)
-keymap('t', '<C-j>', '<C-\\><C-N><C-w>j', term_opts)
-keymap('t', '<C-k>', '<C-\\><C-N><C-w>k', term_opts)
-keymap('t', '<C-l>', '<C-\\><C-N><C-w>l', term_opts)
-
--- window management
-keymap('n', '<Leader>0', '<C-w>=', opts)
-keymap('n', '<Leader>+', ':vertical resize +10<CR>', opts)
-keymap('n', '<Leader>-', ':vertical resize -10<CR>', opts)
-
-vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]]
-vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]
--- vim.cmd [[:amenu 10.120 mousemenu.-sep- *]]
-
--- no K or arrow keys
-keymap('n', '<K>', '<NOP>', opts)
-keymap('n', '<Down>', '<NOP>', opts)
-keymap('n', '<Up>', '<NOP>', opts)
-keymap('n', '<Left>', '<NOP>', opts)
-keymap('i', '<Right>', '<NOP>', opts)
-keymap('i', '<Down>', '<NOP>', opts)
-keymap('i', '<Up>', '<NOP>', opts)
-keymap('i', '<Left>', '<NOP>', opts)
-keymap('i', '<Right>', '<NOP>', opts)
-
--- tailwind bearable to work with
-keymap({ 'n', 'x' }, 'j', 'gj', opts)
-keymap({ 'n', 'x' }, 'k', 'gk', opts)
-
--- diagnostic keymaps
-keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
--- }}}
+require 'core.keymaps'
 
 -- lazy.nvim {{{
 -- install`lazy.nvim` plugin manager from https://github.com/folke/lazy.nvim
@@ -134,18 +34,8 @@ require('lazy').setup({
   { 'folke/twilight.nvim', opts = {} },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
-  { 'rose-pine/neovim', lazy = false, priority = 1000 },
   { 'lewis6991/gitsigns.nvim', event = 'BufEnter', cmd = 'Gitsigns' },
   { 'windwp/nvim-autopairs', event = 'VeryLazy' },
-  {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    build = 'cd app && yarn install',
-    init = function()
-      vim.g.mkdp_filetypes = { 'markdown' }
-    end,
-    ft = { 'markdown' },
-  },
   {
     'folke/zen-mode.nvim',
     event = 'VeryLazy',
@@ -193,7 +83,8 @@ require('lazy').setup({
 
   {
     'neovim/nvim-lspconfig', -- LSP Configuration & Plugins
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    event = 'LspAttach',
     dependencies = {
       'williamboman/mason.nvim', -- automatically install lsps to stdpath for neovim
       'williamboman/mason-lspconfig.nvim',
@@ -250,8 +141,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-
-  -- require 'plugins.autoformat',
 }, {})
 
 require 'impatient' -- improve plugin performances
@@ -259,32 +148,22 @@ require 'nvim-web-devicons'
 -- }}}
 
 -- colorscheme {{{
-vim.opt.termguicolors = true
-require('rose-pine').setup {
-  dark_variant = 'moon',
-  dim_inactive_windows = false,
-  extend_background_behind_borders = true,
-
-  styles = {
-    bold = true,
-    italic = true,
-    transparency = true,
-  },
-
-  highlight_groups = {
-    ColorColumn = { bg = 'rose' },
-    Normal = { bg = 'none' },
-    SignColumn = { bg = 'none' },
-    GitSignsAdd = { fg = '#68d98a' },
-    GitSignsChange = { fg = 'gold' },
-    GitSignsDelete = { fg = 'love' },
-  },
-}
-vim.cmd 'colorscheme rose-pine'
+vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = 'UpdateGutter',
+  pattern = '*',
+  callback = function()
+    vim.cmd [[highlight ColorColumn guibg=#000000]]
+    vim.cmd [[highlight GitSignsAdd guifg=#006900]]
+    vim.cmd [[highlight GitSignsChange guifg=#ffff00]]
+    vim.cmd [[highlight GitSignsDelete guifg=#ff0000]]
+  end,
+})
+vim.cmd 'colorscheme lunaperche'
 
 require('lualine').setup {
   options = {
-    theme = 'rose-pine',
+    theme = 'nord',
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
     globalstatus = true,
@@ -328,7 +207,6 @@ vim.defer_fn(function()
       keymaps = {
         init_selection = '<c-space>',
         node_incremental = '<c-space>',
-        scope_incremental = '<c-s>',
         node_decremental = '<M-space>',
       },
     },
@@ -836,7 +714,7 @@ require('gitsigns').setup {
     },
     changedelete = {
       hl = 'GitSignsChange',
-      text = icons.ui.BoldLineMiddle,
+      text = icons.ui.BoldLineDashedMiddle,
       numhl = 'GitSignsChangeNr',
       linehl = 'GitSignsChangeLn',
     },
