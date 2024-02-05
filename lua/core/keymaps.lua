@@ -91,3 +91,10 @@ keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic 
 keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- change directory to cwd
+keymap('n', '<leader>cd', ':cd %:h<CR>', opts)
+
+-- notes
+keymap('n', '<leader>ni', ':e $NOTES_DIR/index.md<CR>:cd $NOTES_DIR<CR>', opts)
+keymap('n', '<leader>nt', ':silent !ctags -R . <CR> :redraw! <CR>', opts)
