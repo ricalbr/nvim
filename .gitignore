@@ -4,4 +4,5 @@ plugin/packer_compiled.lua
 cache/
 cache/*
 lazy-lock.json
+.tags
 
