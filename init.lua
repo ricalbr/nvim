@@ -348,6 +348,14 @@ mason_lspconfig.setup_handlers {
 
 -- plugin setup {{{
 local icons = require 'config.icons'
+-- skeleton {{{
+-- cpp skeleton file
+vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
+vim.api.nvim_create_autocmd('BufNewFile', {
+  pattern = { '*.cpp', '*.cc', '*.cxx' },
+  command = '0r ./templates/skel.cpp',
+})
+-- }}}
 -- cmp {{{
 local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then
