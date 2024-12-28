@@ -353,7 +353,7 @@ local icons = require 'config.icons'
 vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
 vim.api.nvim_create_autocmd('BufNewFile', {
   pattern = { '*.cpp', '*.cc', '*.cxx' },
-  command = '0r ./templates/skel.cpp',
+  command = '0r $HOME/.config/nvim/templates/skel.cpp',
 })
 -- }}}
 -- cmp {{{
