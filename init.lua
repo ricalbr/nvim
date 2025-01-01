@@ -3,17 +3,9 @@
 
 -- set <space> as the leader key
 --  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
--- Inizia a registrare il profilo
-vim.cmd [[profile start ~/.config/nvim/nvim-profile.log]]
-
--- Profilare tutte le funzioni
-vim.cmd [[profile func *]]
-
--- Profilare tutti i file
-vim.cmd [[profile file *]]
-
 require 'core'
 require 'core.keymaps'
+vim.loader.enable()
 
 -- lazy.nvim {{{
 -- install`lazy.nvim` plugin manager from https://github.com/folke/lazy.nvim
@@ -32,12 +24,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-  'lewis6991/impatient.nvim', -- optimize packer with caching
+  -- 'lewis6991/impatient.nvim', -- optimize packer with caching
   'tpope/vim-repeat',
   'anuvyklack/pretty-fold.nvim',
-  'nvim-lualine/lualine.nvim',
+  { 'nvim-lualine/lualine.nvim', event = 'BufRead' },
   { 'nathom/filetype.nvim' },
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
   { 'kylechui/nvim-surround', opts = {} },
   -- { 'folke/which-key.nvim', opts = {} },
   -- { 'folke/twilight.nvim', opts = {} },
@@ -99,7 +91,7 @@ require('lazy').setup({
       { 'williamboman/mason-lspconfig.nvim', event = 'LspAttach' },
       { 'WhoIsSethDaniel/mason-tool-installer.nvim', event = 'LspAttach' },
       { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
-      { 'j-hui/fidget.nvim', event = 'BufRead', opts = {} },
+      { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
       'folke/neodev.nvim',
     },
   },
@@ -165,13 +157,13 @@ require('lazy').setup({
     event = 'BufRead',
     after = 'vim-matchup',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'VeryLazy' },
     },
     build = ':TSUpdate',
   },
 }, {})
 
-require 'impatient' -- improve plugin performances
+-- require 'impatient' -- improve plugin performances
 require 'nvim-web-devicons'
 -- }}}
 
