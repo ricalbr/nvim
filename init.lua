@@ -36,6 +36,7 @@ require('lazy').setup({
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'lewis6991/gitsigns.nvim', event = 'BufEnter', cmd = 'Gitsigns' },
   { 'windwp/nvim-autopairs', event = 'VeryLazy' },
+  { 'andymass/vim-matchup', event = 'VeryLazy' },
   {
     'folke/zen-mode.nvim',
     event = 'VeryLazy',
@@ -60,26 +61,26 @@ require('lazy').setup({
           ruler = false, -- disables the ruler text in the cmd line area
           showcmd = false, -- disables the command in the last line of the screen
         },
-        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+        twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
         gitsigns = { enabled = true }, -- disables git signs
       },
     },
   },
 
-  {
-    'vimwiki/vimwiki',
-    event = 'VeryLazy',
-    init = function()
-      vim.g.vimwiki_list = {
-        {
-          path = '~/notes',
-          syntax = 'markdown',
-          ext = '.md',
-        },
-      }
-      vim.g.vimwiki_global_ext = 0
-    end,
-  },
+  -- {
+  --   'vimwiki/vimwiki',
+  --   event = 'VeryLazy',
+  --   init = function()
+  --     vim.g.vimwiki_list = {
+  --       {
+  --         path = '~/notes',
+  --         syntax = 'markdown',
+  --         ext = '.md',
+  --       },
+  --     }
+  --     vim.g.vimwiki_global_ext = 0
+  --   end,
+  -- },
 
   {
     'neovim/nvim-lspconfig', -- LSP Configuration & Plugins
@@ -131,11 +132,12 @@ require('lazy').setup({
     },
   },
 
-  { 'nvimtools/none-ls.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvimtools/none-ls.nvim', dependencies = { 'nvimtools/none-ls-extras.nvim', 'nvim-lua/plenary.nvim' } },
 
   {
     -- highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    tag = 'v0.9.3', -- last version compatible with Nvim 0.9
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -148,6 +150,7 @@ require 'nvim-web-devicons'
 -- }}}
 
 -- colorscheme {{{
+vim.api.nvim_set_hl(0, 'GitSignsDelete', { link = 'GitSignsDelete' })
 vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = 'UpdateGutter',
@@ -155,8 +158,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
     vim.cmd [[highlight ColorColumn guibg=#000000]]
     vim.cmd [[highlight GitSignsAdd guifg=#006900]]
-    vim.cmd [[highlight GitSignsChange guifg=#ffff00]]
-    vim.cmd [[highlight GitSignsDelete guifg=#ff0000]]
+    vim.cmd [[highlight GitSignsChange guifg=#FFFF00]]
+    vim.cmd [[highlight GitSignsDelete guifg=#FF0000]]
+    vim.cmd [[highlight MatchParen  cterm=bold gui=bold guifg=#F09EBF guibg=#1c1c1c ]]
   end,
 })
 vim.cmd 'colorscheme lunaperche'
@@ -253,6 +257,7 @@ vim.defer_fn(function()
           ['<leader>A'] = '@parameter.inner',
         },
       },
+      matchup = { enable = true },
     },
   }
 end, 0)
@@ -349,12 +354,12 @@ mason_lspconfig.setup_handlers {
 -- plugin setup {{{
 local icons = require 'config.icons'
 -- skeleton {{{
--- cpp skeleton file
-vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
-vim.api.nvim_create_autocmd('BufNewFile', {
-  pattern = { '*.cpp', '*.cc', '*.cxx' },
-  command = '0r $HOME/.config/nvim/templates/skel.cpp',
-})
+-- -- cpp skeleton file
+-- vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
+-- vim.api.nvim_create_autocmd('BufNewFile', {
+--   pattern = { '*.cpp', '*.cc', '*.cxx' },
+--   command = '0r $HOME/.config/nvim/templates/skel.cpp',
+-- })
 -- }}}
 -- cmp {{{
 local cmp_status_ok, cmp = pcall(require, 'cmp')
@@ -366,7 +371,7 @@ local snip_status_ok, luasnip = pcall(require, 'luasnip')
 if not snip_status_ok then
   return
 end
-require('luasnip.loaders.from_vscode').lazy_load()
+require('luasnip.loaders.from_snipmate').lazy_load { paths = './snippets/' }
 
 vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTabnine', { fg = '#CA42F0' })
@@ -497,10 +502,11 @@ null_ls.setup {
     formatting.prettier.with { extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' } },
     formatting.black.with { extra_args = { '--fast', '--skip-string-normalization', '--line-length=120' } },
     formatting.isort,
-    diagnostics.flake8.with { extra_args = { '--max-line-length=120' } },
+    -- diagnostics.flake8.with { extra_args = { '--max-line-length=120' } },
+    require('none-ls.diagnostics.flake8').with { extra_args = { '--max-line-length', '120' } },
     formatting.stylua,
     formatting.clang_format,
-    diagnostics.clang_check,
+    diagnostics.clazy,
     null_ls.builtins.completion.spell,
   },
   on_attach = function(client, bufnr)
@@ -697,36 +703,20 @@ vim.keymap.set('n', '<leader>gt', require('telescope.builtin').tags, { desc = '[
 -- gitsigns {{{
 require('gitsigns').setup {
   signs = {
-    add = {
-      hl = 'GitSignsAdd',
-      text = icons.ui.BoldLineMiddle,
-      numhl = 'GitSignsAddNr',
-      linehl = 'GitSignsAddLn',
-    },
-    change = {
-      hl = 'GitSignsChange',
-      text = icons.ui.BoldLineDashedMiddle,
-      numhl = 'GitSignsChangeNr',
-      linehl = 'GitSignsChangeLn',
-    },
-    delete = {
-      hl = 'GitSignsDelete',
-      text = icons.ui.TriangleShortArrowRight,
-      numhl = 'GitSignsDeleteNr',
-      linehl = 'GitSignsDeleteLn',
-    },
-    topdelete = {
-      hl = 'GitSignsDelete',
-      text = icons.ui.TriangleShortArrowRight,
-      numhl = 'GitSignsDeleteNr',
-      linehl = 'GitSignsDeleteLn',
-    },
-    changedelete = {
-      hl = 'GitSignsChange',
-      text = icons.ui.BoldLineDashedMiddle,
-      numhl = 'GitSignsChangeNr',
-      linehl = 'GitSignsChangeLn',
-    },
+    add = { text = icons.ui.BoldLineMiddle },
+    change = { text = icons.ui.BoldLineMiddle },
+    delete = { text = icons.ui.TriangleShortArrowRight },
+    topdelete = { text = icons.ui.TriangleShortArrowRight },
+    changedelete = { text = icons.ui.TriangleShortArrowRight },
+    untracked = { text = '┆' },
+  },
+  signs_staged = {
+    add = { text = icons.ui.BoldLineMiddle },
+    change = { text = icons.ui.BoldLineMiddle },
+    delete = { text = icons.ui.TriangleShortArrowRight },
+    topdelete = { text = icons.ui.TriangleShortArrowRight },
+    changedelete = { text = icons.ui.TriangleShortArrowRight },
+    untracked = { text = '┆' },
   },
 
   on_attach = function(bufnr)
@@ -806,9 +796,6 @@ require('gitsigns').setup {
     delay = 1000,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter_opts = {
-    relative_time = false,
-  },
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -822,15 +809,16 @@ require('gitsigns').setup {
     col = 1,
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  yadm = {
-    enable = false,
-  },
+  -- yadm = { enable = false, },
 }
 -- }}}
 -- filetype {{{
 require('filetype').setup {
   overrides = { extensions = { pgm = 'gcode', gcode = 'gcode', g = 'gcode', ngc = 'gcode' } },
 }
+-- }}}
+-- match-up {{{
+require('match-up').setup { opts = {} }
 -- }}}
 -- oil {{{
 require('oil').setup {
@@ -854,12 +842,13 @@ require('oil').setup {
   skip_confirm_for_simple_edits = false,
   prompt_save_on_select_new_entry = true,
   cleanup_delay_ms = 2000,
-  lsp_rename_autosave = false,
+  -- lsp_rename_autosave = false,
+  lsp_file_methods = { autosave_changes = false },
   constrain_cursor = 'editable',
   keymaps = {
     ['g?'] = 'actions.show_help',
     ['<CR>'] = 'actions.select',
-    ['<C-s>'] = 'actions.select_vsplit',
+    ['<C-v>'] = 'actions.select_vsplit',
     ['<C-h>'] = 'actions.select_split',
     ['<C-t>'] = 'actions.select_tab',
     ['<C-p>'] = 'actions.preview',
