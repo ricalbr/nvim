@@ -3,6 +3,15 @@
 
 -- set <space> as the leader key
 --  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
+-- Inizia a registrare il profilo
+vim.cmd [[profile start ~/.config/nvim/nvim-profile.log]]
+
+-- Profilare tutte le funzioni
+vim.cmd [[profile func *]]
+
+-- Profilare tutti i file
+vim.cmd [[profile file *]]
+
 require 'core'
 require 'core.keymaps'
 
@@ -31,7 +40,7 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
   { 'kylechui/nvim-surround', opts = {} },
   -- { 'folke/which-key.nvim',        opts = {}, },
-  { 'folke/twilight.nvim', opts = {} },
+  -- { 'folke/twilight.nvim', opts = {} },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'lewis6991/gitsigns.nvim', event = 'BufEnter', cmd = 'Gitsigns' },
@@ -84,14 +93,13 @@ require('lazy').setup({
 
   {
     'neovim/nvim-lspconfig', -- LSP Configuration & Plugins
-    -- event = 'VeryLazy',
     event = 'LspAttach',
     dependencies = {
-      'williamboman/mason.nvim', -- automatically install lsps to stdpath for neovim
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'glepnir/lspsaga.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'williamboman/mason.nvim', event = 'LspAttach' }, -- automatically install lsps to stdpath for neovim
+      { 'williamboman/mason-lspconfig.nvim', event = 'LspAttach' },
+      { 'WhoIsSethDaniel/mason-tool-installer.nvim', event = 'LspAttach' },
+      { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
+      { 'j-hui/fidget.nvim', event = 'BufRead', opts = {} },
       'folke/neodev.nvim',
     },
   },
@@ -100,18 +108,34 @@ require('lazy').setup({
     'hrsh7th/nvim-cmp', -- autocompletion
     event = 'InsertEnter',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-emoji', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-buffer', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-path', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-cmdline', event = 'InsertEnter' },
-      { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-nvim-lua' },
       {
         'L3MON4D3/LuaSnip',
         event = 'InsertEnter',
-        dependencies = { 'rafamadriz/friendly-snippets' },
+        build = (function()
+          -- Build Step is needed for regex support in snippets.
+          -- This step is not supported in many windows environments.
+          -- Remove the below condition to re-enable on windows.
+          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+            return
+          end
+          return 'make install_jsregexp'
+        end)(),
+        -- dependencies = {
+        --     {
+        --         'rafamadriz/friendly-snippets',
+        --         config = function()
+        --             require('luasnip.loaders.from_vscode').lazy_load()
+        --         end,
+        --     },
+        -- },
       },
+      { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
+      { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
+      { 'hrsh7th/cmp-path', event = 'InsertEnter' },
+      { 'hrsh7th/cmp-emoji', event = 'InsertEnter' },
+      -- { 'hrsh7th/cmp-cmdline', event = 'InsertEnter' },
+      -- { 'hrsh7th/cmp-buffer', event = 'InsertEnter' },
+      -- { 'hrsh7th/cmp-nvim-lua' },
     },
   },
 
@@ -138,6 +162,8 @@ require('lazy').setup({
     -- highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     tag = 'v0.9.3', -- last version compatible with Nvim 0.9
+    event = 'BufRead',
+    after = 'vim-matchup',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -160,6 +186,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.cmd [[highlight GitSignsAdd guifg=#006900]]
     vim.cmd [[highlight GitSignsChange guifg=#FFFF00]]
     vim.cmd [[highlight GitSignsDelete guifg=#FF0000]]
+    vim.cmd [[highlight GitSignsChangedelete guifg=#FF0000]]
+    vim.cmd [[highlight GitSignsTopdelete guifg=#FF0000]]
     vim.cmd [[highlight MatchParen  cterm=bold gui=bold guifg=#F09EBF guibg=#1c1c1c ]]
   end,
 })
@@ -167,7 +195,7 @@ vim.cmd 'colorscheme lunaperche'
 
 require('lualine').setup {
   options = {
-    theme = 'nord',
+    theme = 'iceberg_dark',
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
     globalstatus = true,
@@ -353,14 +381,6 @@ mason_lspconfig.setup_handlers {
 
 -- plugin setup {{{
 local icons = require 'config.icons'
--- skeleton {{{
--- -- cpp skeleton file
--- vim.api.nvim_create_augroup('UpdateGutter', { clear = true })
--- vim.api.nvim_create_autocmd('BufNewFile', {
---   pattern = { '*.cpp', '*.cc', '*.cxx' },
---   command = '0r $HOME/.config/nvim/templates/skel.cpp',
--- })
--- }}}
 -- cmp {{{
 local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then
@@ -370,8 +390,9 @@ end
 local snip_status_ok, luasnip = pcall(require, 'luasnip')
 if not snip_status_ok then
   return
+else
+  require('luasnip.loaders.from_lua').lazy_load { paths = { '~/.config/nvim/lua/snippets/' } }
 end
-require('luasnip.loaders.from_snipmate').lazy_load { paths = './snippets/' }
 
 vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTabnine', { fg = '#CA42F0' })
