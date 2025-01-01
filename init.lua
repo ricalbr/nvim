@@ -39,7 +39,7 @@ require('lazy').setup({
   { 'nathom/filetype.nvim' },
   { 'numToStr/Comment.nvim', opts = {} },
   { 'kylechui/nvim-surround', opts = {} },
-  -- { 'folke/which-key.nvim',        opts = {}, },
+  -- { 'folke/which-key.nvim', opts = {} },
   -- { 'folke/twilight.nvim', opts = {} },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
@@ -120,14 +120,14 @@ require('lazy').setup({
           end
           return 'make install_jsregexp'
         end)(),
-        -- dependencies = {
-        --     {
-        --         'rafamadriz/friendly-snippets',
-        --         config = function()
-        --             require('luasnip.loaders.from_vscode').lazy_load()
-        --         end,
-        --     },
-        -- },
+        dependencies = {
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
+        },
       },
       { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
       { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
@@ -497,17 +497,10 @@ cmp.setup {
     select = false,
   },
   window = {
-    completion = {
-      border = 'rounded',
-      scrollbar = false,
-    },
-    documentation = {
-      border = 'rounded',
-    },
+    completion = { border = 'rounded', scrollbar = false },
+    documentation = { border = 'rounded' },
   },
-  experimental = {
-    ghost_text = false,
-  },
+  experimental = { ghost_text = false },
 }
 -- }}}
 -- none-ls {{{
@@ -969,31 +962,23 @@ require('pretty-fold').setup {
   },
 }
 -- }}}
--- autopairs {{{
-require('nvim-autopairs').setup {
-  enable_check_bracket_line = false, -- don't add pairs if it already has a close pair in the same line
-  ignored_next_char = '[%w%.]', -- will ignore alphanumeric and `.` symbol
-  check_ts = true, -- use treesitter to check for a pair.
-  disable_filetype = { 'TelescopePrompt', 'spectre_panel' },
-}
--- }}}
 -- keychain {{{
--- document existing key chains
+-- -- document existing key chains
 -- require('which-key').register {
---     ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
---     ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
---     ['<leader>g'] = { name = '[G]o', _ = 'which_key_ignore' },
---     ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
---     ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
---     ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
---     ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
---     ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+--   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+--   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+--   ['<leader>g'] = { name = '[G]o', _ = 'which_key_ignore' },
+--   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+--   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+--   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+--   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+--   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 -- }
 -- -- register which-key VISUAL mode
 -- -- required for visual <leader>hs (hunk stage) to work
 -- require('which-key').register({
---     ['<leader>'] = { name = 'VISUAL <leader>' },
---     ['<leader>h'] = { 'Git [H]unk' },
+--   ['<leader>'] = { name = 'VISUAL <leader>' },
+--   ['<leader>h'] = { 'Git [H]unk' },
 -- }, { mode = 'v' })
--- -- }}}
+-- }}}
 -- }}}
