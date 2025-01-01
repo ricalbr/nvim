@@ -24,13 +24,13 @@ install following requirements:
 ##### ubuntu
 
 ```bash
-sudo apt install npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit
+sudo apt install npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit clazy
 ```
 
 ##### arch-based
 
 ```bash
-sudo pacman -Sy npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit
+sudo pacman -Sy npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit clazy
 ```
 
 # setup environments
