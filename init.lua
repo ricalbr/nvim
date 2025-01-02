@@ -22,7 +22,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+require('lazy').setup {
 
   -- 'lewis6991/impatient.nvim', -- optimize packer with caching
   'tpope/vim-repeat',
@@ -31,7 +31,6 @@ require('lazy').setup({
   { 'nathom/filetype.nvim' },
   { 'numToStr/Comment.nvim', event = 'BufRead', opts = {} },
   { 'kylechui/nvim-surround', opts = {} },
-  -- { 'folke/which-key.nvim', opts = {} },
   -- { 'folke/twilight.nvim', opts = {} },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
@@ -64,6 +63,27 @@ require('lazy').setup({
         },
         twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
         gitsigns = { enabled = true }, -- disables git signs
+      },
+    },
+  },
+  {
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      delay = 50, -- delay between pressing a key and opening which-key (milliseconds)
+      icons = {
+        mappings = vim.g.have_nerd_font,
+        keys = vim.g.have_nerd_font and {},
+
+        spec = { -- Document existing key chains
+          { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+          { '<leader>d', group = '[D]ocument' },
+          { '<leader>r', group = '[R]ename' },
+          { '<leader>s', group = '[S]earch' },
+          { '<leader>w', group = '[W]orkspace' },
+          { '<leader>t', group = '[T]oggle' },
+          { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        },
       },
     },
   },
@@ -161,7 +181,8 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-}, {})
+  {},
+}
 
 -- require 'impatient' -- improve plugin performances
 require 'nvim-web-devicons'
@@ -390,11 +411,6 @@ vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
 vim.api.nvim_set_hl(0, 'CmpItemKindTabnine', { fg = '#CA42F0' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEmoji', { fg = '#FDE030' })
 
-local check_backspace = function()
-  local col = vim.fn.col '.' - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
-end
-
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -402,48 +418,41 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    ['<C-n>'] = cmp.mapping.select_next_item(), -- Select the [n]ext item
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+
+    ['<C-p>'] = cmp.mapping.select_prev_item(), -- Select the [p]revious item
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-e>'] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
+
+    -- Scroll the documentation window [b]ack / [f]orward
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
+    -- Accept ([y]es) the completion.
+    --  this will auto-import if your lsp supports it.
+    --  this will expand snippets if the lsp sent a snippet.
+    ['<C-y>'] = cmp.mapping.confirm { select = true },
+
+    -- more traditional completion keymaps,
+    --['<CR>'] = cmp.mapping.confirm { select = true },
+    --['<Tab>'] = cmp.mapping.select_next_item(),
+    --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    -- overload of these mappings can be found here:
+    -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/cmp.lua
+
+    ['<C-Space>'] = cmp.mapping.complete {}, -- Manually trigger a completion from nvim-cmp.
+    ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+
+    -- <c-l> will move you to the right of each of the expansion locations.
+    ['<C-l>'] = cmp.mapping(function()
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
-        -- require("neotab").tabout()
-      else
-        fallback()
-        -- require("neotab").tabout()
       end
-    end, {
-      'i',
-      's',
-    }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+    end, { 'i', 's' }),
+    -- <c-h> is similar, except moving you backwards.
+    ['<C-h>'] = cmp.mapping(function()
+      if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
-      else
-        fallback()
       end
     end, { 'i', 's' }),
   },
@@ -465,23 +474,16 @@ cmp.setup {
         vim_item.kind = icons.misc.Smiley
         vim_item.kind_hl_group = 'CmpItemKindEmoji'
       end
-
-      if entry.source.name == 'cmp_tabnine' then
-        vim_item.kind = icons.misc.Robot
-        vim_item.kind_hl_group = 'CmpItemKindTabnine'
-      end
-
       return vim_item
     end,
   },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'cmp_tabnine' },
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'calc' },
+    -- { name = 'calc' },
     { name = 'emoji' },
   },
   confirm_opts = {
