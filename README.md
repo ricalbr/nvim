@@ -38,8 +38,4 @@ other compatible formatters can be found in [here](https://github.com/jose-elias
 
 # check nvim status
 
-Check the editor and plugins status using
-
-```vim
-:checkhealth
-```
+Check the editor and plugins status using `:checkhealth`
