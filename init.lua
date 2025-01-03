@@ -32,7 +32,6 @@ require('lazy').setup {
   { 'echasnovski/mini.nvim', version = '*' },
   { 'stevearc/oil.nvim', opts = {}, dependencies = { 'nvim-tree/nvim-web-devicons' } },
   { 'lewis6991/gitsigns.nvim', event = 'BufEnter', cmd = 'Gitsigns' },
-  { 'andymass/vim-matchup', event = 'VeryLazy' },
   {
     'folke/zen-mode.nvim',
     event = 'VeryLazy',
@@ -64,7 +63,7 @@ require('lazy').setup {
   },
   {
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    event = 'VimEnter',
     opts = {
       delay = 50, -- delay between pressing a key and opening which-key (milliseconds)
       icons = {
@@ -171,7 +170,6 @@ require('lazy').setup {
     'nvim-treesitter/nvim-treesitter',
     tag = 'v0.9.3', -- last version compatible with Nvim 0.9
     event = 'BufRead',
-    after = 'vim-matchup',
     dependencies = {
       { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'VeryLazy' },
     },
@@ -294,7 +292,6 @@ vim.defer_fn(function()
           ['<leader>A'] = '@parameter.inner',
         },
       },
-      matchup = { enable = true },
     },
   }
 end, 0)
@@ -821,9 +818,6 @@ require('filetype').setup {
   overrides = { extensions = { pgm = 'gcode', gcode = 'gcode', g = 'gcode', ngc = 'gcode' } },
 }
 -- }}}
--- match-up {{{
-require('match-up').setup { opts = {} }
--- }}}
 --{{{ mini
 require('mini.ai').setup()
 require('mini.comment').setup()
@@ -967,24 +961,5 @@ require('pretty-fold').setup {
     { '%[', ']' }, -- % to escape lua pattern char
   },
 }
--- }}}
--- keychain {{{
--- -- document existing key chains
--- require('which-key').register {
---   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
---   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
---   ['<leader>g'] = { name = '[G]o', _ = 'which_key_ignore' },
---   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
---   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
---   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
---   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
---   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
--- }
--- -- register which-key VISUAL mode
--- -- required for visual <leader>hs (hunk stage) to work
--- require('which-key').register({
---   ['<leader>'] = { name = 'VISUAL <leader>' },
---   ['<leader>h'] = { 'Git [H]unk' },
--- }, { mode = 'v' })
 -- }}}
 -- }}}
