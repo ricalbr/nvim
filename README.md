@@ -4,33 +4,18 @@ neovim config
 
 ### requirements
 
-install following requirements:
-
-- python
-- npm
-- unzip
-- python3-pip
-- python3-virtualenv
-- fzf
-- ripgrep
-- fd
-- clangd
-- clang-format
-- clang-tools
-- julia
-- luajit
-- clazy
+install the required packages:
 
 ##### ubuntu
 
 ```bash
-sudo apt install npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit clazy
+xargs sudo apt-get install < pkglist.txt
 ```
 
 ##### arch-based
 
 ```bash
-sudo pacman -Sy npm unzip python3-pip python3-virtualenv fzf ripgrep clangd clang-format clang-tools julia luajit clazy
+pacman -S - < pkglist.txt
 ```
 
 # setup environments
@@ -50,3 +35,11 @@ pip install neovim pynvim black isort flake8
 install external formatters in the system that hooks into neovim using null-ls.
 
 other compatible formatters can be found in [here](https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting).
+
+# check nvim status
+
+Check the editor and plugins status using
+
+```vim
+:checkhealth
+```
