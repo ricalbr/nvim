@@ -1,24 +1,28 @@
-# nvim
+# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> neovim config
+configuration for neovim text editor.
 
-neovim config
-
-### requirements
+### install
+clone the repo
+``` bash
+mkdir ~/.config/nvim
+git clone https://github.com/ricalbr/nvim ~/.config/nvim
+```
 
 install the required packages:
 
-##### ubuntu
+###### ubuntu
 
 ```bash
 xargs sudo apt-get install < pkglist.txt
 ```
 
-##### arch-based
+###### arch-based
 
 ```bash
 pacman -S - < pkglist.txt
 ```
 
-# setup environments
+### setup environments
 
 ```
 npm install -g neovim prettier
@@ -36,6 +40,6 @@ install external formatters in the system that hooks into neovim using null-ls.
 
 other compatible formatters can be found in [here](https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting).
 
-# check nvim status
+### check nvim status
 
 Check the editor and plugins status using `:checkhealth`
