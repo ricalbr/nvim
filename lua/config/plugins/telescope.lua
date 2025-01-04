@@ -7,7 +7,7 @@ return {
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
-    -- only load if `make` is available. make sure you have the system requirements installed.
+      -- only load if `make` is available. make sure you have the system requirements installed.
       cond = function()
         return vim.fn.executable 'make' == 1
       end,
@@ -15,6 +15,16 @@ return {
     'nvim-telescope/telescope-smart-history.nvim',
     'nvim-telescope/telescope-ui-select.nvim',
   },
+  opts = function()
+    require('plenary.filetype').add_table {
+      extension = {
+        ['pgm'] = 'gcode',
+        ['gcode'] = 'gcode',
+        ['g'] = 'gcode',
+        ['ngc'] = 'gcode',
+      },
+    }
+  end,
   config = function()
     require 'config.telescope'
   end,
