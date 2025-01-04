@@ -2,7 +2,6 @@ return {
   'nvim-lualine/lualine.nvim',
   event = 'BufEnter',
   opts = {
-
     options = {
       theme = 'iceberg_dark',
       section_separators = { left = '', right = '' },

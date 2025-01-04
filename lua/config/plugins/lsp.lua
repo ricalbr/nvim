@@ -1,14 +1,15 @@
 return {
   {
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
     dependencies = {
       'folke/neodev.nvim',
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
-      { 'j-hui/fidget.nvim', opts = {} },
-      {'stevearc/conform.nvim', branch = 'nvim-0.9', },
+      { 'j-hui/fidget.nvim', event = 'VeryLazy', opts = {} },
+      { 'stevearc/conform.nvim', branch = 'nvim-0.9' },
     },
     config = function()
       require('neodev').setup {}
