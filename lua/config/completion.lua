@@ -1,15 +1,8 @@
-require 'config.snippets'
-
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append 'c'
 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
--- local cmp_status_ok, cmp = pcall(require, 'cmp')
--- if not cmp_status_ok then
---   return
--- end
-
 local lspkind = require 'lspkind'
 lspkind.init {
   symbol_map = {
@@ -40,13 +33,10 @@ cmp.setup {
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [n]ext item
     ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [p]revious item
-    ['<C-y>'] = cmp.mapping( -- Accept ([y]es) the completion.
-      cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      },
-      { 'i', 'c' }
-    ),
+
+    -- Accept ([y]es) the completion.
+    ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }, { 'i', 'c' }),
+
     -- Scroll the documentation window [b]ack / [f]orward
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -58,14 +48,13 @@ cmp.setup {
     -- overload of these mappings can be found here:
     -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/cmp.lua
 
-    -- <c-l> will move you to the right of each of the expansion locations.
-    ['<C-l>'] = cmp.mapping(function()
+    ['<C-l>'] = cmp.mapping(function() -- <c-l> will move you to the right of each of the expansion locations.
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
     end, { 'i', 's' }),
-    -- <c-h> is similar, except moving you backwards.
-    ['<C-h>'] = cmp.mapping(function()
+
+    ['<C-h>'] = cmp.mapping(function() -- <c-h> is similar, except moving you backwards.
       if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       end
