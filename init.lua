@@ -195,7 +195,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.cmd [[highlight GitSignsDelete guifg=#FF0000]]
     vim.cmd [[highlight GitSignsChangedelete guifg=#FF0000]]
     vim.cmd [[highlight GitSignsTopdelete guifg=#FF0000]]
-    vim.cmd [[highlight MatchParen  cterm=bold gui=bold guifg=#F09EBF guibg=#1c1c1c ]]
+    vim.cmd [[highlight MatchParen ctermbg=240 ctermfg=186 cterm=NONE guibg=#585858 guifg=#DFDF87 gui=NONE]]
   end,
 })
 vim.cmd 'colorscheme lunaperche'
