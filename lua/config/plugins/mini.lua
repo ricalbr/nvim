@@ -2,6 +2,7 @@ return {
   {
     'echasnovski/mini.nvim',
     version = '*',
+    event = 'BufEnter',
     config = function()
       require('mini.ai').setup()
       require('mini.comment').setup()

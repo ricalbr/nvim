@@ -20,6 +20,7 @@ opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = 'a'
+opt.pumheight = 10 -- limit completion items
 
 -- numbers
 opt.number = true

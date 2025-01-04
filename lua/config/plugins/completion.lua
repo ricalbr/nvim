@@ -5,9 +5,9 @@ return {
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
       { 'hrsh7th/cmp-path', event = 'InsertEnter' },
-      -- { 'hrsh7th/cmp-emoji', event = 'InsertEnter' },
-      'onsails/lspkind.nvim',
-      'roobert/tailwindcss-colorizer-cmp.nvim',
+      { 'hrsh7th/cmp-emoji', event = 'InsertEnter' },
+      { 'onsails/lspkind.nvim', event = 'BufEnter' },
+      { 'roobert/tailwindcss-colorizer-cmp.nvim', event = 'BufEnter' },
       { 'hrsh7th/cmp-buffer', event = 'InsertEnter' },
       { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
       {
