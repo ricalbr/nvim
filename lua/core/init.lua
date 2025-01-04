@@ -1,6 +1,5 @@
 local opt = vim.opt
 local g = vim.g
--- local config = require("core.utils").load_config()
 
 -- options {{{
 opt.laststatus = 3 -- global statusline
@@ -56,39 +55,6 @@ g.maplocalleader = ' '
 
 -- avoid loading unwanted plugins in vim/vimfiles
 vim.cmd 'set rtp-=/usr/share/vim/vimfiles'
-
--- disable some default providers
-for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
-  vim.g['loaded_' .. provider .. '_provider'] = 0
-end
--- disable built-in plugins
-local builtins = {
-  '2html_plugin',
-  'getscript',
-  'getscriptPlugin',
-  'gzip',
-  'logiPat',
-  -- 'matchit',
-  -- 'matchparen',
-  'netrw',
-  'netrwFileHandlers',
-  'netrwPlugin',
-  'netrwSettings',
-  'rrhelper',
-  'spellfile',
-  'tar',
-  'tarPlugin',
-  'tohtml',
-  'tutor',
-  'tutor_mode_plugin',
-  'vimball',
-  'vimballPlugin',
-  'zip',
-  'zipPlugin',
-}
-for _, plugin in ipairs(builtins) do
-  vim.g['loaded_' .. plugin] = true
-end
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == 'Windows_NT'
