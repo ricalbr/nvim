@@ -31,8 +31,6 @@ return {
           require('luasnip.loaders.from_lua').lazy_load { paths = { '~/.config/nvim/lua/snippets/' } }
         end,
       },
-      -- { 'hrsh7th/cmp-cmdline', event = 'InsertEnter' },
-      -- { 'hrsh7th/cmp-nvim-lua' },
     },
     config = function()
       require 'config.completion'
