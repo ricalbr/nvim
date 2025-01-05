@@ -14,6 +14,7 @@ return {
     },
     'nvim-telescope/telescope-smart-history.nvim',
     'nvim-telescope/telescope-ui-select.nvim',
+    'debugloop/telescope-undo.nvim',
   },
   opts = function()
     require('plenary.filetype').add_table {

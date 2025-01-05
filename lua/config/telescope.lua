@@ -69,7 +69,7 @@ require('telescope').setup {
   },
   extensions = {
     wrap_results = true,
-
+    undo = {},
     fzf = {},
     history = {
       path = data,
@@ -84,6 +84,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'smart_history')
 pcall(require('telescope').load_extension, 'ui-select')
+pcall(require('telescope').load_extension, 'undo')
 
 local builtin = require 'telescope.builtin'
 local function telescope_live_grep_open_files()
@@ -96,6 +97,7 @@ end
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = '[U]ndo history' })
 vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>gt', builtin.tags, { desc = '[G]o to C[T]ags (telescope)', noremap = true })
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
