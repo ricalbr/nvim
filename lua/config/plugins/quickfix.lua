@@ -1,7 +1,6 @@
 return {
   {
     'kevinhwang91/nvim-bqf',
-    enabled = false,
     event = 'BufEnter',
     config = function()
       require('bqf').setup()
@@ -9,6 +8,7 @@ return {
   },
   {
     'stevearc/quicker.nvim',
+    enabled = false,
     event = 'FileType qf',
     ---@module "quicker"
     ---@type quicker.SetupOptions
