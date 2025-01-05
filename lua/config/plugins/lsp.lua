@@ -29,10 +29,11 @@ return {
         pyright = true,
         html = { filetypes = { 'html', 'twig', 'hbs' } },
         lua_ls = true,
-        clangd = {
-          init_options = { clangdFileStatus = true },
-          filetypes = { 'c', 'cpp' },
-        },
+        clangd = true,
+        -- clangd = {
+        --   init_options = { clangdFileStatus = true },
+        --   filetypes = { 'c', 'cpp' },
+        -- },
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
