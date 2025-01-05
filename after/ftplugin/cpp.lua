@@ -5,6 +5,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.fileformat = 'unix'
 vim.opt.foldlevelstart = 99
+vim.opt.commentstring = '//%s' -- avoid /*%s*/ commstring
 
 local opts = { noremap = true, silent = true }
 
@@ -14,8 +15,8 @@ vim.keymap.set('n', '<F6>', '<cmd> make<CR>', opts)
 vim.keymap.set('i', '<F6>', '<Esc> <cmd>make <CR>', opts)
 
 -- compile with -O2 flag (optimized)
-vim.keymap.set('n', '<F7>', ':w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result -I include % -o %:r <CR>', opts)
-vim.keymap.set('i', '<F7>', '<Esc> :w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result -I include % -o %:r <CR>', opts)
+vim.keymap.set('n', '<F7>', '<cmd>w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result -I include % -o %:r <CR>', opts)
+vim.keymap.set('i', '<F7>', '<Esc><cmd>w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result -I include % -o %:r <CR>', opts)
 
 -- execute
 vim.keymap.set('n', '<F8>', '<cmd> !./%:r <CR>', opts)
