@@ -8,11 +8,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 require 'core'
+require 'core.filetypes'
 require 'core.keymaps'
 vim.loader.enable()
 
--- lazy.nvim
--- bootstrap {{{
+-- lazy.nvim {{{
+-- bootstrap
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -25,8 +26,7 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
--- }}}
--- lazy config {{{
+
 require('lazy').setup({ import = 'config/plugins' }, {
   performance = {
     cache = {
@@ -65,14 +65,4 @@ require('lazy').setup({ import = 'config/plugins' }, {
     notify = false,
   },
 })
--- }}}
-
--- custom filetpes {{{
-vim.filetype.add { extensions = {
-  pgm = 'gcode',
-  gcode = 'gcode',
-  g = 'gcode',
-  ngc = 'gcode',
-} }
--- vim.cmd 'filetype plugin on'
 -- }}}
