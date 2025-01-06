@@ -50,7 +50,7 @@ return {
           border = 'rounded',
         },
       }
-      -- require('mason-lspconfig').setup()
+      require('mason-lspconfig').setup()
       local ensure_installed = {
         'stylua',
         'lua_ls',
