@@ -3,6 +3,10 @@
 
 -- set <space> as the leader key
 --  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
+vim.keymap.set({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 require 'core'
 require 'core.keymaps'
 vim.loader.enable()
@@ -60,4 +64,14 @@ require('lazy').setup({ import = 'config/plugins' }, {
     notify = false,
   },
 })
+-- }}}
+
+-- custom filetpes {{{
+vim.filetype.add { extensions = {
+  pgm = 'gcode',
+  gcode = 'gcode',
+  g = 'gcode',
+  ngc = 'gcode',
+} }
+-- vim.cmd 'filetype plugin on'
 -- }}}
