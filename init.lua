@@ -46,6 +46,7 @@ require('lazy').setup({ import = 'config/plugins' }, {
         'netrwFileHandlers',
         'netrwPlugin',
         'netrwSettings',
+        'rplugin',
         'rrhelper',
         'spellfile',
         'tar',

@@ -9,10 +9,9 @@ keymap('n', '<Tab>', '<cmd> bnext<CR>', opts)
 keymap('n', '<S-Tab>', '<cmd> bprevious<CR>', opts)
 keymap('n', '<Esc><Esc>', '<cmd> noh<CR>', { desc = 'Deactivate search highlight', noremap = true, silent = true })
 
--- -- mapping C-s to save the file, in all the modes
--- keymap('n', '<C-s>', '<Esc> <cmd>Update<CR>', opts)
--- keymap('v', '<C-s>', '<Esc> <cmd>Update<CR>gv', opts)
--- keymap('i', '<C-s>', '<Esc> <cmd>Update<CR>', opts)
+-- mapping C-s to save the file, in all the modes
+keymap({ 'n', 'i' }, '<C-s>', '<Esc> <cmd>update<CR>', opts)
+keymap('v', '<C-s>', '<Esc> <cmd>update<CR>gv', opts)
 
 -- keep searches centered on screen
 keymap('n', 'n', 'nzz', opts)
