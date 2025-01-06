@@ -5,23 +5,24 @@ vim.opt.linebreak = true
 -- set fo-=t
 
 -- set compiler
-vim.opt.compiler = "tex"
+vim.opt.compiler = 'tex'
 
 -- correcting spelling mistakes on the fly
 vim.opt.spell = true
-vim.opt.spellang="en_gb,it"
+vim.opt.spellang = 'en_gb,it'
 
 -- keymaps
 local opts = { noremap = true, silent = true }
-vim.keymap.set("i", "<C-l>", '<c-g>u<Esc>[s1z=`]a<c-g>u', opts)
+vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', opts)
 
 -- generate the document and open pdf
-inoremap <F7> <Esc> :w \| :Make % <CR>
-nnoremap <F7> :w \| :Make % <CR>
+vim.keymap.set('i', '<F7>', '<Esc> <cmd>w | :Make % <CR>', opts)
+vim.keymap.set('n', '<F7>', '<cmd>w | :Make % <CR>', opts)
 
 -- compilation using pdflatex
-inoremap <F8> <Esc> :w \| :! pdflatex % <CR><CR>
-nnoremap <F8> :w \| :! pdflatex % <CR><CR>
+vim.keymap.set('i', '<F8>', '<Esc> <cmd>w | :! pdflatex % <CR><CR>', opts)
+vim.keymap.set('n', '<F8>', '<cmd>w | :! pdflatex % <CR><CR>', opts)
+vim.keymap.set('n', '<F8>', ':w | :Make % <CR>', opts)
 
 -- open document
-noremap <leader>o :! zathura %<.pdf & <CR><CR>
+vim.keymap.set('n', '<leader>o', ':! zathura %<.pdf & <CR><CR>', opts)
