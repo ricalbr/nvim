@@ -12,15 +12,167 @@ endif
 
 syntax case ignore
 
-syntax  match gcComment "'.*$" contains=gcTodo
-syntax  match gcComment "\/\/.*$" contains=gcTodo
-syntax  match gcComment ";.*$" contains=gcTodo
+" Match M- and G-codes {{{
+syntax match gcGCode "\vG\d+"
 
-syntax  keyword gcGCodes G0 G01 G1 G02 G2 G03 G3 G04 G4 G8 G9 G10 G12 G13 G16 G17 G18 G19 G20 G21 G22 G26 G27 G28 G29 G30 G33 G33.1 G34 G35 G36 G37 G38.2 G38.X G40 G41 G41.1 G42 G42.1 G43 G43.1 G44 G45 G46 G47 G49 G51 G52 G53 G54 G55 G56 G57 G58 G59 G59.1 G59.2 G59.3 G60 G61 G61.1 G63 G64 G65 G66 G67 G68 G70 G71 G72 G75 G76 G80 G81 G82 G83 G84 G85 G86 G87 G88 G89 G90 G91 G92 G92.1 G92.2 G92.3 G93 G94 G95 G96 G97 G98 G99 G100 G101 G108 G109 G110 G111 G112 G113 G114 G115 G116 G117 G118 G120 G121 G143 G144 G149 G150 G151 G153 G165 G166 G202 G203 G212 G213 G295 G296 G297 G300 G301 G359 G360 G361 G395 G396 G397 G495 G496 G497
+" Match M-codes
+syntax match gcMCode "\vM\d+"
+" }}}
 
-syntax  keyword gcMCodes M00 M0 M01 M1 M02 M2 M03 M3 M04 M4 M05 M5 M06 M6 M07 M7 M08 M8 M09 M9 M19 M23 M25 M30 M33 M34 M44 M45 M46 M47 M48 M49 M50 M51 M52 M53 M60 M62 M63 M64 M65 M66 M97 M98 M103 M104 M123 M124 M133 M134 M143 M144 M146 M219 M319 M419
-
-syntax  keyword gcFunction  $AI $BI $BO $DI $DO $ECI $EDI $EDO $EPO $EPOD $EPOF $EPOS $ERI $ERID $ERIF $ERIS $ERO $EROD $EROF $EROS $PORT $RI $RO $WI $WO ABORT ABSOLUTE ANALOG ARRAY AUTOFOCUS AXCALPARM BAND BRAKE CALL CALLDLL CCW CFGMASTER COMMINIT COMMSETTIMEOUT CONTROL CW DATAACQ DATACW DATASTART DATASTOP DBLTOSTR DISABLE DISPLAY DRIVEINFO DVAR DWELL ENABLE ENGLISH EXE EXECANNEDFUNCTION EXEMODAL FARCALL FAULTACK FIBER FILECLOSE FILEEXISTS FILEOPEN FILEREAD FILEREADINI FILEWRITE FILEWRITEINI FILEWRITENOTERM FRAC FREECAN FREERUN HALT HANDWEEL HOME HOMEASYNC INCREMENTAL INT ISDONE LINEAR LOADCAMTABLE LOADCAMVAR LOADTOOLTABLE MAKESTRING MASKTODOUBLE MC METRIC MINUTES MOVEABS MOVEINC MOVEOUTLIM MSET MSGBOX MSGCLEAR MSGDISPLAY MSGHIDE MSGINPUT MSGLAMP MSGMENU MSGSHOW MSGTASK NSCOPEMANUALXYSCALE NSCOPESTART NSCOPETRIG NVISION ONGOSUB OSC PCI PGM POPMODES PORT PRG PROBE PROGRAMDOWNLOADFILE PROGRAMEXECUTE PROGRAMEXECUTEFILE PROGRAMTASKRESET PROGRAMUNLOAD PSOCONTROL PSODISTANCE PSOHALT PSOOUTPUT PSOPULSE PSOTRACK PSOWINDOW PULSE PUSHMODES PVT QCOMMAND RAND RAPID READ REF RETURN SECONDS SETCANNEDFUNCTION SETPARM SETPOSCMD SLICE SLW STRCHAR STRCMP STRFIND STRLEN STRLWR STRMID STRTOASCII STRTODBL STRUPR SUB SYNCH UNITS VELOCITY WORD
+" Match functions {{{
+" " Keywords {{{
+syntax keyword gcFunction $AI
+syntax keyword gcFunction $BI
+syntax keyword gcFunction $BO
+syntax keyword gcFunction $DI
+syntax keyword gcFunction $DO
+syntax keyword gcFunction $ECI
+syntax keyword gcFunction $EDI
+syntax keyword gcFunction $EDO
+syntax keyword gcFunction $EPO
+syntax keyword gcFunction $EPOD
+syntax keyword gcFunction $EPOF
+syntax keyword gcFunction $EPOS
+syntax keyword gcFunction $ERI
+syntax keyword gcFunction $ERID
+syntax keyword gcFunction $ERIF
+syntax keyword gcFunction $ERIS
+syntax keyword gcFunction $ERO
+syntax keyword gcFunction $EROD
+syntax keyword gcFunction $EROF
+syntax keyword gcFunction $EROS
+syntax keyword gcFunction $PORT
+syntax keyword gcFunction $RI
+syntax keyword gcFunction $RO
+syntax keyword gcFunction $WI
+syntax keyword gcFunction $WO
+syntax keyword gcFunction ABORT
+syntax keyword gcFunction ABSOLUTE
+syntax keyword gcFunction ANALOG
+syntax keyword gcFunction ARRAY
+syntax keyword gcFunction AUTOFOCUS
+syntax keyword gcFunction AXCALPARM
+syntax keyword gcFunction BAND
+syntax keyword gcFunction BRAKE
+syntax keyword gcFunction CALL
+syntax keyword gcFunction CALLDLL
+syntax keyword gcFunction CCW
+syntax keyword gcFunction CFGMASTER
+syntax keyword gcFunction COMMINIT
+syntax keyword gcFunction COMMSETTIMEOUT
+syntax keyword gcFunction CONTROL
+syntax keyword gcFunction CW
+syntax keyword gcFunction DATAACQ
+syntax keyword gcFunction DATACW
+syntax keyword gcFunction DATASTART
+syntax keyword gcFunction DATASTOP
+syntax keyword gcFunction DBLTOSTR
+syntax keyword gcFunction DISABLE
+syntax keyword gcFunction DISPLAY
+syntax keyword gcFunction DRIVEINFO
+syntax keyword gcFunction DVAR
+syntax keyword gcFunction DWELL
+syntax keyword gcFunction ENABLE
+syntax keyword gcFunction ENGLISH
+syntax keyword gcFunction EXE
+syntax keyword gcFunction EXECANNEDFUNCTION
+syntax keyword gcFunction EXEMODAL
+syntax keyword gcFunction FARCALL
+syntax keyword gcFunction FAULTACK
+syntax keyword gcFunction FIBER
+syntax keyword gcFunction FILECLOSE
+syntax keyword gcFunction FILEEXISTS
+syntax keyword gcFunction FILEOPEN
+syntax keyword gcFunction FILEREAD
+syntax keyword gcFunction FILEREADINI
+syntax keyword gcFunction FILEWRITE
+syntax keyword gcFunction FILEWRITEINI
+syntax keyword gcFunction FILEWRITENOTERM
+syntax keyword gcFunction FRAC
+syntax keyword gcFunction FREECAN
+syntax keyword gcFunction FREERUN
+syntax keyword gcFunction HALT
+syntax keyword gcFunction HANDWEEL
+syntax keyword gcFunction HOME
+syntax keyword gcFunction HOMEASYNC
+syntax keyword gcFunction INCREMENTAL
+syntax keyword gcFunction INT
+syntax keyword gcFunction ISDONE
+syntax keyword gcFunction LINEAR
+syntax keyword gcFunction LOADCAMTABLE
+syntax keyword gcFunction LOADCAMVAR
+syntax keyword gcFunction LOADTOOLTABLE
+syntax keyword gcFunction MAKESTRING
+syntax keyword gcFunction MASKTODOUBLE
+syntax keyword gcFunction MC
+syntax keyword gcFunction METRIC
+syntax keyword gcFunction MINUTES
+syntax keyword gcFunction MOVEABS
+syntax keyword gcFunction MOVEINC
+syntax keyword gcFunction MOVEOUTLIM
+syntax keyword gcFunction MSET
+syntax keyword gcFunction MSGBOX
+syntax keyword gcFunction MSGCLEAR
+syntax keyword gcFunction MSGDISPLAY
+syntax keyword gcFunction MSGHIDE
+syntax keyword gcFunction MSGINPUT
+syntax keyword gcFunction MSGLAMP
+syntax keyword gcFunction MSGMENU
+syntax keyword gcFunction MSGSHOW
+syntax keyword gcFunction MSGTASK
+syntax keyword gcFunction NSCOPEMANUALXYSCALE
+syntax keyword gcFunction NSCOPESTART
+syntax keyword gcFunction NSCOPETRIG
+syntax keyword gcFunction NVISION
+syntax keyword gcFunction ONGOSUB
+syntax keyword gcFunction OSC
+syntax keyword gcFunction PCI
+syntax keyword gcFunction PGM
+syntax keyword gcFunction POPMODES
+syntax keyword gcFunction PORT
+syntax keyword gcFunction PRG
+syntax keyword gcFunction PROBE
+syntax keyword gcFunction PROGRAMDOWNLOADFILE
+syntax keyword gcFunction PROGRAMEXECUTE
+syntax keyword gcFunction PROGRAMEXECUTEFILE
+syntax keyword gcFunction PROGRAMTASKRESET
+syntax keyword gcFunction PROGRAMUNLOAD
+syntax keyword gcFunction PSOCONTROL
+syntax keyword gcFunction PSODISTANCE
+syntax keyword gcFunction PSOHALT
+syntax keyword gcFunction PSOOUTPUT
+syntax keyword gcFunction PSOPULSE
+syntax keyword gcFunction PSOTRACK
+syntax keyword gcFunction PSOWINDOW
+syntax keyword gcFunction PULSE
+syntax keyword gcFunction PUSHMODES
+syntax keyword gcFunction PVT
+syntax keyword gcFunction QCOMMAND
+syntax keyword gcFunction RAND
+syntax keyword gcFunction RAPID
+syntax keyword gcFunction READ
+syntax keyword gcFunction REF
+syntax keyword gcFunction RETURN
+syntax keyword gcFunction SECONDS
+syntax keyword gcFunction SETCANNEDFUNCTION
+syntax keyword gcFunction SETPARM
+syntax keyword gcFunction SETPOSCMD
+syntax keyword gcFunction SLICE
+syntax keyword gcFunction SLW
+syntax keyword gcFunction STRCHAR
+syntax keyword gcFunction STRCMP
+syntax keyword gcFunction STRFIND
+syntax keyword gcFunction STRLEN
+syntax keyword gcFunction STRLWR
+syntax keyword gcFunction STRMID
+syntax keyword gcFunction STRTOASCII
+syntax keyword gcFunction STRTODBL
+syntax keyword gcFunction STRUPR
+syntax keyword gcFunction SUB
+syntax keyword gcFunction SYNCH
+syntax keyword gcFunction UNITS
+syntax keyword gcFunction VELOCITY
+syntax keyword gcFunction WORD
 syntax match gcFunction "\<ANALOG TRACK\>"
 syntax match gcFunction "\<.DEFINED\>"
 syntax match gcFunction "\<ENCODER OUT\>"
@@ -31,7 +183,17 @@ syntax match gcFunction "\<RAMP TIME\>"
 syntax match gcFunction "\<VME READ\>"
 syntax match gcFunction "\<VME WRITE\>"
 syntax match gcFunction "\<WAIT MODE\>"
+" }}}
 
+" Match math operators
+syntax match gcOperator "[\+|\-|\*|\/|=|>|<|>=|<=|&|\||%|!|\^|\(|\)\[\]\{\}]"
+syntax keyword gcMath ABS ACOS ASIN ATAN COS EXP SIN SQRT TAN
+syntax keyword gcIter DFS ELSE ELSEIF END ENDDFS ENDIF ENDREPEAT ENDRPT ENDW FARGOTO FARJUMP FOR GOTO IF JUMP NEXT PROGRAM REPEAT RPT STEP THEN TO WHILE
+syntax keyword gcStatus INPOS INPUT MODE NOWAIT OFF ON RESET TRIGGER WAIT
+syntax keyword gcError ERROR TASKERROR
+" }}}
+
+" Match #CMD {{{
 syntax match gcHashtag "#\<AXISNAMES\>"
 syntax match gcHashtag "#\<DEFINE\>"
 syntax match gcHashtag "#\<ELSE\>"
@@ -43,43 +205,15 @@ syntax match gcHashtag "#\<MAKENCODESLABELS\>"
 syntax match gcHashtag "#\<NOSUBST\>"
 syntax match gcHashtag "#\<SUBST\>"
 syntax match gcHashtag "#\<UNDEF\>"
+" }}}
 
-syntax keyword gcMath ABS ACOS ASIN ATAN COS EXP SIN SQRT TAN
-syntax match gcOperator "[\+|\-|\*|\/|=|>|<|>=|<=|&|\||%|!|\^|\(|\)]"
-
-syntax keyword gcIter DFS ELSE ELSEIF END ENDDFS ENDIF ENDREPEAT ENDRPT ENDW FARGOTO FARJUMP FOR GOTO IF JUMP NEXT PROGRAM REPEAT RPT STEP THEN TO WHILE
-
-syntax keyword gcStatus INPOS INPUT MODE NOWAIT OFF ON RESET TRIGGER WAIT
-
-syntax keyword gcError ERROR TASKERROR
-
-syntax match gcXAxis "\<[X]\>"
-syntax match gcXAxis "\<[X]-\?\d\+\>"
-syntax match gcXAxis "\<[X]-\?\.\d\+\>"
-syntax match gcXAxis "\<[X]-\?\d\+\."
-syntax match gcXAxis "\<[X]-\?\d\+\.\d\+\>"
-syntax match gcXAxis "\<[X]\ze\(\s*\d\+\)*\>"
-
-syntax match gcYAxis "\<[Y]\>"
-syntax match gcYAxis "\<[Y]-\?\d\+\>"
-syntax match gcYAxis "\<[Y]-\?\.\d\+\>"
-syntax match gcYAxis "\<[Y]-\?\d\+\."
-syntax match gcYAxis "\<[Y]-\?\d\+\.\d\+\>"
-syntax match gcYAxis "\<[Y]\ze\(\s*\d\+\)*\>"
-
-syntax match gcZAxis "\<[Z]\>"
-syntax match gcZAxis "\<[Z]-\?\d\+\>"
-syntax match gcZAxis "\<[Z]-\?\.\d\+\>"
-syntax match gcZAxis "\<[Z]-\?\d\+\."
-syntax match gcZAxis "\<[Z]-\?\d\+\.\d\+\>"
-syntax match gcZAxis "\<[Z]\ze\(\s*\d\+\)*\>"
-
-syntax match gcUAxis "\<[U]\>"
-syntax match gcUAxis "\<[U]-\?\d\+\>"
-syntax match gcUAxis "\<[U]-\?\.\d\+\>"
-syntax match gcUAxis "\<[U]-\?\d\+\."
-syntax match gcUAxis "\<[U]-\?\d\+\.\d\+\>"
-syntax match gcUAxis "\<[U]\ze\(\s*\d\+\)*\>"
+" Match axis and motion parameters {{{
+syntax match gcAxis "\<[XYZU]\>"
+syntax match gcAxis "\<[XYZU]-\?\d\+\>"
+syntax match gcAxis "\<[XYZU]-\?\.\d\+\>"
+syntax match gcAxis "\<[XYZU]-\?\d\+\."
+syntax match gcAxis "\<[XYZU]-\?\d\+\.\d\+\>"
+syntax match gcAxis "\<[XYZU]\ze\(\s*\d\+\)*\>"
 
 syntax match gcFeed "\<[EFS]\>"
 syntax match gcFeed "\<[EFS]-\?\d\+\>"
@@ -95,30 +229,47 @@ syntax match gcUserParam "\<[LO]-\?\d\+\."
 syntax match gcUserParam "\<[LO]-\?\d\+\.\d\+\>"
 syntax match gcUserParam "\<[LO]\ze\(\s*\d\+\)*\>"
 
+syntax match gcRotationParam "\<[IJKPQR]\>"
+syntax match gcRotationParam "\<[IJKPQR]-\?\d\+\>"
+syntax match gcRotationParam "\<[IJKPQR]-\?\.\d\+\>"
+syntax match gcRotationParam "\<[IJKPQR]-\?\d\+\."
+syntax match gcRotationParam "\<[IJKPQR]-\?\d\+\.\d\+\>"
 syntax match gcRotationParam "\<[IJKPQR]\ze\(\s*\d\+\)*\>"
+" }}}
 
-syntax match gcVariable "\$"
+" Math variables {{{
+syntax match gcDollar "\$\ze\(\w*\)"
+syntax match gcVariable "\$\(\w*\)"hs=s+1,ms=s+1
+" }}}
 
+" Match strings {{{
 syntax match gcString "\v\"([^"]*)\""
+" }}}
 
-highlight def link gcComment TSComment
-highlight def link gcGCodes TSMethod
-highlight def link gcMCodes TSMethod
-highlight def link gcFunction TSKeyword
-highlight def link gcXAxis TSCharacter
-highlight def link gcYAxis TSCharacter
-highlight def link gcZAxis TSCharacter
-highlight def link gcUAxis TSCharacter
-highlight def link gcFeed  TSCharacter
-highlight def link gcRotationParam TSParameter
-highlight def link gcUserParam TSParameter
-highlight def link gcIter TSFuncBuiltin
-highlight def link gcStatus TSBoolean
-highlight def link gcVariable TSVariable
-highlight def link gcOperator TSOperator
-highlight def link gcMath TSOperator
-highlight def link gcHashtag TSInclude
-highlight def link gcString TSString
-highlight def link gcError TSError
+" Match comments {{{
+syntax  match gcComment "'.*$" contains=gcTodo
+syntax  match gcComment "\/\/.*$" contains=gcTodo
+syntax  match gcComment ";.*$" contains=gcTodo
+" }}}
+
+" highlight gcFunction cterm=NONE gui=NONE guifg=#9aae6b
+highlight  gcFunction  cterm=NONE  gui=NONE  guifg=#b0d0f0
+highlight  gcGCode     cterm=bold  gui=bold  guifg=#b0d0f0
+highlight  gcAxis      cterm=bold  gui=bold  guifg=#9aae6b
+highlight  gcOperator  cterm=NONE  gui=NONE  guifg=#7c9081
+highlight  gcStatus    cterm=bold  gui=bold  guifg=#9aae6b
+
+highlight  def  link  gcComment        Comment
+highlight  def  link  gcDollar         gcGCode
+highlight  def  link  gcError          Error
+highlight  def  link  gcFeed           gcAxis
+highlight  def  link  gcHashtag        Include
+highlight  def  link  gcIter           gcGCode
+highlight  def  link  gcMCode          gcGCode
+highlight  def  link  gcMath           gcOperator
+highlight  def  link  gcRotationParam  gcAxis
+highlight  def  link  gcString         String
+highlight  def  link  gcUserParam      Parameter
+highlight  def  link  gcVariable       Keyword
 
 let b:current_syntax = "gcode"
