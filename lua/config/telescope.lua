@@ -19,53 +19,14 @@ require('telescope').setup {
     },
   },
   pickers = {
-    live_grep = {
-      theme = 'dropdown',
-    },
-
-    grep_string = {
-      theme = 'dropdown',
-    },
-
-    find_files = {
-      theme = 'dropdown',
-      previewer = false,
-    },
-
-    buffers = {
-      theme = 'dropdown',
-      previewer = false,
-      initial_mode = 'normal',
-    },
-
-    planets = {
-      show_pluto = true,
-      show_moon = true,
-    },
-
-    colorscheme = {
-      enable_preview = true,
-    },
-
-    lsp_references = {
-      theme = 'dropdown',
-      initial_mode = 'normal',
-    },
-
-    lsp_definitions = {
-      theme = 'dropdown',
-      initial_mode = 'normal',
-    },
-
-    lsp_declarations = {
-      theme = 'dropdown',
-      initial_mode = 'normal',
-    },
-
-    lsp_implementations = {
-      theme = 'dropdown',
-      initial_mode = 'normal',
-    },
+    live_grep = { theme = 'dropdown' },
+    grep_string = { theme = 'dropdown' },
+    find_files = { theme = 'dropdown', previewer = false },
+    buffers = { theme = 'dropdown', previewer = false, initial_mode = 'normal' },
+    lsp_references = { theme = 'dropdown', initial_mode = 'normal' },
+    lsp_definitions = { theme = 'dropdown', initial_mode = 'normal' },
+    lsp_declarations = { theme = 'dropdown', initial_mode = 'normal' },
+    lsp_implementations = { theme = 'dropdown', initial_mode = 'normal' },
   },
   extensions = {
     wrap_results = true,
@@ -107,5 +68,4 @@ vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles
 vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
