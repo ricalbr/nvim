@@ -10,7 +10,7 @@ return {
     branch = 'main',
     lazy = false,
     config = function()
-      require('config.treesitter').setup()
+      require 'config.treesitter'
     end,
   },
 }
