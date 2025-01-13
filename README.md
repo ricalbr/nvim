@@ -24,6 +24,15 @@ pacman -S - < pkglist.txt
 
 ### setup environments
 
+Install `npm` via `nvm`
+```bash 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+nvm install node -s --latest-npm --default
+nvm reinstall-packages system
+npm install -g npm-check-updates
+ncu -ug
+npm update -g
+```
 ```
 npm install -g neovim prettier
 ```
