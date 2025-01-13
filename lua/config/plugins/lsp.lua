@@ -1,15 +1,15 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     dependencies = {
       'folke/neodev.nvim',
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
-      { 'j-hui/fidget.nvim', event = 'VeryLazy', opts = {} },
-      { 'stevearc/conform.nvim', branch = 'nvim-0.9' },
+      { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
+      { 'stevearc/conform.nvim', event = 'LspAttach', branch = 'nvim-0.9' },
     },
     config = function()
       require('neodev').setup {}
@@ -30,10 +30,6 @@ return {
         html = { filetypes = { 'html', 'twig', 'hbs' } },
         lua_ls = true,
         clangd = true,
-        -- clangd = {
-        --   init_options = { clangdFileStatus = true },
-        --   filetypes = { 'c', 'cpp' },
-        -- },
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
@@ -54,6 +50,9 @@ return {
       local ensure_installed = {
         'stylua',
         'lua_ls',
+        'clangd',
+        'clang-format',
+        'pyright',
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
