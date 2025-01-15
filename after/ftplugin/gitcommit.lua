@@ -1,6 +1,6 @@
 -- git commit
 
 -- basic settings
-vim.opts.textwidth = 68
-vim.bo.spell = true
-vim.opts.spelllang = 'eng_gb'
+vim.opt.textwidth = 68
+vim.opt.spelllang = 'eng_gb'
+vim.opt.spell = true

@@ -1,12 +1,12 @@
 -- conf
 
-vim.opts.shiftwidth = 2
-vim.opts.tabstop = 2
-vim.opts.softtabstop = 2
-vim.opts.autoindent = true
-vim.opts.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
-vim.opts.foldmethod = 'marker'
-vim.opts.foldmarker = '{{{,}}}'
-vim.opts.foldlevelstart = 0
-vim.opts.foldlevel = 0
+vim.opt.foldmethod = 'marker'
+vim.opt.foldmarker = '{{{,}}}'
+vim.opt.foldlevelstart = 0
+vim.opt.foldlevel = 0
