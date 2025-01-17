@@ -61,6 +61,8 @@ vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or '
 
 -- autocmds {{{
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local general_settings = vim.api.nvim_create_augroup('General settings', { clear = true })
 
 -- dont list quickfix buffers
 autocmd('FileType', {
@@ -68,10 +70,11 @@ autocmd('FileType', {
   callback = function()
     vim.opt_local.buflisted = false
   end,
+  group = general_settings,
 })
 
 -- map q to :close for utility buffers
-vim.api.nvim_create_autocmd({ 'FileType' }, {
+autocmd({ 'FileType' }, {
   pattern = {
     'netrw',
     'Jaq',
@@ -93,17 +96,19 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       set nobuflisted
     ]]
   end,
+  group = general_settings,
 })
 
 -- warn if buffer has been modified outside of vim
-vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+autocmd({ 'BufWinEnter' }, {
   pattern = { '*' },
   callback = function()
     vim.cmd 'checktime'
   end,
+  group = general_settings,
 })
 
-vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+autocmd({ 'CursorHold' }, {
   callback = function()
     local status_ok, luasnip = pcall(require, 'luasnip')
     if not status_ok then
@@ -115,17 +120,18 @@ vim.api.nvim_create_autocmd({ 'CursorHold' }, {
       vim.cmd [[silent! lua require("luasnip").unlink_current()]]
     end
   end,
+  group = general_settings,
 })
 
 -- remove trailing white spaces on save
-local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup('TrimWhiteSpaceGrp', { clear = true })
+local TrimWhiteSpaceGrp = augroup('TrimWhiteSpaceGrp', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePre', {
   command = [[:%s/\s\+$//e]],
   group = TrimWhiteSpaceGrp,
 })
 
 -- highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+local highlight_group = augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
@@ -135,22 +141,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- go to last location when opening a buffer
-vim.api.nvim_create_autocmd('BufReadPost', { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] })
+autocmd('BufReadPost', { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]], group = general_settings })
 
 -- don't auto comment new line
-vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+autocmd({ 'BufWinEnter' }, {
   callback = function()
     vim.cmd 'set formatoptions-=cro'
   end,
+  group = general_settings,
 })
 
 -- enable spell checking for certain file types
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.txt', '*.md', '*.tex' },
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = 'en,it'
   end,
+  group = general_settings,
 })
 -- }}}
 
