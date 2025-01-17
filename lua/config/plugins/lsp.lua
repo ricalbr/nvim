@@ -70,7 +70,9 @@ return {
       end
 
       local disable_semantic_tokens = {
+        cpp = true,
         lua = true,
+        python = true,
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
