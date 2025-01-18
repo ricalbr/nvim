@@ -1,23 +1,24 @@
 return {
-  -- 'gremble0/yellowbeans.nvim',
   'rmehri01/onenord.nvim',
   priority = 1000, -- Theme should load before most other plugins
   config = function()
+    local colors = require('onenord.colors').load()
     require('onenord').setup {
       disable = {
         background = true,
         float_background = true,
       },
+      custom_highlights = {
+        ['ColorColumn'] = { bg = '#000000' },
+        ['GitSignsAdd'] = { fg = colors.green },
+        ['GitSignsChange'] = { fg = colors.yellow },
+        ['GitSignsChangedelete'] = { link = 'GitSignsDelete' },
+        ['GitSignsTopdelete'] = { link = 'GitSignsDelete' },
+        ['MatchParen'] = { bg = '#585858', fg = '#DFDF87' },
+        ['Normal'] = { bg = '#000000' },
+        ['SignColumn'] = { bg = '#000000' },
+      },
     }
-    vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#000000' })
-    vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#006900' })
-    vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFFF00' })
-    vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#FF0000' })
-    vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { fg = '#FF0000' })
-    vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { fg = '#FF0000' })
-    vim.api.nvim_set_hl(0, 'MatchParen', { bg = '#585858', fg = '#DFDF87' })
-    vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000' })
-    vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#000000' })
     vim.cmd.colorscheme 'onenord'
   end,
 }
