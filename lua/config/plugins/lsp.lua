@@ -69,10 +69,11 @@ return {
         lspconfig[name].setup(config)
       end
 
+      -- TODO: check highlighting vs tree-sitter
       local disable_semantic_tokens = {
-        cpp = true,
+        -- cpp = true,
         lua = true,
-        python = true,
+        -- python = true,
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
