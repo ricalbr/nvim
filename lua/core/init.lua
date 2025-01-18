@@ -2,6 +2,7 @@ local opt = vim.opt
 local g = vim.g
 
 -- options {{{
+g.editorconfig = false
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
