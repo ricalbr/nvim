@@ -64,5 +64,8 @@ require('lazy').setup({ import = 'config/plugins' }, {
   change_detection = {
     notify = false,
   },
+  rocks = {
+    enabled = false,
+  },
 })
 -- }}}
