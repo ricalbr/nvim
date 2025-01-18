@@ -1,4 +1,4 @@
-local custom_theme = require 'lualine.themes.yellowbeans-monochrome'
+local custom_theme = require 'lualine.themes.onenord'
 
 custom_theme.normal.a.bg = '#000000'
 custom_theme.normal.b.bg = '#000000'
