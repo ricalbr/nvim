@@ -2,9 +2,9 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     tag = 'v0.9.3', -- last version compatible with Nvim 0.9
-    event = 'BufRead',
+    event = 'BufReadPre',
     dependencies = {
-      { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'VeryLazy' },
+      { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufReadPre' },
     },
     build = ':TSUpdate',
     branch = 'main',

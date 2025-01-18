@@ -15,7 +15,7 @@ custom_theme.inactive.c.bg = '#000000'
 
 return {
   'nvim-lualine/lualine.nvim',
-  event = 'BufEnter',
+  event = 'BufReadPre',
   opts = {
     options = {
       theme = custom_theme,

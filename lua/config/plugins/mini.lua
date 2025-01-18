@@ -2,7 +2,7 @@ return {
   {
     'echasnovski/mini.nvim',
     version = '*',
-    event = 'BufEnter',
+    event = 'BufReadPre',
     config = function()
       require('mini.ai').setup()
       require('mini.bracketed').setup()

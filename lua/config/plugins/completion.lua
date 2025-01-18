@@ -3,16 +3,15 @@ return {
     'hrsh7th/nvim-cmp', -- autocompletion
     event = 'InsertEnter',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp', event = 'InsertEnter' },
-      { 'hrsh7th/cmp-path', event = 'InsertEnter' },
-      -- { 'hrsh7th/cmp-emoji', event = 'InsertEnter' },
+       'hrsh7th/cmp-nvim-lsp' ,
+       'hrsh7th/cmp-path' ,
+      --  'hrsh7th/cmp-emoji' ,
       'onsails/lspkind.nvim',
       'roobert/tailwindcss-colorizer-cmp.nvim',
-      { 'hrsh7th/cmp-buffer', event = 'InsertEnter' },
-      { 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter' },
+       'hrsh7th/cmp-buffer',
+       'saadparwaiz1/cmp_luasnip',
       {
         'L3MON4D3/LuaSnip',
-        event = 'InsertEnter',
         build = (function()
           if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
             return

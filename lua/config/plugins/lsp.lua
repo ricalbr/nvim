@@ -1,14 +1,14 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    -- event = 'VeryLazy',
+    event = 'BufReadPre',
     dependencies = {
       'folke/neodev.nvim',
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
-      { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
+      -- { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
       { 'stevearc/conform.nvim', event = 'LspAttach', branch = 'nvim-0.9' },
     },
     config = function()

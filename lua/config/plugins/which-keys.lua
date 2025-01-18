@@ -1,6 +1,7 @@
 return {
   'folke/which-key.nvim',
-  event = 'VimEnter',
+  -- event = 'VimEnter',
+  cmd = 'WhichKey',
   opts = {
     delay = 500, -- delay between pressing a key and opening which-key (milliseconds)
     icons = {
