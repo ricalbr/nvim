@@ -59,3 +59,19 @@ keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diag
 -- keymap('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Go to previous quickfix list argument' })
 -- keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' }) -- use mini.jump
 -- keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' }) -- use mini.jump
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>/', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = '[/] Fuzzily search in current buffer' })
+vim.keymap.set('n', '<leader>?', '<Cmd>Telescope oldfiles<CR>', { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<CR>', { desc = '[U]ndo history' })
+vim.keymap.set('n', '<leader>gf', '<Cmd>Telescope git_files<CR>', { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>gt', '<Cmd>Telescope tags<CR>', { desc = '[G]o to C[T]ags (telescope)', noremap = true })
+vim.keymap.set('n', '<leader>sb', '<Cmd>Telescope buffers<CR>', { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>sd', '<Cmd>Telescope diagnostics<CR>', { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sf', '<Cmd>Telescope find_files<CR>', { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sg', '<Cmd>Telescope live_grep<CR>', { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sh', '<Cmd>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sr', '<Cmd>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>ss', '<Cmd>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>sw', '<Cmd>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
+-- telescope
