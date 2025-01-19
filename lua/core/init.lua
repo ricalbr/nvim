@@ -42,8 +42,6 @@ g.swapfile = false
 
 -- folding options
 opt.foldlevelstart = 99
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
