@@ -55,7 +55,7 @@ Clone this repository into your Neovim configuration directory:
 
 ```bash
 mkdir -p ~/.config/nvim
-git clone git@github.com:ricalbr/nvim.git ~/.config/nvim
+git clone https://www.github.com/ricalbr/nvim ~/.config/nvim
 ```
 
 ### Step 2: Install Plugins
@@ -108,7 +108,7 @@ To enable LSP, ensure `npm` is set up:
    npm install -g neovim prettier
    ```
 
----
+<!-- --- -->
 
 <!-- ## Setup Language Servers -->
 <!---->
