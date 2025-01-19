@@ -27,7 +27,6 @@ return {
         -- run: curl -sL https://deb.nodesource.com/setup_20.x | sudo bash -  && sudo apt-get update && sudo apt-get install nodejs
         -- eventually update the nodejs version
         pyright = true,
-        html = { filetypes = { 'html', 'twig', 'hbs' } },
         lua_ls = true,
         clangd = true,
       }

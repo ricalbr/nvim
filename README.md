@@ -20,7 +20,7 @@ Make sure the following are installed on your system:
 2. **Python** (for `pynvim`):
    Install Python 3 and the required library:
    ```bash
-   sudo apt install python3 python3-pip
+   sudo apt install python3 python3-pip python3-virtualenv
    pip3 install --user pynvim
    ```
 
@@ -108,23 +108,17 @@ To enable LSP, ensure `npm` is set up:
    npm install -g neovim prettier
    ```
 
-<!-- --- -->
+---
 
-<!-- ## Setup Language Servers -->
-<!---->
-<!-- This configuration uses Neovim's built-in LSP for code intelligence. To set up additional language servers: -->
-<!---->
-<!-- 1. Use `npm` for JavaScript/TypeScript: -->
-<!--    ```bash -->
-<!--    npm install -g typescript-language-server typescript -->
-<!--    ``` -->
-<!---->
-<!-- 2. Use `pip` for Python (e.g., `pylsp`): -->
-<!--    ```bash -->
-<!--    pip install 'python-lsp-server[all]' -->
-<!--    ``` -->
-<!---->
-<!-- 3. Other language servers can be installed via their package managers or tools like `mason.nvim`. -->
+## Setup Language Servers
+
+This configuration uses Neovim's built-in LSP for code intelligence. To set up additional language servers:
+
+```bash
+pip install 'python-lsp-server[all]' pyright
+apt install luajit clangd clang-format clang-tools
+```
+Other language servers can be installed via their package managers or tools like `mason.nvim` (see the `:Mason` command).
 
 ---
 
