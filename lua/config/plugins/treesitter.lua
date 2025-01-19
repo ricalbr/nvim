@@ -2,7 +2,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     tag = 'v0.9.3', -- last version compatible with Nvim 0.9
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufReadPre' },
     },
@@ -24,7 +24,7 @@ return {
       }
       vim.wo.foldmethod = 'expr'
       vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      -- vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
     end,
   },
 }
