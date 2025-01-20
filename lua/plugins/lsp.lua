@@ -59,8 +59,11 @@ return {
 
       for name, config in pairs(servers) do
         if config == true then
+          ---@diagnostic disable-next-line: cast-local-type
           config = {}
         end
+
+        ---@diagnostic disable-next-line: cast-local-type
         config = vim.tbl_deep_extend('force', {}, {
           capabilities = capabilities,
         }, config)
@@ -68,11 +71,11 @@ return {
         lspconfig[name].setup(config)
       end
 
-      -- TODO: check highlighting vs tree-sitter
       local disable_semantic_tokens = {
-        -- cpp = true,
+        c = true,
+        cpp = true,
         lua = true,
-        -- python = true,
+        python = true,
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
