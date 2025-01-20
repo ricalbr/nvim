@@ -1,16 +1,13 @@
 -- init.lua
 -- @ricalbr
 
--- set <space> as the leader key
---  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
-vim.keymap.set({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-require 'core'
-require 'core.filetypes'
+-- config {{{
 require 'core.keymaps'
+require 'core.autocmd'
+require 'core.options'
+require 'core.filetypes'
 vim.loader.enable()
+-- }}}
 
 -- lazy.nvim {{{
 -- bootstrap
@@ -82,6 +79,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { link = 'GitSignsDelete' })
     vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { link = 'GitSignsDelete' })
     vim.api.nvim_set_hl(0, 'MatchParen', { bg = '#585858', fg = '#DFDF87' })
+    vim.api.nvim_set_hl(0, 'Visual', { link = 'Folded' })
     vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000' })
     vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#000000' })
   end,

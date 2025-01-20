@@ -2,6 +2,12 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- set <space> as the leader key
+--  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
+keymap({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- keymaps for better default experience
 keymap('i', 'jk', '<Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
