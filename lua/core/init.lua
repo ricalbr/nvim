@@ -64,19 +64,22 @@ vim.g.python3_host_prog = '$HOME/.venv/nvim/bin/python'
 -- autocmds {{{
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
-local general_settings = vim.api.nvim_create_augroup('General settings', { clear = true })
+local function agroup(name)
+  return vim.api.nvim_create_augroup('lazynvim_' .. name, { clear = true })
+end
 
 -- dont list quickfix buffers
 autocmd('FileType', {
+  group = agroup 'quickfix',
   pattern = 'qf',
   callback = function()
     vim.opt_local.buflisted = false
   end,
-  group = general_settings,
 })
 
 -- map q to :close for utility buffers
 autocmd({ 'FileType' }, {
+  group = agroup 'close_with_q',
   pattern = {
     'netrw',
     'Jaq',
@@ -92,75 +95,80 @@ autocmd({ 'FileType' }, {
     'tsplayground',
     '',
   },
-  callback = function()
-    vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR>
-      set nobuflisted
-    ]]
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set('n', 'q', function()
+        vim.cmd 'close'
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = 'Quit buffer',
+      })
+    end)
   end,
-  group = general_settings,
 })
 
 -- warn if buffer has been modified outside of vim
-autocmd({ 'BufWinEnter' }, {
-  pattern = { '*' },
+autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = agroup 'checktime',
   callback = function()
-    vim.cmd 'checktime'
+    if vim.o.buftype ~= 'nofile' then
+      vim.cmd 'checktime'
+    end
   end,
-  group = general_settings,
 })
 
--- autocmd({ 'CursorHold' }, {
---   callback = function()
---     local status_ok, luasnip = pcall(require, 'luasnip')
---     if not status_ok then
---       return
---     end
---     if luasnip.expand_or_jumpable() then
---       -- ask maintainer for option to make this silent
---       -- luasnip.unlink_current()
---       vim.cmd [[silent! lua require("luasnip").unlink_current()]]
---     end
---   end,
---   group = general_settings,
+-- -- remove trailing white spaces on save
+-- local TrimWhiteSpaceGrp = augroup('TrimWhiteSpaceGrp', { clear = true })
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   command = [[:%s/\s\+$//e]],
+--   group = TrimWhiteSpaceGrp,
 -- })
 
--- remove trailing white spaces on save
-local TrimWhiteSpaceGrp = augroup('TrimWhiteSpaceGrp', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePre', {
-  command = [[:%s/\s\+$//e]],
-  group = TrimWhiteSpaceGrp,
-})
-
 -- highlight on yank
-local highlight_group = augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+autocmd('TextYankPost', {
+  group = agroup 'highlight_yank',
   callback = function()
-    vim.highlight.on_yank()
+    (vim.hl or vim.highlight).on_yank()
   end,
-  group = highlight_group,
-  pattern = '*',
 })
 
--- go to last location when opening a buffer
-autocmd('BufReadPost', { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]], group = general_settings })
+-- go to last loc when opening a buffer
+autocmd('BufReadPost', {
+  group = agroup 'last_loc',
+  callback = function(event)
+    local exclude = { 'gitcommit' }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
 
 -- don't auto comment new line
 autocmd({ 'BufWinEnter' }, {
+  group = agroup 'no_comment_newline',
   callback = function()
     vim.cmd 'set formatoptions-=cro'
   end,
-  group = general_settings,
 })
 
 -- enable spell checking for certain file types
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.txt', '*.md', '*.tex' },
+autocmd('FileType', {
+  group = agroup 'wrap_spell',
+  pattern = { 'text', 'plaintex', 'typst', 'gitcommit', 'markdown' },
   callback = function()
-    vim.opt.spell = true
-    vim.opt.spelllang = 'en,it'
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
   end,
-  group = general_settings,
 })
 -- }}}
 
