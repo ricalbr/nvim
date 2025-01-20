@@ -1,4 +1,4 @@
-local icons = require 'config.icons'
+local icons = require 'plugins.config.icons'
 
 return {
   'lewis6991/gitsigns.nvim',

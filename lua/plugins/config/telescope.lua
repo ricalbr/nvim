@@ -1,5 +1,5 @@
 local data = assert(vim.fn.stdpath 'data') --[[@as string]]
-local icons = require 'config.icons'
+local icons = require 'plugins.config.icons'
 
 require('telescope').setup {
   defaults = {

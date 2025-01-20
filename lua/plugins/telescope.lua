@@ -26,6 +26,6 @@ return {
     }
   end,
   config = function()
-    require 'config.telescope'
+    require 'plugins.config.telescope'
   end,
 }

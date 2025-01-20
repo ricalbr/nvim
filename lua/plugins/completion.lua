@@ -3,13 +3,13 @@ return {
     'hrsh7th/nvim-cmp', -- autocompletion
     event = 'InsertEnter',
     dependencies = {
-       'hrsh7th/cmp-nvim-lsp' ,
-       'hrsh7th/cmp-path' ,
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
       --  'hrsh7th/cmp-emoji' ,
       'onsails/lspkind.nvim',
       'roobert/tailwindcss-colorizer-cmp.nvim',
-       'hrsh7th/cmp-buffer',
-       'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-buffer',
+      'saadparwaiz1/cmp_luasnip',
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -32,7 +32,7 @@ return {
       },
     },
     config = function()
-      require 'config.completion'
+      require 'plugins.config.completion'
     end,
   },
 }
