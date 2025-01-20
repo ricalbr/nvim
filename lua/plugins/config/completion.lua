@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: missing-fields
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append 'c'
 
@@ -25,6 +26,7 @@ cmp.setup {
   sources = {
     {
       name = 'nvim_lsp',
+      ---@diagnostic disable-next-line: unused-local
       entry_filter = function(entry, ctx)
         return require('cmp').lsp.CompletionItemKind.Snippet ~= entry:get_kind()
       end,
