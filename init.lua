@@ -6,6 +6,8 @@ require 'core.keymaps'
 require 'core.autocmd'
 require 'core.options'
 require 'core.filetypes'
+
+vim.cmd.colorscheme 'habamax'
 vim.loader.enable()
 -- }}}
 
@@ -67,22 +69,3 @@ require('lazy').setup({ import = 'plugins' }, {
   },
 })
 -- }}}
-
--- -- colorscheme {{{
-vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = '*',
-  callback = function()
-    vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#000000' })
-    vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#006400' })
-    vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFCC00' })
-    vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#8B0000' })
-    vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { link = 'GitSignsDelete' })
-    vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { link = 'GitSignsDelete' })
-    vim.api.nvim_set_hl(0, 'MatchParen', { bg = '#585858', fg = '#DFDF87' })
-    vim.api.nvim_set_hl(0, 'Visual', { link = 'Folded' })
-    vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000' })
-    vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#000000' })
-  end,
-})
-vim.cmd.colorscheme 'habamax'
--- -- }}}
