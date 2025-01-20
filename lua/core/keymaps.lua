@@ -6,8 +6,13 @@ local opts = { noremap = true, silent = true }
 keymap('i', 'jk', '<Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
 keymap('n', '<Tab>', '<cmd>bnext<CR>', opts)
+keymap('n', ']b', '<cmd>bnext<CR>', opts)
 keymap('n', '<S-Tab>', '<cmd>bprevious<CR>', opts)
-keymap('n', '<Esc><Esc>', '<cmd>noh<CR>', { desc = 'Deactivate search highlight', noremap = true, silent = true })
+keymap('n', '[b', '<cmd>bprevious<CR>', opts)
+keymap({ 'i', 'n', 's' }, '<Esc>', function()
+  vim.cmd 'noh'
+  return '<esc>'
+end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- change directory to cwd
 keymap('n', '<leader>cd', '<cmd>cd %:h<CR>', { noremap = true })
@@ -29,8 +34,8 @@ end
 keymap('n', 'J', '<cmd>let p=getpos(".")<bar>join<bar>call setpos(".", p)<CR>', opts)
 
 -- move vertically by visual line (don't skip wrapped lines)
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- retain visual selection after `>` or `<`
 keymap('v', '<', '<gv', opts)
@@ -52,14 +57,20 @@ for _, key in ipairs(keys_to_disable) do
   keymap({ 'n', 'i' }, key, '<NOP>', opts)
 end
 
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
+keymap('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+keymap('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+keymap('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search Result' })
+keymap('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
+keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
+
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
--- keymap('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Go to next quickfix list argument' })
--- keymap('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Go to previous quickfix list argument' })
 -- keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' }) -- use mini.jump
 -- keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' }) -- use mini.jump
 
+-- telescope
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>/', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>?', '<Cmd>Telescope oldfiles<CR>', { desc = '[?] Find recently opened files' })
@@ -74,4 +85,3 @@ vim.keymap.set('n', '<leader>sh', '<Cmd>Telescope help_tags<CR>', { desc = '[S]e
 vim.keymap.set('n', '<leader>sr', '<Cmd>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>ss', '<Cmd>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>sw', '<Cmd>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
--- telescope
