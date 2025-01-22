@@ -31,7 +31,7 @@ keymap('v', '<C-s>', '<Esc><cmd>update<CR>gv', opts)
 keymap('n', '<leader>aa', 'ggVG', { desc = 'Select all', noremap = true, silent = true })
 
 -- keep searches centered on screen
-local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#' }
+local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}' }
 for _, key in ipairs(keys_to_center) do
   keymap('n', key, key .. 'zz', opts)
 end
