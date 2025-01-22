@@ -1,5 +1,6 @@
 local data = assert(vim.fn.stdpath 'data') --[[@as string]]
 local icons = require 'plugins.config.icons'
+local actions = require 'telescope.actions'
 
 require('telescope').setup {
   defaults = {
@@ -16,6 +17,16 @@ require('telescope').setup {
       '--smart-case',
       '--hidden',
       '--glob=!.git/',
+    },
+    mappings = {
+      i = {
+        ['<Down>'] = actions.nop,
+        ['<Up>'] = actions.nop,
+      },
+      n = {
+        ['<Down>'] = actions.nop,
+        ['<Up>'] = actions.nop,
+      },
     },
   },
   pickers = {
