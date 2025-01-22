@@ -42,4 +42,9 @@ return {
     config = true,
     opts = {},
   },
+
+  {
+    'takac/vim-hardtime',
+    cmd = 'HardTimeOn',
+  },
 }
