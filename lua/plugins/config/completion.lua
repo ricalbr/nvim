@@ -37,6 +37,7 @@ cmp.setup {
     { name = 'path' },
     { name = 'emoji' },
   },
+
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [n]ext item
     ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [p]revious item
@@ -76,7 +77,7 @@ cmp.setup {
   },
 
   formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
+    fields = { 'kind', 'abbr', 'menu' },
     expandable_indicator = true,
     format = function(entry, vim_item)
       -- Lspkind setup for icons
@@ -87,6 +88,19 @@ cmp.setup {
 
       return vim_item
     end,
+  },
+
+  window = {
+    completion = cmp.config.window.bordered {
+      col_offset = -2,
+      side_padding = 1,
+      border = 'rounded',
+      winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+    },
+    documentation = cmp.config.window.bordered {
+      border = 'rounded',
+      winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+    },
   },
 
   sorting = {
