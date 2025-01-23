@@ -91,3 +91,34 @@ vim.keymap.set('n', '<leader>sh', '<Cmd>Telescope help_tags<CR>', { desc = '[S]e
 vim.keymap.set('n', '<leader>sr', '<Cmd>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>ss', '<Cmd>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>sw', '<Cmd>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
+
+-- gitsigns
+
+keymap({ 'n', 'v' }, ']h', function()
+  if vim.wo.diff then
+    return ']h'
+  end
+  vim.schedule(function()
+    vim.cmd [[ Gitsigns next_hunk ]]
+  end)
+  return '<Ignore>'
+end, { expr = true, desc = 'Jump to next hunk' })
+
+keymap({ 'n', 'v' }, '[h', function()
+  if vim.wo.diff then
+    return '[h'
+  end
+  vim.schedule(function()
+    vim.cmd [[ Gitsigns prev_hunk ]]
+  end)
+  return '<Ignore>'
+end, { expr = true, desc = 'Jump to previous hunk' })
+keymap('n', '<leader>hr', '<Cmd>Gitsign reset_hunk<CR>', { desc = 'git reset hunk' })
+keymap('n', '<leader>hR', '<Cmd>Gitsign reset_buffer<CR>', { desc = 'git Reset buffer' })
+keymap('n', '<leader>hs', '<Cmd>Gitsign stage_hunk<CR>', { desc = 'git stage hunk' })
+keymap('n', '<leader>hS', '<Cmd>Gitsign stage_buffer<CR>', { desc = 'git Stage buffer' })
+keymap('n', '<leader>hu', '<Cmd>Gitsign undo_stage_hunk<CR>', { desc = 'undo stage hunk' })
+keymap('n', '<leader>hp', '<Cmd>Gitsign preview_hunk<CR>', { desc = 'preview git hunk' })
+keymap('n', '<leader>hd', '<Cmd>Gitsigns diffthis<CR>', { desc = 'git diff against index' })
+keymap('n', '<leader>td', '<Cmd>Gitsign toggle_deleted<CR>', { desc = 'toggle git show deleted' })
+keymap('n', '<leader>tb', '<Cmd>Gitsign toggle_current_line_blame<CR>', { desc = 'toggle git blame line' })
