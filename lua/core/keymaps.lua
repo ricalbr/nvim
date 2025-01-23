@@ -93,7 +93,6 @@ vim.keymap.set('n', '<leader>ss', '<Cmd>Telescope builtin<CR>', { desc = '[S]ear
 vim.keymap.set('n', '<leader>sw', '<Cmd>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
 
 -- gitsigns
-
 keymap({ 'n', 'v' }, ']h', function()
   if vim.wo.diff then
     return ']h'
@@ -122,3 +121,6 @@ keymap('n', '<leader>hp', '<Cmd>Gitsign preview_hunk<CR>', { desc = 'preview git
 keymap('n', '<leader>hd', '<Cmd>Gitsigns diffthis<CR>', { desc = 'git diff against index' })
 keymap('n', '<leader>td', '<Cmd>Gitsign toggle_deleted<CR>', { desc = 'toggle git show deleted' })
 keymap('n', '<leader>tb', '<Cmd>Gitsign toggle_current_line_blame<CR>', { desc = 'toggle git blame line' })
+
+-- which-key
+keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })
