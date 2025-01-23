@@ -111,6 +111,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'habamax',
   callback = function()
     vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#000000' })
+    vim.api.nvim_set_hl(0, 'MiniDiffSignAdd', { fg = '#006400' })
+    vim.api.nvim_set_hl(0, 'MiniDiffSignChange', { fg = '#FFCC00' })
+    vim.api.nvim_set_hl(0, 'MiniDiffSignDelete', { fg = '#8B0000' })
     vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#006400' })
     vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#FFCC00' })
     vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#8B0000' })
