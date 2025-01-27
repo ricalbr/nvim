@@ -9,12 +9,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- keymaps for better default experience
-keymap('i', 'jk', '<Esc>', opts)
-keymap('n', '\\', '<cmd>bd<CR>', opts)
-keymap('n', '<Tab>', '<cmd>bnext<CR>', opts)
-keymap('n', ']b', '<cmd>bnext<CR>', opts)
-keymap('n', '<S-Tab>', '<cmd>bprevious<CR>', opts)
-keymap('n', '[b', '<cmd>bprevious<CR>', opts)
+keymap('i', 'jk', '<Esc><Esc>', opts)
+keymap('n', '\\', '<cmd>bp|bd #<CR>', opts)
 keymap({ 'i', 'n', 's' }, '<Esc>', function()
   vim.cmd 'noh'
   return '<esc>'
@@ -31,13 +27,13 @@ keymap('v', '<C-s>', '<Esc><cmd>update<CR>gv', opts)
 keymap('n', '<leader>aa', 'ggVG', { desc = 'Select all', noremap = true, silent = true })
 
 -- keep searches centered on screen
-local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}' }
+local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}', '<C-u>', '<C-d>' }
 for _, key in ipairs(keys_to_center) do
   keymap('n', key, key .. 'zz', opts)
 end
 
 -- join lines keepin the cursor position
-keymap('n', 'J', '<cmd>let p=getpos(".")<bar>join<bar>call setpos(".", p)<CR>', opts)
+keymap('n', 'J', 'mzJ`z', opts)
 
 -- move vertically by visual line (don't skip wrapped lines)
 keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -124,3 +120,6 @@ keymap('n', '<leader>tb', '<Cmd>Gitsign toggle_current_line_blame<CR>', { desc =
 
 -- which-key
 keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })
+
+-- oil
+keymap('n', '-', '<Cmd>Oil --float .. <CR>', { desc = 'Open Oil on parent directory' })
