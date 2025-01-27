@@ -16,6 +16,7 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
+---@diagnostic disable-next-line: missing-fields
 opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
 opt.smartcase = true
@@ -45,16 +46,9 @@ opt.foldlevelstart = 99
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
 
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-opt.whichwrap:append '<>[]hl'
-
--- avoid loading unwanted plugins in vim/vimfiles
-vim.cmd 'set rtp-=/usr/share/vim/vimfiles'
-
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == 'Windows_NT'
 vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or ':') .. vim.env.PATH
 
 -- add python interpreper
-vim.g.python3_host_prog = '$HOME/.venv/nvim/bin/python'
+vim.g.python3_host_prog = '$HOME/.venv/nvim/bin/python3'
