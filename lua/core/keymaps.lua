@@ -10,7 +10,7 @@ vim.g.maplocalleader = ' '
 
 -- keymaps for better default experience
 keymap('i', 'jk', '<Esc><Esc>', opts)
-keymap('n', '\\', '<cmd>bp|bd #<CR>', opts)
+keymap('n', '\\', '<cmd>bd<CR>', opts)
 keymap({ 'i', 'n', 's' }, '<Esc>', function()
   vim.cmd 'noh'
   return '<esc>'
