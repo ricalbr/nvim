@@ -8,20 +8,20 @@ return {
       require('mini.ai').setup()
       require('mini.bracketed').setup()
       require('mini.comment').setup()
-      -- require('mini.diff').setup {
-      --   view = {
-      --     style = 'sign',
-      --     signs = {
-      --       add = icons.ui.BoldLineMiddle,
-      --       change = icons.ui.BoldLineMiddle,
-      --       delete = icons.ui.TriangleShortArrowRight,
-      --     },
-      --   },
-      --   mappings = {
-      --     apply = '<leader>ha',
-      --     reset = '<leader>hr',
-      --   },
-      -- }
+      require('mini.diff').setup {
+        view = {
+          style = 'sign',
+          signs = {
+            add = icons.ui.BoldLineMiddle,
+            change = icons.ui.BoldLineMiddle,
+            delete = icons.ui.TriangleShortArrowRight,
+          },
+        },
+        mappings = {
+          apply = 'ha',
+          reset = 'hr',
+        },
+      }
       require('mini.icons').setup()
       require('mini.jump').setup()
       -- require('mini.pairs').setup()
