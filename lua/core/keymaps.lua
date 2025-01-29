@@ -24,7 +24,7 @@ keymap({ 'n', 'i' }, '<C-s>', '<Esc><cmd>update<CR>', opts)
 keymap('v', '<C-s>', '<Esc><cmd>update<CR>gv', opts)
 
 -- select all text
-keymap('n', '<leader>aa', 'ggVG', { desc = 'Select all', noremap = true, silent = true })
+keymap('n', '<leader>aa', 'ggVG<c-$>', { desc = 'Select all', noremap = true, silent = true })
 
 -- keep searches centered on screen
 local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}', '<C-u>', '<C-d>' }
@@ -69,54 +69,21 @@ keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Res
 
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
--- keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' }) -- use mini.jump
--- keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' }) -- use mini.jump
 
--- telescope
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>/', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = '[/] Fuzzily search in current buffer' })
-vim.keymap.set('n', '<leader>?', '<Cmd>Telescope oldfiles<CR>', { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<CR>', { desc = '[U]ndo history' })
-vim.keymap.set('n', '<leader>gf', '<Cmd>Telescope git_files<CR>', { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>gt', '<Cmd>Telescope tags<CR>', { desc = '[G]o to C[T]ags (telescope)', noremap = true })
-vim.keymap.set('n', '<leader>sb', '<Cmd>Telescope buffers<CR>', { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sd', '<Cmd>Telescope diagnostics<CR>', { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sf', '<Cmd>Telescope find_files<CR>', { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sg', '<Cmd>Telescope live_grep<CR>', { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sh', '<Cmd>Telescope help_tags<CR>', { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sr', '<Cmd>Telescope resume<CR>', { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>ss', '<Cmd>Telescope builtin<CR>', { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>sw', '<Cmd>Telescope grep_string<CR>', { desc = '[S]earch current [W]ord' })
-
--- gitsigns
-keymap({ 'n', 'v' }, ']h', function()
-  if vim.wo.diff then
-    return ']h'
-  end
-  vim.schedule(function()
-    vim.cmd [[ Gitsigns next_hunk ]]
-  end)
-  return '<Ignore>'
-end, { expr = true, desc = 'Jump to next hunk' })
-
-keymap({ 'n', 'v' }, '[h', function()
-  if vim.wo.diff then
-    return '[h'
-  end
-  vim.schedule(function()
-    vim.cmd [[ Gitsigns prev_hunk ]]
-  end)
-  return '<Ignore>'
-end, { expr = true, desc = 'Jump to previous hunk' })
-keymap('n', '<leader>hr', '<Cmd>Gitsign reset_hunk<CR>', { desc = 'git reset hunk' })
-keymap('n', '<leader>hR', '<Cmd>Gitsign reset_buffer<CR>', { desc = 'git Reset buffer' })
-keymap('n', '<leader>hs', '<Cmd>Gitsign stage_hunk<CR>', { desc = 'git stage hunk' })
-keymap('n', '<leader>hS', '<Cmd>Gitsign stage_buffer<CR>', { desc = 'git Stage buffer' })
-keymap('n', '<leader>hu', '<Cmd>Gitsign undo_stage_hunk<CR>', { desc = 'undo stage hunk' })
-keymap('n', '<leader>hp', '<Cmd>Gitsign preview_hunk<CR>', { desc = 'preview git hunk' })
-keymap('n', '<leader>hd', '<Cmd>Gitsigns diffthis<CR>', { desc = 'git diff against index' })
-keymap('n', '<leader>td', '<Cmd>Gitsign toggle_deleted<CR>', { desc = 'toggle git show deleted' })
-keymap('n', '<leader>tb', '<Cmd>Gitsign toggle_current_line_blame<CR>', { desc = 'toggle git blame line' })
+-- fzf-lua
+vim.keymap.set('n', '<leader>sf', '<Cmd>FzfLua files<CR>', { desc = 'FZF Files' })
+vim.keymap.set('n', '<leader>sg', '<Cmd>FzfLua live_grep<CR>', { desc = 'FZF Grep' })
+vim.keymap.set('n', '<leader>mk', '<Cmd>FzfLua marks<CR>', { desc = 'Marks' })
+vim.keymap.set('n', '<leader>sk', '<Cmd>FzfLua keymaps<CR>', { desc = 'Keymaps' })
+vim.keymap.set('n', '<leader>sb', '<Cmd>FzfLua buffers<CR>', { desc = 'FZF Buffers' })
+vim.keymap.set('n', '<leader>sw', '<Cmd>FzfLua grep_cword<CR>', { desc = 'FZF Word' })
+vim.keymap.set('n', '<leader>sh', '<Cmd>FzfLua helptags<CR>', { desc = 'Help Tags' })
+vim.keymap.set('n', '<leader>gc', '<Cmd>FzfLua git_bcommits<CR>', { desc = 'Browse File Commits' })
+vim.keymap.set('n', '<leader>gs', '<Cmd>FzfLua git_status<CR>', { desc = 'Git Status' })
+vim.keymap.set('n', '<leader>sp', '<Cmd>FzfLua spell_suggest<CR>', { desc = 'Spelling Suggestions' })
+vim.keymap.set('n', '<leader>cj', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Jump to Definition' })
+vim.keymap.set('n', '<leader>cr', '<Cmd>FzfLua lsp_references', { desc = 'LSP References' })
+vim.keymap.set('n', '<leader><leader>', '<Cmd>FzfLua resume<CR>', { desc = 'FZF resume search' })
 
 -- which-key
 keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })

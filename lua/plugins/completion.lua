@@ -5,7 +5,7 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      --  'hrsh7th/cmp-emoji' ,
+      'hrsh7th/cmp-emoji',
       'onsails/lspkind.nvim',
       'roobert/tailwindcss-colorizer-cmp.nvim',
       'hrsh7th/cmp-buffer',
