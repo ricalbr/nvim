@@ -8,6 +8,12 @@ return {
       require('mini.ai').setup()
       require('mini.bracketed').setup()
       require('mini.comment').setup()
+      require('mini.icons').setup()
+      require('mini.jump').setup()
+      -- require('mini.pairs').setup()
+      require('mini.tabline').setup { show_icons = false }
+      -- require('mini.statusline').setup()
+      -- require('mini.pick').setup()
       require('mini.diff').setup {
         view = {
           style = 'sign',
@@ -22,10 +28,6 @@ return {
           reset = 'hr',
         },
       }
-      require('mini.icons').setup()
-      require('mini.jump').setup()
-      -- require('mini.pairs').setup()
-      require('mini.tabline').setup { show_icons = false }
       require('mini.surround').setup {
         mappings = {
           add = 'ys', --  defult  'sa'
@@ -48,6 +50,7 @@ return {
 
       -- Make special mapping for "add surrounding for line"
       vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+      MiniIcons.mock_nvim_web_devicons()
     end,
   },
 
