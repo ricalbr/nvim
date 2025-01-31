@@ -59,31 +59,33 @@ for _, key in ipairs(keys_to_disable) do
   keymap({ 'n', 'i' }, key, '<NOP>', opts)
 end
 
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
-keymap('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
-keymap('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
-keymap('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search Result' })
-keymap('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
-keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
-
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+-- stylua: ignore start
+keymap('n',  'n',  "'Nn'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('x',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('o',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('n',  'N',  "'nN'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+keymap('x',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+keymap('o',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+
 -- fzf-lua
-vim.keymap.set('n', '<leader>sf', '<Cmd>FzfLua files<CR>', { desc = 'FZF Files' })
-vim.keymap.set('n', '<leader>sg', '<Cmd>FzfLua live_grep<CR>', { desc = 'FZF Grep' })
-vim.keymap.set('n', '<leader>mk', '<Cmd>FzfLua marks<CR>', { desc = 'Marks' })
-vim.keymap.set('n', '<leader>sk', '<Cmd>FzfLua keymaps<CR>', { desc = 'Keymaps' })
-vim.keymap.set('n', '<leader>sb', '<Cmd>FzfLua buffers<CR>', { desc = 'FZF Buffers' })
-vim.keymap.set('n', '<leader>sw', '<Cmd>FzfLua grep_cword<CR>', { desc = 'FZF Word' })
-vim.keymap.set('n', '<leader>sh', '<Cmd>FzfLua helptags<CR>', { desc = 'Help Tags' })
-vim.keymap.set('n', '<leader>gc', '<Cmd>FzfLua git_bcommits<CR>', { desc = 'Browse File Commits' })
-vim.keymap.set('n', '<leader>gs', '<Cmd>FzfLua git_status<CR>', { desc = 'Git Status' })
-vim.keymap.set('n', '<leader>sp', '<Cmd>FzfLua spell_suggest<CR>', { desc = 'Spelling Suggestions' })
-vim.keymap.set('n', '<leader>cj', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Jump to Definition' })
-vim.keymap.set('n', '<leader>cr', '<Cmd>FzfLua lsp_references', { desc = 'LSP References' })
-vim.keymap.set('n', '<leader><leader>', '<Cmd>FzfLua resume<CR>', { desc = 'FZF resume search' })
+keymap('n',  '<leader>sf',        '<Cmd>FzfLua  files<CR>',            { desc  =  'FZF Files' })
+keymap('n',  '<leader>sg',        '<Cmd>FzfLua  live_grep<CR>',        { desc  =  'FZF Grep' })
+keymap('n',  '<leader>mk',        '<Cmd>FzfLua  marks<CR>',            { desc  =  'Marks' })
+keymap('n',  '<leader>sk',        '<Cmd>FzfLua  keymaps<CR>',          { desc  =  'Keymaps' })
+keymap('n',  '<leader>sb',        '<Cmd>FzfLua  buffers<CR>',          { desc  =  'FZF Buffers' })
+keymap('n',  '<leader>sw',        '<Cmd>FzfLua  grep_cword<CR>',       { desc  =  'FZF Word' })
+keymap('n',  '<leader>sh',        '<Cmd>FzfLua  helptags<CR>',         { desc  =  'Help Tags' })
+keymap('n',  '<leader>gc',        '<Cmd>FzfLua  git_bcommits<CR>',     { desc  =  'Browse File Commits' })
+keymap('n',  '<leader>gs',        '<Cmd>FzfLua  git_status<CR>',       { desc  =  'Git Status' })
+keymap('n',  '<leader>sp',        '<Cmd>FzfLua  spell_suggest<CR>',    { desc  =  'Spelling Suggestions' })
+keymap('n',  '<leader>cj',        '<Cmd>FzfLua  lsp_definitions<CR>',  { desc  =  'Jump to Definition' })
+keymap('n',  '<leader>cr',        '<Cmd>FzfLua  lsp_references',       { desc  =  'LSP References' })
+keymap('n',  '<leader><leader>',  '<Cmd>FzfLua  resume<CR>',           { desc  =  'FZF resume search' })
+-- stylua: ignore end
 
 -- which-key
 keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })
