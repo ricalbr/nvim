@@ -14,6 +14,7 @@ return {
       require('mini.jump').setup()
       require('mini.pairs').setup()
       require('mini.tabline').setup { show_icons = false }
+      require('mini.trailspace').setup()
       -- require('mini.statusline').setup()
       -- require('mini.pick').setup()
       require('mini.diff').setup {

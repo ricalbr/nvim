@@ -55,12 +55,12 @@ autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   end,
 })
 
--- -- remove trailing white spaces on save
--- local TrimWhiteSpaceGrp = augroup('TrimWhiteSpaceGrp', { clear = true })
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   command = [[:%s/\s\+$//e]],
---   group = TrimWhiteSpaceGrp,
--- })
+-- remove trailing white spaces on save
+local TrimWhiteSpaceGrp = augroup('TrimWhiteSpaceGrp', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  command = [[:%s/\s\+$//e]],
+  group = TrimWhiteSpaceGrp,
+})
 
 -- highlight on yank
 autocmd('TextYankPost', {
