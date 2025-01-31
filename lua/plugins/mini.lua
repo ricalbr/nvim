@@ -1,12 +1,15 @@
 return {
   {
     'echasnovski/mini.nvim',
-    version = '*',
+    version = false,
     event = 'BufReadPre',
+
     config = function()
       require('mini.ai').setup()
       require('mini.bracketed').setup()
       require('mini.comment').setup()
+      -- require('mini.completion').setup()
+      -- require('mini.snippets').setup()
       require('mini.icons').setup()
       require('mini.jump').setup()
       require('mini.pairs').setup()
@@ -45,6 +48,7 @@ return {
 
       -- make special mapping for "add surrounding for line"
       vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+
       MiniIcons.mock_nvim_web_devicons()
     end,
   },
