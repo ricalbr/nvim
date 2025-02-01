@@ -10,7 +10,7 @@ return {
       require('mini.bracketed').setup()
       require('mini.comment').setup()
       require('mini.indentscope').setup { draw = { animation = function() return 0 end, } }
-      require('mini.icons').setup()
+      require('mini.icons').setup{lsp={['snippet'] = { glyph = '', hl = 'MiniIconsGreen' }}}
       require('mini.jump').setup()
       require('mini.pairs').setup()
       require('mini.tabline').setup { show_icons = false }
