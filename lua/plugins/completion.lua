@@ -5,9 +5,6 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-emoji',
-      'onsails/lspkind.nvim',
-      'roobert/tailwindcss-colorizer-cmp.nvim',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
       {
@@ -18,15 +15,9 @@ return {
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
-        },
+        dependencies = { 'rafamadriz/friendly-snippets' },
         config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
           require('luasnip.loaders.from_lua').lazy_load { paths = { '~/.config/nvim/lua/snippets/' } }
         end,
       },

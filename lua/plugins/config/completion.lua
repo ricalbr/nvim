@@ -4,23 +4,7 @@ vim.opt.shortmess:append 'c'
 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-local lspkind = require 'lspkind'
-lspkind.init {
-  symbol_map = {
-    Copilot = '',
-  },
-}
-local kind_formatter = lspkind.cmp_format {
-  mode = 'symbol_text',
-  menu = {
-    buffer = '[buf]',
-    nvim_lsp = '[LSP]',
-    nvim_lua = '[api]',
-    path = '[path]',
-    luasnip = '[snip]',
-    gh_issues = '[issues]',
-  },
-}
+local icons = require 'mini.icons'
 
 cmp.setup {
   sources = {
@@ -35,28 +19,16 @@ cmp.setup {
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'emoji' },
   },
 
   mapping = {
-    ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [n]ext item
-    ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, -- Select the [p]revious item
+    ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, -- [n]ext item
+    ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, -- [p]revious item
+    ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }, { 'i', 'c' }), -- Accept ([y]es) completion.
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Scroll the documentation window [b]ack
+    ['<C-f>'] = cmp.mapping.scroll_docs(4), -- Scroll the documentation window [f]orward
 
-    -- Accept ([y]es) the completion.
-    ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }, { 'i', 'c' }),
-
-    -- Scroll the documentation window [b]ack / [f]orward
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-    -- more traditional completion keymaps,
-    --['<CR>'] = cmp.mapping.confirm { select = true },
-    --['<Tab>'] = cmp.mapping.select_next_item(),
-    --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    -- overload of these mappings can be found here:
-    -- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/cmp.lua
-
-    ['<C-l>'] = cmp.mapping(function() -- <c-l> will move you to the right of each of the expansion locations.
+    ['<C-l>'] = cmp.mapping(function() -- <c-l> will move you to the next expansion locations.
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
@@ -80,43 +52,26 @@ cmp.setup {
     fields = { 'kind', 'abbr', 'menu' },
     expandable_indicator = true,
     format = function(entry, vim_item)
-      -- Lspkind setup for icons
-      vim_item = kind_formatter(entry, vim_item)
-
-      -- Tailwind colorizer setup
-      vim_item = require('tailwindcss-colorizer-cmp').formatter(entry, vim_item)
-
+      local icon, hl_group = icons.get('lsp', vim_item.kind)
+      vim_item.kind = string.format('%s ', icon)
+      vim_item.kind_hl_group = hl_group
+      --stylua: ignore
+      vim_item.menu = ({
+        buffer    =  '[Buffer]',
+        nvim_lsp  =  '[LSP]',
+        luasnip   =  '[SNIP]',
+        path      =  '[path]',
+      })[entry.source.name]
       return vim_item
     end,
   },
 
   window = {
+    documentation = cmp.config.window.bordered { border = 'rounded' },
     completion = cmp.config.window.bordered {
       col_offset = -2,
       side_padding = 1,
       border = 'rounded',
-      winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-    },
-    documentation = cmp.config.window.bordered {
-      border = 'rounded',
-      winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-    },
-  },
-
-  sorting = {
-    priority_weight = 2,
-    comparators = {
-      -- Below is the default comparitor list and order for nvim-cmp
-      cmp.config.compare.offset,
-      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.locality,
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
     },
   },
 }
