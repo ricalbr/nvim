@@ -3,9 +3,6 @@ return {
         'nvim-treesitter/nvim-treesitter',
         tag = 'v0.9.3', -- last version compatible with Nvim 0.9
         event = { 'BufReadPre', 'BufNewFile' },
-        -- dependencies = {
-        --   { 'nvim-treesitter/nvim-treesitter-textobjects' },
-        -- },
         build = ':TSUpdate',
         branch = 'main',
         config = function()
