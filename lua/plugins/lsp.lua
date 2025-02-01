@@ -100,7 +100,6 @@ return {
     event = 'LspAttach',
     branch = 'nvim-0.9',
     config = function()
-      -- autoformatting setup
       require('conform').setup {
         formatters_by_ft = {
           json = { 'prettier' },
