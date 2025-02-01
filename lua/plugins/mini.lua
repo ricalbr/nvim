@@ -4,12 +4,12 @@ return {
     version = false,
     event = 'BufReadPre',
 
+    --stylua: ignore
     config = function()
       require('mini.ai').setup()
       require('mini.bracketed').setup()
       require('mini.comment').setup()
-      -- require('mini.completion').setup()
-      -- require('mini.snippets').setup()
+      require('mini.indentscope').setup { draw = { animation = function() return 0 end, } }
       require('mini.icons').setup()
       require('mini.jump').setup()
       require('mini.pairs').setup()
@@ -22,13 +22,9 @@ return {
           style = 'sign',
           signs = { add = '▌', change = '▌', delete = '▌' },
         },
-        mappings = {
-          apply = 'ha',
-          reset = 'hr',
-        },
+        mappings = { apply = 'ha', reset = 'hr' },
       }
       require('mini.surround').setup {
-        --stylua: ignore
         mappings = {
             add             =  'ys',  --  defult  'sa'
             delete          =  'ds',  --  defult  'sd'
@@ -53,13 +49,6 @@ return {
       MiniIcons.mock_nvim_web_devicons()
     end,
   },
-
-  -- {
-  --   'windwp/nvim-autopairs',
-  --   event = 'InsertEnter',
-  --   config = true,
-  --   opts = {},
-  -- },
 
   {
     'takac/vim-hardtime',

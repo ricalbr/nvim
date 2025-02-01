@@ -7,12 +7,9 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'glepnir/lspsaga.nvim', event = 'LspAttach' },
-      -- { 'j-hui/fidget.nvim', event = 'LspAttach', opts = {} },
-      { 'stevearc/conform.nvim', event = 'LspAttach', branch = 'nvim-0.9' },
     },
     config = function()
-      require('neodev').setup {}
+      require('neodev').setup()
 
       local capabilities = nil
       if pcall(require, 'cmp_nvim_lsp') then
@@ -21,14 +18,14 @@ return {
 
       local lspconfig = require 'lspconfig'
 
+      -- NOTE: pyright might not attach to python files, the problem is due to node or nodesj
+      -- eventually update the nodejs version
+      -- run: curl -sL https://deb.nodesource.com/setup_20.x | sudo bash -  && sudo apt-get update && sudo apt-get install nodejs
       local servers = {
         bashls = true,
-        -- NOTE: pyright might not attach to python files, the problem is due to node or nodesj
-        -- run: curl -sL https://deb.nodesource.com/setup_20.x | sudo bash -  && sudo apt-get update && sudo apt-get install nodejs
-        -- eventually update the nodejs version
-        pyright = true,
-        lua_ls = true,
         clangd = true,
+        lua_ls = true,
+        pyright = true,
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
@@ -40,11 +37,7 @@ return {
         end
       end, vim.tbl_keys(servers))
 
-      require('mason').setup {
-        ui = {
-          border = 'rounded',
-        },
-      }
+      require('mason').setup()
       require('mason-lspconfig').setup()
       local ensure_installed = {
         'stylua',
@@ -99,14 +92,23 @@ return {
           end
         end,
       })
+    end,
+  },
 
-      -- Autoformatting Setup
+  {
+    'stevearc/conform.nvim',
+    event = 'LspAttach',
+    branch = 'nvim-0.9',
+    config = function()
+      -- autoformatting setup
       require('conform').setup {
         formatters_by_ft = {
+          json = { 'prettier' },
           lua = { 'stylua' },
           python = { 'isort', 'black' },
           cpp = { 'clang-format' },
         },
+
         formatters = {
           black = {
             prepend_args = { '--line-length', '120', '--fast', '--skip-string-normalization' },
