@@ -12,55 +12,55 @@ local colors = {
 -- stylua: ignore end
 
 local custom_theme = {
-  normal = {
-    a = { fg = colors.blue, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-    c = { fg = colors.fg, bg = colors.bg },
-  },
-  insert = {
-    a = { fg = colors.green, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-  },
-  visual = {
-    a = { fg = colors.darkblue, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-  },
-  replace = {
-    a = { fg = colors.violet, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-  },
-  command = {
-    a = { fg = colors.yellow, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-  },
-  inactive = {
-    a = { fg = colors.bg, bg = colors.bg, gui = 'bold' },
-    b = { fg = colors.fg, bg = colors.bg },
-    c = { fg = colors.fg, bg = colors.bg },
-  },
+    normal = {
+        a = { fg = colors.blue, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+        c = { fg = colors.fg, bg = colors.bg },
+    },
+    insert = {
+        a = { fg = colors.green, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+    },
+    visual = {
+        a = { fg = colors.darkblue, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+    },
+    replace = {
+        a = { fg = colors.violet, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+    },
+    command = {
+        a = { fg = colors.yellow, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+    },
+    inactive = {
+        a = { fg = colors.bg, bg = colors.bg, gui = 'bold' },
+        b = { fg = colors.fg, bg = colors.bg },
+        c = { fg = colors.fg, bg = colors.bg },
+    },
 }
 
 return {
-  {
-    'nvim-lualine/lualine.nvim',
-    event = 'BufReadPre',
-    opts = {
-      options = {
-        theme = custom_theme,
-        section_separators = { left = '', right = '' },
-        component_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_b = {},
-        lualine_c = { 'filename' },
-        lualine_x = { 'filetype' },
-        lualine_y = { 'branch', 'diagnostics' },
-      },
-      inactive_sections = {
-        lualine_b = { 'filename' },
-        lualine_c = { '' },
-      },
-      extensions = { 'quickfix', 'man' },
+    {
+        'nvim-lualine/lualine.nvim',
+        event = 'BufReadPre',
+        opts = {
+            options = {
+                theme = custom_theme,
+                section_separators = { left = '', right = '' },
+                component_separators = { left = '', right = '' },
+            },
+            sections = {
+                lualine_b = {},
+                lualine_c = { 'filename' },
+                lualine_x = { 'filetype' },
+                lualine_y = { 'branch', 'diagnostics' },
+            },
+            inactive_sections = {
+                lualine_b = { 'filename' },
+                lualine_c = { '' },
+            },
+            extensions = { 'quickfix', 'man' },
+        },
     },
-  },
 }

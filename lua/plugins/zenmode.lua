@@ -1,5 +1,5 @@
 return {
-  'folke/zen-mode.nvim',
-  cmd = 'ZenMode',
-  opts = {},
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
+    opts = {},
 }

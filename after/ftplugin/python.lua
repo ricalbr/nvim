@@ -7,7 +7,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.fileformat = 'unix'
 vim.opt.textwidth = 120
-vim.wo.colorcolumn = 121
+-- vim.wo.colorcolumn = 121
 -- vim.opt.foldlevel = 0
 vim.opt.foldlevelstart = 99
 

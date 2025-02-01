@@ -1,8 +1,8 @@
 return {
-  {
-    'echasnovski/mini.nvim',
-    version = false,
-    event = 'BufReadPre',
+    {
+        'echasnovski/mini.nvim',
+        version = false,
+        event = 'BufReadPre',
 
     --stylua: ignore
     config = function()
@@ -48,10 +48,10 @@ return {
 
       MiniIcons.mock_nvim_web_devicons()
     end,
-  },
+    },
 
-  {
-    'takac/vim-hardtime',
-    cmd = 'HardTimeOn',
-  },
+    {
+        'takac/vim-hardtime',
+        cmd = 'HardTimeOn',
+    },
 }

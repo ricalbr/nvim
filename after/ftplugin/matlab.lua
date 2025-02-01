@@ -13,4 +13,3 @@ vim.opt.textwidth = 79
 
 -- matlab comment string
 vim.opt.commentstring = '% '
-

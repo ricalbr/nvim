@@ -12,8 +12,8 @@ vim.g.maplocalleader = ' '
 keymap('i', 'jk', '<Esc><Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
 keymap({ 'i', 'n', 's' }, '<Esc>', function()
-  vim.cmd 'noh'
-  return '<esc>'
+    vim.cmd 'noh'
+    return '<esc>'
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- change directory to cwd
@@ -29,7 +29,7 @@ keymap('n', '<leader>aa', 'ggVG<c-$>', { desc = 'Select all', noremap = true, si
 -- keep searches centered on screen
 local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}', '<C-u>', '<C-d>' }
 for _, key in ipairs(keys_to_center) do
-  keymap('n', key, key .. 'zz', opts)
+    keymap('n', key, key .. 'zz', opts)
 end
 
 -- join lines keepin the cursor position
@@ -56,7 +56,7 @@ keymap({ 'i', 'n', 't' }, '<C-l>', '<C-\\><C-N><C-w>l', opts)
 keymap('n', '<K>', '<NOP>', opts)
 local keys_to_disable = { '<Down>', '<Up>', '<Left>', '<Right>' }
 for _, key in ipairs(keys_to_disable) do
-  keymap({ 'n', 'i' }, key, '<NOP>', opts)
+    keymap({ 'n', 'i' }, key, '<NOP>', opts)
 end
 
 -- diagnostic keymaps

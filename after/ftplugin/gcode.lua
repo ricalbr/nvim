@@ -11,4 +11,3 @@ vim.opt.fileformat = 'unix'
 
 -- set comment string
 vim.bo.commentstring = ';%s'
-
