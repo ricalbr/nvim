@@ -8,13 +8,7 @@ local icons = require 'mini.icons'
 
 cmp.setup {
   sources = {
-    {
-      name = 'nvim_lsp',
-      ---@diagnostic disable-next-line: unused-local
-      entry_filter = function(entry, ctx)
-        return require('cmp').lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-      end,
-    },
+    { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'buffer' },
