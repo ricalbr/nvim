@@ -43,29 +43,25 @@ cmp.setup {
     },
 
     formatting = {
-        fields = { 'kind', 'abbr', 'menu' },
+        fields = { 'abbr', 'kind' }, -- eventually add 'menu'
         expandable_indicator = true,
         format = function(entry, vim_item)
             local icon, hl_group = icons.get('lsp', vim_item.kind)
-            vim_item.kind = string.format('%s ', icon)
+            vim_item.kind = string.format('%s  (%s)  ', icon, vim_item.kind)
             vim_item.kind_hl_group = hl_group
-      --stylua: ignore
-      vim_item.menu = ({
-        buffer    =  '[Buffer]',
-        nvim_lsp  =  '[LSP]',
-        luasnip   =  '[SNIP]',
-        path      =  '[path]',
-      })[entry.source.name]
+            --stylua: ignore
+            vim_item.menu = ({
+                buffer    =  '[BUFFER]',
+                nvim_lsp  =  '[LSP]',
+                luasnip   =  '[SNIP]',
+                path      =  '[PATH]',
+            })[entry.source.name]
             return vim_item
         end,
     },
 
     window = {
-        documentation = cmp.config.window.bordered { border = 'rounded' },
-        completion = cmp.config.window.bordered {
-            col_offset = -2,
-            side_padding = 1,
-            border = 'rounded',
-        },
+        documentation = cmp.config.window.bordered { winhighlight = 'FloatBorder:Comment' },
+        completion = cmp.config.window.bordered { winhighlight = 'FloatBorder:Comment' },
     },
 }
