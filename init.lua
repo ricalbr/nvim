@@ -13,7 +13,6 @@ vim.loader.enable()
 
 -- lazy.nvim {{{
 -- bootstrap {{{
-
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
@@ -30,11 +29,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- lazy config {{{
 require('lazy').setup({ import = 'plugins' }, {
-    -- debug = true,
     performance = {
-        cache = {
-            enabled = true,
-        },
+        cache = { enabled = true },
         reset_packpath = true, -- reset the package path to improve startup time
         rtp = {
             disabled_plugins = {
@@ -64,12 +60,8 @@ require('lazy').setup({ import = 'plugins' }, {
             },
         },
     },
-    change_detection = {
-        notify = false,
-    },
-    rocks = {
-        enabled = false,
-    },
+    change_detection = { notify = false },
+    rocks = { enabled = false },
 })
 -- }}}
 -- }}}
