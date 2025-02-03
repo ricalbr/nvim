@@ -4,19 +4,23 @@ return {
         version = false,
         event = 'BufReadPre',
 
-        --stylua: ignore
         config = function()
             require('mini.ai').setup()
             require('mini.bracketed').setup()
             require('mini.comment').setup()
-            require('mini.indentscope').setup { draw = { animation = function() return 0 end } }
             require('mini.icons').setup { lsp = { ['snippet'] = { glyph = '' } } }
             require('mini.jump').setup()
             require('mini.pairs').setup()
             require('mini.tabline').setup { show_icons = false }
             require('mini.trailspace').setup()
-            -- require('mini.statusline').setup()
-            -- require('mini.pick').setup()
+            -- stylua: ignore
+            require('mini.indentscope').setup {
+                symbol = '│',
+                draw = {
+                    delay = 30,
+                    animation = function() return 0 end,
+                },
+            }
             require('mini.diff').setup {
                 view = {
                     style = 'sign',
@@ -24,15 +28,16 @@ return {
                 },
                 mappings = { apply = 'ha', reset = 'hr' },
             }
+            -- stylua: ignore
             require('mini.surround').setup {
                 mappings = {
-                    add             =  'ys', --  defult  'sa'
-                    delete          =  'ds', --  defult  'sd'
-                    find            =  '', --  defult  'sf'
-                    find_left       =  '', --  defult  'sF'
-                    highlight       =  '', --  defult  'sh'
-                    replace         =  'cs', --  defult  'sr'
-                    update_n_lines  =  '', --  defult  'sn'
+                    add             =  'ys',  --  defult  'sa'
+                    delete          =  'ds',  --  defult  'sd'
+                    find            =  '',    --  defult  'sf'
+                    find_left       =  '',    --  defult  'sF'
+                    highlight       =  '',    --  defult  'sh'
+                    replace         =  'cs',  --  defult  'sr'
+                    update_n_lines  =  '',    --  defult  'sn'
                     suffix_last     =  '',
                     suffix_next     =  '',
                 },
@@ -45,6 +50,9 @@ return {
 
             -- make special mapping for "add surrounding for line"
             vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+
+            -- toggle git diff
+            vim.keymap.set('n', '<Leader>gs', [[:<C-u>lua MiniDiff.toggle_overlay()<CR>]], { silent = true })
 
             MiniIcons.mock_nvim_web_devicons()
         end,
