@@ -52,6 +52,15 @@ keymap({ 'i', 'n', 't' }, '<C-j>', '<C-\\><C-N><C-w>j', opts)
 keymap({ 'i', 'n', 't' }, '<C-k>', '<C-\\><C-N><C-w>k', opts)
 keymap({ 'i', 'n', 't' }, '<C-l>', '<C-\\><C-N><C-w>l', opts)
 
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+-- stylua: ignore start
+keymap('n',  'n',  "'Nn'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('x',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('o',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
+keymap('n',  'N',  "'nN'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+keymap('x',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+keymap('o',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
+
 -- no K or arrow keys
 keymap('n', '<K>', '<NOP>', opts)
 local keys_to_disable = { '<Down>', '<Up>', '<Left>', '<Right>' }
@@ -61,15 +70,6 @@ end
 
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- stylua: ignore start
-keymap('n',  'n',  "'Nn'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('x',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('o',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('n',  'N',  "'nN'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Prev  Search  Result'  })
-keymap('x',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
-keymap('o',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
 
 -- fzf-lua
 keymap('n',  '<leader>sf',        '<Cmd>FzfLua  files<CR>',            { desc  =  'FZF Files' })
