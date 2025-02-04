@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         vim.api.nvim_set_hl(0, 'MiniDiffSignAdd', { fg = '#006400' })
         vim.api.nvim_set_hl(0, 'MiniDiffSignChange', { fg = '#FFCC00' })
         vim.api.nvim_set_hl(0, 'MiniDiffSignDelete', { fg = '#8B0000' })
-        vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'Comment' })
+        vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#4C4C4C' })
         vim.api.nvim_set_hl(0, 'MatchParen', { bg = '#585858', fg = '#DFDF87' })
         vim.api.nvim_set_hl(0, 'Visual', { link = 'Folded' })
         vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal' })
