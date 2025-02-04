@@ -82,15 +82,6 @@ Plugins will be installed automatically.
 
 ---
 
-## Key Features
-
-- **Plugin Management**: Powered by `lazy.nvim`.
-- **LSP Integration**: Pre-configured for multiple languages.
-- **Treesitter**: Advanced syntax highlighting and parsing.
-- **Fuzzy Finder**: Integrated with `telescope.nvim` and `fzf`.
-
----
-
 ## Troubleshooting
 
 ### Common Issues
