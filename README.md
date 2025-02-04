@@ -44,6 +44,12 @@ Make sure the following are installed on your system:
      ```bash
      sudo apt install fzf
      ```
+   - `python` setup
+      ```bash
+      virtualenv $HOME/.venvs/nvim
+      source $HOME/.venvs/nvim/bin/activate
+      pip install neovim pynvim black isort flake8
+      ```
 
 ---
 
@@ -76,74 +82,12 @@ Plugins will be installed automatically.
 
 ---
 
-## Setup Python Environment
-
-For Python development, ensure that the correct Python interpreter is set up in Neovim:
-
-1. Install `pynvim` globally or in a virtual environment:
-   ```bash
-   pip3 install pynvim
-   ```
-
-2. If using a virtual environment (recommended):
-   ```bash
-   virtualenv $HOME/.venvs/nvim
-   source $HOME/.venvs/nvim/bin/activate
-   pip install neovim pynvim black isort flake8
-   ```
-
-3. If the environment is created in a different location, modify the following command:
-   ```lua
-   vim.g.python3_host_prog = '$HOME/.venv/nvim/bin/python'
-   ```
-
----
-
-## Setup Node.js Environment
-
-To enable LSP, ensure `npm` is set up:
-
-1. Install `npm` packages required for Neovim LSP:
-   ```bash
-   npm install -g neovim prettier
-   ```
-
----
-
-## Setup Language Servers
-
-This configuration uses Neovim's built-in LSP for code intelligence. To set up additional language servers:
-
-```bash
-pip install 'python-lsp-server[all]' pyright
-apt install luajit clangd clang-format clang-tools
-```
-Other language servers can be installed via their package managers or tools like `mason.nvim` (see the `:Mason` command).
-
----
-
 ## Key Features
 
 - **Plugin Management**: Powered by `lazy.nvim`.
 - **LSP Integration**: Pre-configured for multiple languages.
 - **Treesitter**: Advanced syntax highlighting and parsing.
 - **Fuzzy Finder**: Integrated with `telescope.nvim` and `fzf`.
-
----
-
-## Customization
-
-1. **Colorscheme**:
-   This configuration uses `habamax` by default. To change it, edit the `init.lua`:
-   ```lua
-   vim.cmd("colorscheme habamax")
-   ```
-
-2. **Keybindings**:
-   Custom keybindings are defined in `lua/keymaps.lua`. Modify this file to customize shortcuts.
-
-3. **Plugins**:
-   Add or remove plugins in `lua/plugins/`.
 
 ---
 
