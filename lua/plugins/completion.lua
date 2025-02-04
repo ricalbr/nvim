@@ -1,26 +1,27 @@
 return {
     {
-        'hrsh7th/nvim-cmp', -- autocompletion
+        'echasnovski/mini.snippets',
+        dependencies = 'rafamadriz/friendly-snippets',
+        event = 'InsertEnter',
+        opts = function()
+            local snippets = require 'mini.snippets'
+            return {
+                snippets = {
+                    snippets.gen_loader.from_file '$XDG_CONFIG_HOME/nvim/snippets/cpp.json',
+                    snippets.gen_loader.from_lang(),
+                },
+            }
+        end,
+    },
+
+    {
+        'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
-            'saadparwaiz1/cmp_luasnip',
-            {
-                'L3MON4D3/LuaSnip',
-                build = (function()
-                    if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-                        return
-                    end
-                    return 'make install_jsregexp'
-                end)(),
-                dependencies = { 'rafamadriz/friendly-snippets' },
-                config = function()
-                    require('luasnip.loaders.from_vscode').lazy_load()
-                    require('luasnip.loaders.from_lua').lazy_load { paths = { '~/.config/nvim/lua/snippets/' } }
-                end,
-            },
+            'abeldekat/cmp-mini-snippets',
         },
         config = function()
             require 'plugins.config.completion'

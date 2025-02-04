@@ -1,0 +1,6 @@
+{
+  "Skeleton": {
+    "prefix": "beg",
+    "body": "#include <bits/stdc++.h>\n\nusing namespace std;\ntypedef long long ll;\n\nint32_t main(int argc, char *argv[]) {\n    $0\n\n    return 0;\n}"
+  }
+}

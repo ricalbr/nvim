@@ -3,13 +3,12 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append 'c'
 
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
 local icons = require 'mini.icons'
 
 cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'mini_snippets' },
         { name = 'nvim_lua' },
         { name = 'buffer' },
         { name = 'path' },
@@ -21,24 +20,15 @@ cmp.setup {
         ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }, { 'i', 'c' }), -- Accept ([y]es) completion.
         ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Scroll the documentation window [b]ack
         ['<C-f>'] = cmp.mapping.scroll_docs(4), -- Scroll the documentation window [f]orward
-
-        ['<C-l>'] = cmp.mapping(function() -- <c-l> will move you to the next expansion locations.
-            if luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
-            end
-        end, { 'i', 's' }),
-
-        ['<C-h>'] = cmp.mapping(function() -- <c-h> is similar, except moving you backwards.
-            if luasnip.locally_jumpable(-1) then
-                luasnip.jump(-1)
-            end
-        end, { 'i', 's' }),
     },
 
-    -- Enable luasnip to handle snippet expansion for nvim-cmp
+    -- mini.snippets to handle snippet expansion for nvim-cmp
     snippet = {
         expand = function(args)
-            vim.snippet.expand(args.body)
+            local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+            insert { body = args.body }
+            cmp.resubscribe { 'TextChangedI', 'TextChangedP' }
+            require('cmp.config').set_onetime { sources = {} }
         end,
     },
 
@@ -51,10 +41,10 @@ cmp.setup {
             vim_item.kind_hl_group = hl_group
             --stylua: ignore
             vim_item.menu = ({
-                buffer    =  '[BUFFER]',
+                buffer    =  '[BUF]',
                 nvim_lsp  =  '[LSP]',
-                luasnip   =  '[SNIP]',
-                path      =  '[PATH]',
+                luasnip   =  '[SNP]',
+                path      =  '[PTH]',
             })[entry.source.name]
             return vim_item
         end,
