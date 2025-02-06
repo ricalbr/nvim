@@ -1,7 +1,5 @@
-# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> neovim config
-configuration for neovim text editor.
-
----
+# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> Neovim config
+Configuration for Neovim text editor.
 
 ## Requirements
 
@@ -21,6 +19,8 @@ Make sure the following are installed on your system:
    Install Python 3 and the required library:
    ```bash
    sudo apt install python3 python3-pip python3-virtualenv
+   virtualenv $HOME/.venvs/nvim
+   source $HOME/.venvs/nvim/bin/activate
    pip3 install --user pynvim
    ```
 
@@ -36,18 +36,12 @@ Make sure the following are installed on your system:
    ```
 
 4. **Optional utilities**:
-   - `ripgrep` (for better search):
+   - `ripgrep` (for better search), `bat` (for better highlight), `fzf` (fuzzy finder):
      ```bash
-     sudo apt install ripgrep
-     ```
-   - `fzf` (fuzzy finder):
-     ```bash
-     sudo apt install fzf
+     sudo apt install fzf ripgrep bat
      ```
    - `python` setup
       ```bash
-      virtualenv $HOME/.venvs/nvim
-      source $HOME/.venvs/nvim/bin/activate
       pip install neovim pynvim black isort flake8
       ```
 
@@ -79,30 +73,6 @@ This configuration uses `lazy.nvim` as a plugin manager. To install all plugins:
    ```
 
 Plugins will be installed automatically.
-
----
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Plugin Installation Fails**:
-   - Ensure `git` is installed and accessible.
-   - Run `:Lazy sync` to retry.
-
-2. **Python Not Configured**:
-   - Check the output of `:checkhealth` to diagnose Python issues.
-   - Verify the `pynvim` installation:
-     ```bash
-     pip3 show pynvim
-     ```
-
-3. **LSP Not Working**:
-   - Ensure the required language server is installed.
-   - Check Neovim's logs:
-     ```bash
-     :LspLog
-     ```
 
 ---
 
