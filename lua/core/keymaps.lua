@@ -91,4 +91,4 @@ keymap('n',  '<leader><leader>',  '<Cmd>FzfLua  resume<CR>',           { desc  =
 keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })
 
 -- oil
-keymap('n', '-', '<Cmd>Oil --float .. <CR>', { desc = 'Open Oil on parent directory' })
+keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on parent directory' })
