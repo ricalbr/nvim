@@ -16,9 +16,6 @@ keymap({ 'i', 'n', 's' }, '<Esc>', function()
     return '<esc>'
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
--- change directory to cwd
-keymap('n', '<leader>cd', '<cmd>cd %:h<CR>', { noremap = true })
-
 -- map C-s to save the file, in all the modes
 keymap({ 'n', 'i' }, '<C-s>', '<Esc><cmd>update<CR>', opts)
 keymap('v', '<C-s>', '<Esc><cmd>update<CR>gv', opts)
@@ -52,15 +49,6 @@ keymap({ 'i', 'n', 't' }, '<C-j>', '<C-\\><C-N><C-w>j', opts)
 keymap({ 'i', 'n', 't' }, '<C-k>', '<C-\\><C-N><C-w>k', opts)
 keymap({ 'i', 'n', 't' }, '<C-l>', '<C-\\><C-N><C-w>l', opts)
 
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- stylua: ignore start
-keymap('n',  'n',  "'Nn'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('x',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('o',  'n',  "'Nn'[v:searchforward]",       {  expr  =  true,  desc  =  'Next  Search  Result'  })
-keymap('n',  'N',  "'nN'[v:searchforward].'zv'",  {  expr  =  true,  desc  =  'Prev  Search  Result'  })
-keymap('x',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
-keymap('o',  'N',  "'nN'[v:searchforward]",       {  expr  =  true,  desc  =  'Prev  Search  Result'  })
-
 -- no K or arrow keys
 keymap('n', '<K>', '<NOP>', opts)
 local keys_to_disable = { '<Down>', '<Up>', '<Left>', '<Right>' }
@@ -71,22 +59,31 @@ end
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+-- stylua: ignore start
+keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
+keymap('x', 'n', "'Nn'[v:searchforward]",      { expr = true, desc = 'Next Search Result' })
+keymap('o', 'n', "'Nn'[v:searchforward]",      { expr = true, desc = 'Next Search Result' })
+keymap('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search Result' })
+keymap('x', 'N', "'nN'[v:searchforward]",      { expr = true, desc = 'Prev Search Result' })
+keymap('o', 'N', "'nN'[v:searchforward]",      { expr = true, desc = 'Prev Search Result' })
+
 -- fzf-lua
-keymap('n', '<leader>sf',        '<Cmd>FzfLua  files<CR>',                { desc = 'Search Files' })
-keymap('n', '<leader>sg',        '<Cmd>FzfLua  live_grep<CR>',            { desc = 'Search Grep' })
-keymap('n', '<leader>sm',        '<Cmd>FzfLua  marks<CR>',                { desc = 'Search Marks' })
-keymap('n', '<leader>sk',        '<Cmd>FzfLua  keymaps<CR>',              { desc = 'Search Keymaps' })
-keymap('n', '<leader>sb',        '<Cmd>FzfLua  buffers<CR>',              { desc = 'Search Buffers' })
-keymap('n', '<leader>sw',        '<Cmd>FzfLua  grep_cword<CR>',           { desc = 'Search Word' })
-keymap('n', '<leader>sh',        '<Cmd>FzfLua  helptags<CR>',             { desc = 'Search Help Tags' })
-keymap('n', '<leader>sp',        '<Cmd>FzfLua  spell_suggest<CR>',        { desc = 'Spelling Suggestions' })
-keymap('n', '<leader>gc',        '<Cmd>FzfLua  git_commits<CR>',          { desc = 'Browse File Commits' })
-keymap('n', '<leader>gs',        '<Cmd>FzfLua  git_status<CR>',           { desc = 'Browse Git Status' })
-keymap('n', '<leader>cj',        '<Cmd>FzfLua  lsp_definitions<CR>',      { desc = 'Jump to Definition' })
-keymap('n', '<leader>ci',        '<Cmd>FzfLua  lsp_implementations<CR>',  { desc = 'Jump to Implementations' })
-keymap('n', '<leader>cr',        '<Cmd>FzfLua  lsp_references',           { desc = 'LSP References' })
-keymap('n', '<leader><leader>',  '<Cmd>FzfLua  resume<CR>',               { desc = 'Resume FZF search' })
+keymap('n', '<leader>sf',       '<Cmd>FzfLua files<CR>',               { desc = 'Search Files'            })
+keymap('n', '<leader>sg',       '<Cmd>FzfLua live_grep<CR>',           { desc = 'Search Grep'             })
+keymap('n', '<leader>sm',       '<Cmd>FzfLua marks<CR>',               { desc = 'Search Marks'            })
+keymap('n', '<leader>sk',       '<Cmd>FzfLua keymaps<CR>',             { desc = 'Search Keymaps'          })
+keymap('n', '<leader>sb',       '<Cmd>FzfLua buffers<CR>',             { desc = 'Search Buffers'          })
+keymap('n', '<leader>sw',       '<Cmd>FzfLua grep_cword<CR>',          { desc = 'Search Word'             })
+keymap('n', '<leader>sh',       '<Cmd>FzfLua helptags<CR>',            { desc = 'Search Help Tags'        })
+keymap('n', '<leader>sp',       '<Cmd>FzfLua spell_suggest<CR>',       { desc = 'Spelling Suggestions'    })
+keymap('n', '<leader>gc',       '<Cmd>FzfLua git_commits<CR>',         { desc = 'Browse File Commits'     })
+keymap('n', '<leader>gs',       '<Cmd>FzfLua git_status<CR>',          { desc = 'Browse Git Status'       })
+keymap('n', '<leader>cd',       '<Cmd>FzfLua lsp_definitions<CR>',     { desc = 'Jump to Definition'      })
+keymap('n', '<leader>ci',       '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Jump to Implementations' })
+keymap('n', '<leader>cr',       '<Cmd>FzfLua lsp_references <CR>',     { desc = 'LSP References'          })
+keymap('n', '<leader><leader>', '<Cmd>FzfLua resume<CR>',              { desc = 'Resume FZF search'       })
 -- stylua: ignore end
 
 -- oil
-keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on parent directory' })
+keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on current working directory' })
