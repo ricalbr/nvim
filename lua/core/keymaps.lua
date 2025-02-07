@@ -69,26 +69,24 @@ for _, key in ipairs(keys_to_disable) do
 end
 
 -- diagnostic keymaps
-keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
 -- fzf-lua
-keymap('n',  '<leader>sf',        '<Cmd>FzfLua  files<CR>',            { desc  =  'FZF Files' })
-keymap('n',  '<leader>sg',        '<Cmd>FzfLua  live_grep<CR>',        { desc  =  'FZF Grep' })
-keymap('n',  '<leader>mk',        '<Cmd>FzfLua  marks<CR>',            { desc  =  'Marks' })
-keymap('n',  '<leader>sk',        '<Cmd>FzfLua  keymaps<CR>',          { desc  =  'Keymaps' })
-keymap('n',  '<leader>sb',        '<Cmd>FzfLua  buffers<CR>',          { desc  =  'FZF Buffers' })
-keymap('n',  '<leader>sw',        '<Cmd>FzfLua  grep_cword<CR>',       { desc  =  'FZF Word' })
-keymap('n',  '<leader>sh',        '<Cmd>FzfLua  helptags<CR>',         { desc  =  'Help Tags' })
-keymap('n',  '<leader>gc',        '<Cmd>FzfLua  git_bcommits<CR>',     { desc  =  'Browse File Commits' })
-keymap('n',  '<leader>gs',        '<Cmd>FzfLua  git_status<CR>',       { desc  =  'Git Status' })
-keymap('n',  '<leader>sp',        '<Cmd>FzfLua  spell_suggest<CR>',    { desc  =  'Spelling Suggestions' })
-keymap('n',  '<leader>cj',        '<Cmd>FzfLua  lsp_definitions<CR>',  { desc  =  'Jump to Definition' })
-keymap('n',  '<leader>cr',        '<Cmd>FzfLua  lsp_references',       { desc  =  'LSP References' })
-keymap('n',  '<leader><leader>',  '<Cmd>FzfLua  resume<CR>',           { desc  =  'FZF resume search' })
+keymap('n', '<leader>sf',        '<Cmd>FzfLua  files<CR>',                { desc = 'Search Files' })
+keymap('n', '<leader>sg',        '<Cmd>FzfLua  live_grep<CR>',            { desc = 'Search Grep' })
+keymap('n', '<leader>sm',        '<Cmd>FzfLua  marks<CR>',                { desc = 'Search Marks' })
+keymap('n', '<leader>sk',        '<Cmd>FzfLua  keymaps<CR>',              { desc = 'Search Keymaps' })
+keymap('n', '<leader>sb',        '<Cmd>FzfLua  buffers<CR>',              { desc = 'Search Buffers' })
+keymap('n', '<leader>sw',        '<Cmd>FzfLua  grep_cword<CR>',           { desc = 'Search Word' })
+keymap('n', '<leader>sh',        '<Cmd>FzfLua  helptags<CR>',             { desc = 'Search Help Tags' })
+keymap('n', '<leader>sp',        '<Cmd>FzfLua  spell_suggest<CR>',        { desc = 'Spelling Suggestions' })
+keymap('n', '<leader>gc',        '<Cmd>FzfLua  git_commits<CR>',          { desc = 'Browse File Commits' })
+keymap('n', '<leader>gs',        '<Cmd>FzfLua  git_status<CR>',           { desc = 'Browse Git Status' })
+keymap('n', '<leader>cj',        '<Cmd>FzfLua  lsp_definitions<CR>',      { desc = 'Jump to Definition' })
+keymap('n', '<leader>ci',        '<Cmd>FzfLua  lsp_implementations<CR>',  { desc = 'Jump to Implementations' })
+keymap('n', '<leader>cr',        '<Cmd>FzfLua  lsp_references',           { desc = 'LSP References' })
+keymap('n', '<leader><leader>',  '<Cmd>FzfLua  resume<CR>',               { desc = 'Resume FZF search' })
 -- stylua: ignore end
-
--- which-key
-keymap('n', '<leader>wk', '<Cmd>WhichKey<CR>', { desc = 'Which-key' })
 
 -- oil
 keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on parent directory' })
