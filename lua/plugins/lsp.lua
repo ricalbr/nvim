@@ -78,6 +78,7 @@ return {
 
                     vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = 0 })
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = 0 })
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = 0 })
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = 0 })
                     vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, { buffer = 0 })
