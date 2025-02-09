@@ -99,27 +99,6 @@ autocmd('FileType', {
     end,
 })
 
--- colorscheme overrider
-vim.api.nvim_create_autocmd('ColorScheme', {
-    pattern = 'habamax',
-    callback = function()
-        vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000' })
-        vim.api.nvim_set_hl(0, 'MiniDiffSignAdd', { fg = '#57D75F' })
-        vim.api.nvim_set_hl(0, 'MiniDiffSignChange', { fg = '#FFAF5F' })
-        vim.api.nvim_set_hl(0, 'MiniDiffSignDelete', { fg = '#D75F5F' })
-        -- vim.api.nvim_set_hl(0, 'MiniDiffOverAdd', { link = 'MiniDiffSignAdd' })
-        vim.api.nvim_set_hl(0, 'MiniDiffOverChange', { link = 'MiniDiffSignChange' })
-        vim.api.nvim_set_hl(0, 'MiniDiffOverContext', { link = 'MiniDiffSignChange' })
-        vim.api.nvim_set_hl(0, 'MiniDiffOverDelete', { fg = '#000000', bg = '#D75F5F' })
-        vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#4C4C4C' })
-        vim.api.nvim_set_hl(0, 'MatchParen', { bg = '#585858', fg = '#DFDF87' })
-        vim.api.nvim_set_hl(0, 'Visual', { link = 'Folded' })
-        vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal' })
-        vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
-        vim.api.nvim_set_hl(0, 'SignColumn', { link = 'Normal' })
-    end,
-})
-
 -- overload q and w command
 vim.api.nvim_command 'command! Q q'
 vim.api.nvim_command 'command! W w'
