@@ -44,6 +44,7 @@ return {
                 'lua_ls',
                 'clangd',
                 'clang-format',
+                'codespell',
                 'pyright',
             }
 
@@ -98,7 +99,8 @@ return {
 
     {
         'stevearc/conform.nvim',
-        event = 'LspAttach',
+        event = 'BufReadPre',
+        cmd = 'ConformInfo',
         branch = 'nvim-0.9',
         config = function()
             require('conform').setup {
@@ -107,6 +109,8 @@ return {
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
                     cpp = { 'clang-format' },
+                    ['*'] = { 'codespell' },
+                    ['_'] = { 'trim_whitespace' },
                 },
 
                 formatters = {
