@@ -1,9 +1,9 @@
 # <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> Neovim config
 Configuration for Neovim text editor.
 
-## Requirements
+## Installation
 
-### Tools and Dependencies
+### Requirements and Dependencies
 
 Make sure the following are installed on your system:
 
@@ -45,11 +45,7 @@ Make sure the following are installed on your system:
       pip install neovim pynvim black isort flake8
       ```
 
----
-
-## Installation
-
-### Step 1: Clone the Repository
+### Clone the Repository
 
 Clone this repository into your Neovim configuration directory:
 
@@ -57,22 +53,6 @@ Clone this repository into your Neovim configuration directory:
 mkdir -p ~/.config/nvim
 git clone https://www.github.com/ricalbr/nvim ~/.config/nvim
 ```
-
-### Step 2: Install Plugins
-
-This configuration uses `lazy.nvim` as a plugin manager. To install all plugins:
-
-1. Open Neovim:
-   ```bash
-   nvim
-   ```
-
-2. Run the command:
-   ```vim
-   :Lazy sync
-   ```
-
-Plugins will be installed automatically.
 
 ---
 
