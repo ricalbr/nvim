@@ -68,11 +68,6 @@ return {
                         return vim_item
                     end,
                 },
-
-                window = {
-                    documentation = cmp.config.window.bordered { winhighlight = 'FloatBorder:Comment' },
-                    completion = cmp.config.window.bordered { winhighlight = 'FloatBorder:Comment' },
-                },
             }
         end,
     },
