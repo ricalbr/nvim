@@ -7,7 +7,6 @@ require 'core.autocmd'
 require 'core.options'
 require 'core.filetypes'
 
-vim.cmd.colorscheme 'habamax'
 vim.loader.enable()
 -- }}}
 
