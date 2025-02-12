@@ -1,8 +1,9 @@
+--stylua: ignore
 vim.filetype.add {
     extension = {
-        pgm = 'gcode',
+        pgm   = 'gcode',
         gcode = 'gcode',
-        g = 'gcode',
-        ngc = 'gcode',
+        g     = 'gcode',
+        ngc   = 'gcode',
     },
 }
