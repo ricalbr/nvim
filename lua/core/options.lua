@@ -1,50 +1,43 @@
-local opt = vim.opt
-local g = vim.g
-
-g.editorconfig = false
-opt.laststatus = 3 -- global statusline
-opt.showmode = false
+vim.g.editorconfig = false
+vim.opt.laststatus = 2 -- global statusline
+vim.opt.showmode = false
 
 -- opt.clipboard = ''
 require 'core.clipboard'
-opt.cursorline = false
+vim.opt.cursorline = false
 
 -- indenting
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 
 ---@diagnostic disable-next-line: missing-fields
-opt.fillchars = { eob = ' ' }
-opt.ignorecase = true
-opt.smartcase = true
-opt.mouse = 'a'
-opt.pumheight = 10 -- limit completion items
+vim.opt.fillchars = { eob = ' ' }
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.mouse = 'a'
+vim.opt.pumheight = 10 -- limit completion items
+vim.opt.foldlevelstart = 99
 
 -- numbers
-opt.number = true
-opt.numberwidth = 2
-opt.relativenumber = true
-opt.ruler = false
+vim.opt.number = true
+vim.opt.numberwidth = 2
+vim.opt.relativenumber = true
+vim.opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append 'sI'
+vim.opt.shortmess:append 'sI'
 
-opt.signcolumn = 'yes'
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
-opt.timeoutlen = 400
-opt.undofile = true
-g.swapfile = false
-
--- folding options
-opt.foldlevelstart = 99
-
--- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = 250
+vim.opt.signcolumn = 'yes'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.termguicolors = true
+vim.opt.timeoutlen = 400
+vim.opt.updatetime = 250
+vim.opt.undofile = true
+vim.g.swapfile = false
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == 'Windows_NT'
