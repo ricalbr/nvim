@@ -81,8 +81,8 @@ vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or '
 vim.g.python3_host_prog = '$HOME/.venv/nvim/bin/python3'
 
 -- keymaps and autocomands
-require 'lua.core.keymaps'
-require 'lua.core.autocmd'
+require 'core.keymaps'
+require 'core.autocmd'
 
 vim.loader.enable()
 --}}}
