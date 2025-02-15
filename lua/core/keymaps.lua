@@ -2,12 +2,6 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- set <space> as the leader key
---  NOTE: must happen before plugins are required (otherwise wrong leader will be used)
-keymap({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- keymaps for better default experience
 keymap('i', 'jk', '<Esc><Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
@@ -17,8 +11,8 @@ keymap({ 'i', 'n', 's' }, '<Esc>', function()
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- map C-s to save the file, in all the modes
-keymap({ 'n', 'i' }, '<C-s>', '<Esc><cmd>update<CR>', opts)
-keymap('v', '<C-s>', '<Esc><cmd>update<CR>gv', opts)
+keymap('n', '<C-S>', '<Cmd>silent! update | redraw<CR>', { noremap = true, silent = true, desc = 'Save' })
+keymap({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update | redraw<CR>', { noremap = true, silent = true, desc = 'Save and go to Normal mode' })
 
 -- select all text
 keymap('n', '<leader>aa', 'ggVG<c-$>', { desc = 'Select all', noremap = true, silent = true })
@@ -33,15 +27,21 @@ end
 keymap('n', 'J', 'mzJ`z', opts)
 
 -- move vertically by visual line (don't skip wrapped lines)
-keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true, silent = true })
+
+-- Copy/paste with system clipboard
+keymap('x', 'p', [["_dP]]) -- paste without overriding the register
+keymap({ 'n', 'x' }, 'gy', '"+y', { desc = 'Copy to system clipboard' })
+keymap('n', 'gp', '"+p', { desc = 'Paste from system clipboard' })
+keymap('x', 'gp', '"+P', { desc = 'Paste from system clipboard' }) -- - Paste in Visual with `P` to not copy selected text (`:h v_P`)
+
+-- Search inside visually highlighted text. Use `silent = false` for it to make effect immediately.
+keymap('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
 
 -- retain visual selection after `>` or `<`
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
-
--- paste without overriding the register
-keymap('x', 'p', [["_dP]])
 
 -- switch between splits using ctrl + {h,j,k,l}
 keymap({ 'i', 'n', 't' }, '<C-h>', '<C-\\><C-N><C-w>h', opts)
