@@ -3,22 +3,19 @@ return {
         'echasnovski/mini.nvim',
         version = false,
         event = 'BufReadPre',
-
         config = function()
             require('mini.ai').setup()
+            require('mini.align').setup()
             require('mini.bracketed').setup()
             require('mini.comment').setup()
-            require('mini.icons').setup { lsp = { ['snippet'] = { glyph = '' } } }
             require('mini.jump').setup()
             require('mini.pairs').setup()
             require('mini.tabline').setup { show_icons = false }
-            -- {{{ mini.trailspace
             require('mini.trailspace').setup()
-            vim.api.nvim_create_autocmd('BufWritePre', {
-                callback = function()
-                    require('mini.trailspace').trim()
-                end,
-            })
+            -- {{{ mini.icons
+            local icons = require 'mini.icons'
+            icons.setup { lsp = { ['snippet'] = { glyph = '' } } }
+            icons.mock_nvim_web_devicons()
             -- }}}
             -- {{{ mini.indentscope
             require('mini.indentscope').setup {
@@ -35,7 +32,7 @@ return {
             require('mini.diff').setup {
                 view = {
                     style = 'sign',
-                    signs = { add = '▌', change = '▌', delete = '▌' },
+                    signs = { add = '▌', change = '▌', delete = '▸' },
                 },
                 mappings = { apply = 'ha', reset = 'hr' },
             }
@@ -46,13 +43,13 @@ return {
             require('mini.surround').setup {
                 -- stylua: ignore
                 mappings = {
-                    add             =  'ys',  --  defult  'sa'
-                    delete          =  'ds',  --  defult  'sd'
-                    find            =  '',    --  defult  'sf'
-                    find_left       =  '',    --  defult  'sF'
-                    highlight       =  '',    --  defult  'sh'
-                    replace         =  'cs',  --  defult  'sr'
-                    update_n_lines  =  '',    --  defult  'sn'
+                    add             =  'ys',  --  default  'sa'
+                    delete          =  'ds',  --  default  'sd'
+                    find            =  '',    --  default  'sf'
+                    find_left       =  '',    --  default  'sF'
+                    highlight       =  '',    --  default  'sh'
+                    replace         =  'cs',  --  default  'sr'
+                    update_n_lines  =  '',    --  default  'sn'
                     suffix_last     =  '',
                     suffix_next     =  '',
                 },
@@ -115,7 +112,75 @@ return {
                 -- },
             }
             -- }}}
-            MiniIcons.mock_nvim_web_devicons()
+            -- {{{ mini.statusline
+            require('mini.statusline').setup {
+                content = {
+                    active = function()
+                        local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+
+                        local function lineinfo()
+                            if vim.bo.filetype == 'alpha' then
+                                return ''
+                            end
+                            return ' Ln %l, Col %c '
+                        end
+
+                        local function branch_name()
+                            local branch = vim.fn.system "git branch --show-current 2> /dev/null | tr -d '\n'"
+                            if branch ~= '' then
+                                return ' ' .. branch
+                            else
+                                return ''
+                            end
+                        end
+
+                        local function lsp()
+                            local count = {}
+                            local levels = {
+                                errors = 'Error',
+                                warnings = 'Warn',
+                                info = 'Info',
+                                hints = 'Hint',
+                            }
+
+                            for k, level in pairs(levels) do
+                                count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
+                            end
+
+                            local errors = ' ' .. count['errors'] .. ' '
+                            local warnings = ' ' .. count['warnings'] .. ' '
+                            local hints = ''
+                            local info = ''
+
+                            if count['hints'] ~= 0 then
+                                hints = ' ' .. count['hints'] .. ' '
+                            end
+                            if count['info'] ~= 0 then
+                                info = ' ' .. count['info'] .. ' '
+                            end
+
+                            return errors .. warnings .. hints .. info
+                        end
+
+                        local function fileencoding()
+                            return string.format(' %s ', vim.bo.fileencoding):upper()
+                        end
+
+                        local function filetype()
+                            return string.format(' %s ', vim.bo.filetype):upper()
+                        end
+
+                        return MiniStatusline.combine_groups {
+                            { hl = mode_hl, strings = { mode:upper() } },
+                            '%<', -- Mark general truncate point
+                            { hl = 'Normal', strings = { branch_name(), '    ', lsp() } },
+                            '%=', -- End left alignment
+                            { hl = 'Normal', strings = { lineinfo(), filetype(), fileencoding() } },
+                        }
+                    end,
+                },
+            }
+            -- }}}
         end,
     },
 }
