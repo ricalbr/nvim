@@ -34,7 +34,7 @@ keymap({ 'n', 'x' }, 'j', [[v:count == 0 ? 'gj' : 'j']], { expr = true, silent =
 keymap('x', 'p', [["_dP]]) -- paste without overriding the register
 keymap({ 'n', 'x' }, 'gy', '"+y', { desc = 'Copy to system clipboard' })
 keymap('n', 'gp', '"+p', { desc = 'Paste from system clipboard' })
-keymap('x', 'gp', '"+P', { desc = 'Paste from system clipboard' }) -- - Paste in Visual with `P` to not copy selected text (`:h v_P`)
+keymap('x', 'gp', '"+P', { desc = 'Paste from system clipboard' }) -- paste in visual with `P` to not copy selected text (`:h v_P`)
 
 -- Search inside visually highlighted text. Use `silent = false` for it to make effect immediately.
 keymap('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
