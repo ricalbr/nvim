@@ -9,23 +9,42 @@ Make sure the following are installed on your system:
 
 1. **Neovim** (version >= 0.9.0):
    Install the latest version from [Neovim's GitHub releases](https://github.com/neovim/neovim/releases).
-   On Ubuntu/Debian:
+   
+   #### Ubuntu/Debian:
    ```bash
    sudo apt update
    sudo apt install neovim
    ```
+   
+   #### Arch:
+   ```bash
+   sudo pacman -Syu
+   sudo pacman -Sy neovim
+   ```
 
-2. **Python** (for `pynvim`):
-   Install Python 3 and the required library:
+3. **Python** (for `pynvim`):
+   Install Python 3 and the required library.
+   
+   #### Ubuntu/Debian:
    ```bash
    sudo apt install python3 python3-pip python3-virtualenv
    virtualenv $HOME/.venvs/nvim
    source $HOME/.venvs/nvim/bin/activate
    pip3 install --user pynvim
    ```
+   
+   #### Arch:
+   ```bash
+   sudo pacman -Sy python3 python-pip python-virtualenv
+   virtualenv $HOME/.venvs/nvim
+   source $HOME/.venvs/nvim/bin/activate
+   pip3 install pynvim
+   ```
 
-3. **Node.js and npm**:
-   Required for plugins and the Language Server Protocol (LSP). Install it via a package manager or [nvm](https://github.com/nvm-sh/nvm):
+5. **Node.js and npm**:
+   Required for plugins and the Language Server Protocol (LSP). Install it via a package manager or [nvm](https://github.com/nvm-sh/nvm).
+
+   #### Ubuntu/Debian:
    ```bash
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
    nvm install --lts
@@ -35,12 +54,23 @@ Make sure the following are installed on your system:
    npm update -g
    ```
 
-4. **Optional utilities**:
-   - `ripgrep` (for better search), `bat` (for better highlight), `fzf` (fuzzy finder):
+   #### Arch:
+   ```bash
+   sudo pacman -Sy npm
+   sudo npm update -g
+   ```
+
+7. **Optional utilities**:
+   - `ripgrep` (for better search), `bat` (for better highlight), `fzf` (fuzzy finder).
+     #### Ubuntu/Debian:
      ```bash
      sudo apt install fzf ripgrep bat
      ```
-   - `python` setup
+     #### Arch:
+     ```bash
+     sudo pacman -Sy fzf ripgrep bat
+     ```
+   - `python` setup:
       ```bash
       pip install neovim pynvim black isort flake8
       ```
