@@ -26,7 +26,7 @@ vim.pack.add({
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
     { src = 'https://github.com/ibhagwan/fzf-lua' },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    -- { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason.nvim' },
 })
@@ -40,8 +40,8 @@ require 'keymaps'
 require 'autocmd'
 
 vim.lsp.enable({ 'lua_ls', 'clangd', 'codespell', 'prettier', 'pyright', 'ltex-ls-plus' })
-require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'lua', 'python', 'c', 'cpp' },
-    highlight = { enable = true },
-    indent = { enable = true },
-})
+-- require('nvim-treesitter.configs').setup({
+--     ensure_installed = { 'lua', 'python', 'c', 'cpp' },
+--     highlight = { enable = true },
+--     indent = { enable = true },
+-- })
