@@ -2,5 +2,5 @@
 
 -- basic settings
 vim.opt.textwidth = 68
-local spell = require 'core.spell'
-spell()
+-- local spell = require 'core.spell'
+-- spell()

@@ -7,9 +7,9 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
--- spelling
-local spell = require 'core.spell'
-spell()
+-- -- spelling
+-- local spell = require 'core.spell'
+-- spell()
 
 -- twitter mode
 vim.keymap.set('n', '<leader>tw', ':match Error "%>281v.+"<CR>')

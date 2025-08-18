@@ -7,9 +7,9 @@ vim.opt.linebreak = true
 -- set compiler
 vim.opt.compiler = 'tex'
 
--- set spell
-local spell = require 'core.spell'
-spell()
+-- -- set spell
+-- local spell = require 'core.spell'
+-- spell()
 
 -- keymaps
 local opts = { noremap = true, silent = true }

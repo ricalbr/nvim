@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local function augroup(name)
-    return vim.api.nvim_create_augroup('lazynvim_' .. name, { clear = true })
+    return vim.api.nvim_create_augroup('nvim' .. name, { clear = true })
 end
 
 -- dont list quickfix buffers
@@ -15,21 +15,7 @@ autocmd('Filetype', {
 -- map q to :close for utility buffers
 autocmd({ 'FileType' }, {
     group = augroup 'close_with_q',
-    pattern = {
-        'netrw',
-        'Jaq',
-        'qf',
-        'git',
-        'help',
-        'man',
-        'lspinfo',
-        'oil',
-        'spectre_panel',
-        'lir',
-        'DressingSelect',
-        'tsplayground',
-        '',
-    },
+    pattern = { 'git', 'help', 'man', 'lspinfo', 'oil', '' },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
         vim.schedule(function()
@@ -97,6 +83,26 @@ autocmd('FileType', {
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
     end,
+})
+
+
+-- autoformat on save
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     group = augroup 'LspFormatting',
+--     pattern = "*",
+--     callback = function()
+--         vim.lsp.buf.format()
+--     end,
+-- })
+autocmd("BufWritePre", {
+    callback = function()
+        local mode = vim.api.nvim_get_mode().mode
+        local filetype = vim.bo.filetype
+        if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
+            vim.cmd('lua vim.lsp.buf.format()')
+        else
+        end
+    end
 })
 
 -- overload q and w command
