@@ -1,96 +1,37 @@
-# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> Neovim config
-Configuration for Neovim text editor.
+# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="nvim" width="24"/> neovim config
+configuration for neovim text editor.
 
-## Installation
+## installation
+install the latest version from and the required packages.
 
-### Requirements and Dependencies
-
-Make sure the following are installed on your system:
-
-1. **Neovim** (version >= 0.9.0):
-   Install the latest version from [Neovim's GitHub releases](https://github.com/neovim/neovim/releases).
-   
-   #### Ubuntu/Debian:
-   ```bash
-   sudo apt update
-   sudo apt install neovim
-   ```
-   
-   #### Arch:
    ```bash
    sudo pacman -Syu
-   sudo pacman -Sy neovim
-   ```
-
-3. **Python** (for `pynvim`):
-   Install Python 3 and the required library.
-   
-   #### Ubuntu/Debian:
-   ```bash
-   sudo apt install python3 python3-pip python3-virtualenv
-   virtualenv $HOME/.venvs/nvim
-   source $HOME/.venvs/nvim/bin/activate
-   pip3 install --user pynvim
-   ```
-   
-   #### Arch:
-   ```bash
-   sudo pacman -Sy python3 python-pip python-virtualenv
-   virtualenv $HOME/.venvs/nvim
-   source $HOME/.venvs/nvim/bin/activate
-   pip3 install pynvim
-   ```
-
-5. **Node.js and npm**:
-   Required for plugins and the Language Server Protocol (LSP). Install it via a package manager or [nvm](https://github.com/nvm-sh/nvm).
-
-   #### Ubuntu/Debian:
-   ```bash
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-   nvm install --lts
-   nvm reinstall-packages system
-   npm install -g npm-check-updates
-   ncu -ug
-   npm update -g
-   ```
-
-   #### Arch:
-   ```bash
-   sudo pacman -Sy npm
+   sudo pacman -Sy neovim python3 python-pip python-virtualenv fzf ripgrep bat stylua nodejs npm
    sudo npm update -g
    ```
 
-7. **Optional utilities**:
-   - `ripgrep` (for better search), `bat` (for better highlight), `fzf` (fuzzy finder).
-     #### Ubuntu/Debian:
-     ```bash
-     sudo apt install fzf ripgrep bat
-     ```
-     #### Arch:
-     ```bash
-     sudo pacman -Sy fzf ripgrep bat stylua
-     ```
-   - `python` setup:
-      ```bash
-      pip install neovim pynvim black==22.10.0 isort flake8
-      ```
-
-### Clone the Repository
-
-Clone this repository into your Neovim configuration directory:
-
+create the python 3 environment and install the required libraries
+   ```bash
+   virtualenv $HOME/.venvs/nvim
+   source $HOME/.venvs/nvim/bin/activate
+   pip3 install neovim pynvim black==22.10.0 isort flake8 
+   ```
+clone this repository into the neovim configuration directory:
 ```bash
-mkdir -p ~/.config/nvim
-git clone https://www.github.com/ricalbr/nvim ~/.config/nvim
+mkdir -p $HOME/.config/nvim
+git clone https://www.github.com/ricalbr/nvim $HOME/.config/nvim
 ```
 
 ---
 
-## Useful Commands
+## useful commands
 
-- **Install Plugins**: `:Lazy sync`
-- **Update Plugins**: `:Lazy update`
-- **Check LSP Info**: `:LspInfo`
-- **Debug Config**: `:checkhealth`
+- **update plugins**: `:lua vim.pack.update()`
+- **check LSP info**: `:LspInfo`
+- **debug config**: `:checkhealth`
+---
+
+## see also
+[neovim github release page](https://github.com/neovim/neovim/releases) 
 
 ---
