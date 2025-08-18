@@ -68,11 +68,11 @@ Make sure the following are installed on your system:
      ```
      #### Arch:
      ```bash
-     sudo pacman -Sy fzf ripgrep bat
+     sudo pacman -Sy fzf ripgrep bat stylua
      ```
    - `python` setup:
       ```bash
-      pip install neovim pynvim black isort flake8
+      pip install neovim pynvim black==22.10.0 isort flake8
       ```
 
 ### Clone the Repository
