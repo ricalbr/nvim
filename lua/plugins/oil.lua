@@ -2,6 +2,7 @@ require('oil').setup({
     columns = { 'icon' },
     keymaps = {
         ['<C-h>'] = false,
+        ['-'] = false,
         ['<M-h>'] = 'actions.select_split',
         ['<M-v>'] = 'actions.select_vsplit',
         ['h'] = 'actions.parent',
@@ -32,4 +33,3 @@ require('oil').setup({
         end,
     },
 })
-
