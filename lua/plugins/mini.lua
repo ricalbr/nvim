@@ -1,25 +1,25 @@
 require('mini.ai').setup()
 require('mini.align').setup()
-require('mini.comment').setup()
+-- require('mini.comment').setup()
 require('mini.jump').setup()
 require('mini.pairs').setup()
 require('mini.tabline').setup { show_icons = false }
 require('mini.trailspace').setup()
 require('mini.icons').setup()
--- {{{ mini.snippets
-require('mini.snippets').setup {
-    -- dependencies = 'rafamadriz/friendly-snippets',
-    opts = function()
-        local snippets = require 'mini.snippets'
-        return {
-            snippets = {
-                snippets.gen_loader.from_file '$XDG_CONFIG_HOME/nvim/snippets/cpp.json',
-                snippets.gen_loader.from_lang(),
-            },
-        }
-    end,
-}
--- }}}
+-- -- {{{ mini.snippets
+-- require('mini.snippets').setup {
+--     -- dependencies = 'rafamadriz/friendly-snippets',
+--     opts = function()
+--         local snippets = require 'mini.snippets'
+--         return {
+--             snippets = {
+--                 snippets.gen_loader.from_file '$XDG_CONFIG_HOME/nvim/snippets/cpp.json',
+--                 snippets.gen_loader.from_lang(),
+--             },
+--         }
+--     end,
+-- }
+-- -- }}}
 -- {{{ mini.indentscope
 require('mini.indentscope').setup {
     symbol = '│',
