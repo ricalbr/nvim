@@ -11,7 +11,7 @@ keymap({ 'i', 'n', 's' }, '<Esc>', function()
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- map C-s to save the file, in all the modes
-keymap('n', '<leader>u', ':update<CR> :source<CR>')
+keymap('n', '<leader>u', ':update<CR> :source $MYVIMRC<CR>')
 keymap('n', '<leader>nv', ':e $MYVIMRC <CR>')
 keymap('n', '<C-S>', '<Cmd>silent! update | redraw<CR>', { noremap = true, silent = true, desc = 'Save' })
 keymap({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update | redraw<CR>',
