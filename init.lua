@@ -1,5 +1,4 @@
--- init.lua
--- @ricalbr
+-- init.lua @ricalbr
 
 -- set <space> as the leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
@@ -11,8 +10,7 @@ vim.opt.clipboard = 'unnamed'
 vim.opt.undofile = true
 vim.opt.mouse = 'a'
 vim.opt.winborder = 'rounded'
-vim.opt.hlsearch = false
-vim.opt.cursorcolumn = false
+vim.opt.cursorline = true
 vim.opt.ignorecase = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -21,7 +19,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = 'yes'
+vim.opt.completeopt = 'menu,menuone,popup,fuzzy,noinsert'
 
+-- plugins
 vim.pack.add({
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
@@ -36,6 +36,7 @@ require 'fzf-lua'.setup()
 require 'plugins.mini'
 require 'plugins.oil'
 
+-- keymaps and autocmds
 require 'keymaps'
 require 'autocmd'
 
