@@ -63,7 +63,7 @@ end
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- lua_ls: ignore start
+-- stylua: ignore start
 keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
 keymap('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
 keymap('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
@@ -86,7 +86,35 @@ keymap('n', '<leader>cd', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Jump to D
 keymap('n', '<leader>ci', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Jump to Implementations' })
 keymap('n', '<leader>cr', '<Cmd>FzfLua lsp_references <CR>', { desc = 'LSP References' })
 keymap('n', '<leader><leader>', '<Cmd>FzfLua resume<CR>', { desc = 'Resume FZF search' })
--- lua_ls: ignore end
+-- stylua: ignore end
 
 -- oil
 keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on current working directory' })
+
+-- remove unused package
+local function pack_clean()
+    local active_plugins = {}
+    local unused_plugins = {}
+
+    for _, plugin in ipairs(vim.pack.get()) do
+        active_plugins[plugin.spec.name] = plugin.active
+    end
+
+    for _, plugin in ipairs(vim.pack.get()) do
+        if not active_plugins[plugin.spec.name] then
+            table.insert(unused_plugins, plugin.spec.name)
+        end
+    end
+
+    if #unused_plugins == 0 then
+        print("No unused plugins.")
+        return
+    end
+
+    local choice = vim.fn.confirm("Remove unused plugins?", "&Yes\n&No", 2)
+    if choice == 1 then
+        vim.pack.del(unused_plugins)
+    end
+end
+
+vim.keymap.set("n", "<leader>pc", pack_clean)
