@@ -26,7 +26,7 @@ vim.pack.add({
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
     { src = 'https://github.com/ibhagwan/fzf-lua' },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version="master"},
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason.nvim' },
 
@@ -42,9 +42,9 @@ vim.cmd('colorscheme spring')
 require 'keymaps'
 require 'autocmd'
 
-vim.lsp.enable({ 'lua_ls', 'clangd', 'codespell', 'prettier', 'pyright', 'tinymist' })
+vim.lsp.enable({ 'lua_ls', 'clangd', 'cspell_ls', 'pyright', 'tinymist' })
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'lua', 'python', 'c', 'cpp' , 'typst'},
+    ensure_installed = { 'lua', 'python', 'c', 'cpp', 'typst' },
     highlight = { enable = true },
     indent = { enable = true },
 })
