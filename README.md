@@ -3,10 +3,9 @@ configuration for neovim text editor.
 
 ## installation
 install the latest version from and the required packages.
-
    ```bash
    sudo pacman -Syu
-   sudo pacman -Sy neovim python3 python-pip python-virtualenv fzf ripgrep bat stylua nodejs npm
+   sudo pacman -Sy neovim python3 python-pip python-virtualenv fzf ripgrep bat inotify nodejs npm
    sudo npm update -g
    ```
 
@@ -25,7 +24,6 @@ git clone https://www.github.com/ricalbr/nvim $HOME/.config/nvim
 ---
 
 ## useful commands
-
 - **update plugins**: `:lua vim.pack.update()`
 - **check LSP info**: `:LspInfo`
 - **debug config**: `:checkhealth`
