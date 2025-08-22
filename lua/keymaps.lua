@@ -5,20 +5,11 @@ local opts = { noremap = true, silent = true }
 -- keymaps for better default experience
 keymap('i', 'jk', '<Esc><Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
-keymap({ 'i', 'n', 's' }, '<Esc>', function()
-    vim.cmd 'noh'
-    return '<esc>'
-end, { expr = true, desc = 'Escape and Clear hlsearch' })
+keymap({ 'i', 'n', 's' }, '<Esc>', '<Cmd>nohlsearch<CR><Esc>', { desc = 'Escape and clear hlsearch', })
 
 -- map C-s to save the file, in all the modes
-keymap('n', '<leader>u', ':update<CR> :source $MYVIMRC<CR>')
-keymap('n', '<leader>nv', ':e $MYVIMRC <CR>')
-keymap('n', '<C-S>', '<Cmd>silent! update | redraw<CR>', { noremap = true, silent = true, desc = 'Save' })
-keymap({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update | redraw<CR>',
-    { noremap = true, silent = true, desc = 'Save and go to Normal mode' })
-
--- select all text
-keymap('n', '<leader>aa', 'ggVG<c-$>', { desc = 'Select all', noremap = true, silent = true })
+keymap('n', '<C-S>', '<Cmd>silent! update | redraw<CR>', { desc = 'Save', })
+keymap({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update | redraw<CR>', { desc = 'Save and go to Normal mode', })
 
 -- keep searches centered on screen
 local keys_to_center = { 'n', 'N', '*', '#', 'g*', 'g#', '{', '}', '<C-u>', '<C-d>' }
@@ -26,7 +17,10 @@ for _, key in ipairs(keys_to_center) do
     keymap('n', key, key .. 'zz', opts)
 end
 
--- join lines keepin the cursor position
+-- toggle spell
+keymap('n', '<leader>ss', '<Cmd>set spell!<CR>', { desc = 'Toggle spell checking' })
+
+-- join lines keeping the cursor position
 keymap('n', 'J', 'mzJ`z', opts)
 
 -- move vertically by visual line (don't skip wrapped lines)
@@ -38,6 +32,8 @@ keymap('x', 'p', [["_dP]]) -- paste without overriding the register
 keymap({ 'n', 'x' }, 'gy', '"+y', { desc = 'Copy to system clipboard' })
 keymap('n', 'gp', '"+p', { desc = 'Paste from system clipboard' })
 keymap('x', 'gp', '"+P', { desc = 'Paste from system clipboard' }) -- paste in visual with `P` to not copy selected text (`:h v_P`)
+
+--
 
 -- Search inside visually highlighted text. Use `silent = false` for it to make effect immediately.
 keymap('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
