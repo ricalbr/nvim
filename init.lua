@@ -19,7 +19,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.termguicolors = true
 vim.o.signcolumn = 'yes'
-vim.o.completeopt = 'menu,menuone,popup,fuzzy,noinsert'
+vim.o.completeopt = 'menu,popup,fuzzy,noinsert'
 
 -- plugins
 vim.pack.add({
