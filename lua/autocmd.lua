@@ -87,14 +87,8 @@ autocmd('FileType', {
 
 
 -- autoformat on save
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     group = augroup 'LspFormatting',
---     pattern = "*",
---     callback = function()
---         vim.lsp.buf.format()
---     end,
--- })
 autocmd("BufWritePre", {
+    group = augroup 'LspFormatting',
     callback = function()
         local mode = vim.api.nvim_get_mode().mode
         local filetype = vim.bo.filetype
