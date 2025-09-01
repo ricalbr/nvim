@@ -5,7 +5,6 @@ local opts = { noremap = true, silent = true }
 -- keymaps for better default experience
 keymap('i', 'jk', '<Esc><Esc>', opts)
 keymap('n', '\\', '<cmd>bd<CR>', opts)
-keymap({ 'i', 'n', 's' }, '<Esc>', '<Cmd>nohlsearch<CR><Esc>', { desc = 'Escape and clear hlsearch', })
 
 -- map C-s to save the file, in all the modes
 keymap('n', '<C-S>', '<Cmd>silent! update | redraw<CR>', { desc = 'Save', })
