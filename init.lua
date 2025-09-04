@@ -41,7 +41,7 @@ vim.cmd('colorscheme spring')
 require 'keymaps'
 require 'autocmd'
 
-vim.lsp.enable({ 'lua_ls', 'clangd', 'pyright', 'tinymist' })
+vim.lsp.enable({ 'lua_ls', 'clangd', 'ruff', 'tinymist' })
 require('nvim-treesitter.configs').setup({
     ensure_installed = { 'lua', 'python', 'c', 'cpp', 'typst' },
     highlight = { enable = true },
