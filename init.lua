@@ -1,7 +1,7 @@
 -- init.lua @ricalbr
 
 -- set <space> as the leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '', { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -19,6 +19,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.termguicolors = true
 vim.o.signcolumn = 'yes'
+vim.o.pumheight = 10
 vim.o.completeopt = 'menu,popup,fuzzy,noinsert'
 
 -- plugins
