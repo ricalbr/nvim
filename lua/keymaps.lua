@@ -84,7 +84,7 @@ keymap('n', '<leader><leader>', '<Cmd>FzfLua resume<CR>', { desc = 'Resume FZF s
 -- stylua: ignore end
 
 -- oil
-keymap('n', '-', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on current working directory' })
+keymap('n', '<Leader>e', '<Cmd>Oil --float . <CR>', { desc = 'Open Oil on current working directory' })
 
 -- remove unused package
 local function pack_clean()
