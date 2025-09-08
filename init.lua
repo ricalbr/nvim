@@ -6,7 +6,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- general
-vim.o.clipboard = 'unnamed'
+vim.g.clipboard = 'osc52'
 vim.o.undofile = true
 vim.o.mouse = 'a'
 vim.o.winborder = 'rounded'
