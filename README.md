@@ -5,7 +5,7 @@ configuration for neovim text editor.
 install the latest version from and the required packages.
    ```bash
    sudo pacman -Syu
-   sudo pacman -Sy neovim python3 python-pip python-virtualenv fzf ripgrep bat inotify nodejs npm
+   sudo pacman -Sy neovim python3 python-pip python-virtualenv fzf ripgrep bat inotify nodejs npm python-virtualenv
    sudo npm update -g
    ```
 
