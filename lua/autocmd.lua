@@ -85,19 +85,14 @@ autocmd('FileType', {
     end,
 })
 
-
--- -- autoformat on save
--- autocmd("BufWritePre", {
---     group = augroup 'LspFormatting',
---     callback = function()
---         local mode = vim.api.nvim_get_mode().mode
---         local filetype = vim.bo.filetype
---         if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
---             vim.cmd('lua vim.lsp.buf.format()')
---         else
---         end
---     end
--- })
+-- remove trailing white space
+autocmd("BufWritePre", {
+    group = augroup 'trailspace',
+    pattern = "*",
+    callback = function()
+        vim.cmd([[%s/\s\+$//e]])
+    end,
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
