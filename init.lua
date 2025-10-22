@@ -45,7 +45,7 @@ require 'keymaps'
 require 'autocmd'
 
 -- blink
-vim.lsp.enable({ 'lua_ls', 'clangd', 'ruff', 'tinymist' })
+vim.lsp.enable({ 'lua_ls', 'clangd', 'pyright' })
 require("blink.cmp").setup({
     {
         keymap = { preset = 'default' },
