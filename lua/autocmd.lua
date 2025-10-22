@@ -98,12 +98,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-        -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
-        if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-        end
-
-        -- Auto-format ("lint") on save.
+        -- auto-format ("lint") on save.
         if not client:supports_method('textDocument/willSaveWaitUntil')
             and client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
@@ -116,6 +111,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
     end,
 })
+
 -- overload q and w command
 vim.api.nvim_command 'command! Q q'
 vim.api.nvim_command 'command! W w'
