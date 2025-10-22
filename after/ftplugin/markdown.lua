@@ -4,9 +4,9 @@
 vim.opt.linebreak = true
 vim.opt.formatoptions = vim.opt.formatoptions - 't'
 
--- spelling
-local spell = require 'core.spell'
-spell()
+-- -- spelling
+-- local spell = require 'core.spell'
+-- spell()
 
 -- keymaps
 local opts = { noremap = true, silent = true }
