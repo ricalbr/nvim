@@ -31,14 +31,17 @@ vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason.nvim' },
     { src = "https://github.com/Saghen/blink.cmp",                version = "v1.6.0" },
-    { src = 'https://github.com/rafamadriz/friendly-snippets' }
+    { src = 'https://github.com/rafamadriz/friendly-snippets' },
+    { src = 'https://github.com/junegunn/goyo.vim' },
+    { src = 'https://github.com/catppuccin/nvim' }
 })
 
 require 'mason'.setup()
 require 'fzf-lua'.setup()
 require 'plugins.mini'
 require 'plugins.oil'
-vim.cmd('colorscheme spring')
+require("catppuccin").setup({ transparent_background = true, })
+vim.cmd.colorscheme "catppuccin"
 
 -- keymaps and autocmds
 require 'keymaps'
