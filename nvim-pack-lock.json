@@ -10,7 +10,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "f6d949549cc43fb5d35ef43db56f03131da469a7",
+      "rev": "e9c8828f216e419d3b7fa1292d18378b14368492",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "goyo.vim": {
@@ -22,15 +22,15 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "dca98843fab66d080779cd973e7139e258ff164c",
+      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim": {
-      "rev": "193e123cdbc4dd3e86db883d55349e9587f0ded6",
+      "rev": "ce8d176faa4643e026e597ae3c31db59b63cef09",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-lspconfig": {
-      "rev": "9c923997123ff9071198ea3b594d4c1931fab169",
+      "rev": "f3979663c9c8cd9ad258344b9cfb5ad83cff61c1",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
