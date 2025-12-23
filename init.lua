@@ -65,4 +65,15 @@ require('nvim-treesitter.configs').setup({
     ensure_installed = { 'lua', 'python', 'c', 'cpp', 'typst' },
     highlight = { enable = true },
     indent = { enable = true },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = '<C-space>',
+            node_incremental = '<C-space>',
+            scope_incremental = false,
+            node_decremental = '<bs>',
+        },
+    },
 })
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

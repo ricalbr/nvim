@@ -10,11 +10,11 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "e9c8828f216e419d3b7fa1292d18378b14368492",
+      "rev": "b1d2b0dc146cb9260209da4d7ab754adb0a2653d",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "goyo.vim": {
-      "rev": "fa0263d456dd43f5926484d1c4c7022dfcb21ba9",
+      "rev": "9c72fdf2d202914318581f9f0dd09fd102f8504d",
       "src": "https://github.com/junegunn/goyo.vim"
     },
     "mason.nvim": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
+      "rev": "6170f606fbdb94bf461635c47962f61dceffe496",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim": {
@@ -30,7 +30,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-lspconfig": {
-      "rev": "f3979663c9c8cd9ad258344b9cfb5ad83cff61c1",
+      "rev": "5eeb45c8c469b84777a5bd8796b698c8a1c780a7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -38,8 +38,12 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'master'"
     },
+    "nvim-treesitter-pyfold": {
+      "rev": "f0d31fc70e8f8fed43ef745814317eab653454de",
+      "src": "https://github.com/eddiebergman/nvim-treesitter-pyfold"
+    },
     "oil.nvim": {
-      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
+      "rev": "756dec855b4811f2d27f067a3aca477f368d99f5",
       "src": "https://github.com/stevearc/oil.nvim"
     }
   }

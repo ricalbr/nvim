@@ -8,7 +8,7 @@ vim.opt.expandtab = true
 vim.opt.fileformat = 'unix'
 vim.opt.textwidth = 120
 -- vim.wo.colorcolumn = 121
--- vim.opt.foldlevel = 0
+vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 
 vim.opt.makeprg = "python3 %"
