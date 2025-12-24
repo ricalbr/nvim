@@ -54,6 +54,7 @@ end
 
 -- diagnostic keymaps
 keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
+keymap('n', '<leader>k', '<Cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Open diagnostic Quickfix list' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 -- stylua: ignore start
