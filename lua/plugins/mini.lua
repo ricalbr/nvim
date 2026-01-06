@@ -68,13 +68,6 @@ require('mini.statusline').setup {
         active = function()
             local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
 
-            local function lineinfo()
-                if vim.bo.filetype == 'alpha' then
-                    return ''
-                end
-                return ' Ln %l, Col %c '
-            end
-
             local function branch_name()
                 local branch = vim.fn.system "git branch --show-current 2> /dev/null | tr -d '\n'"
                 if branch ~= '' then
@@ -113,19 +106,33 @@ require('mini.statusline').setup {
             end
 
             local function fileencoding()
-                return string.format(' %s ', vim.bo.fileencoding):upper()
+                return string.format(' %s ', vim.bo.fileencoding):lower()
             end
 
-            local function filetype()
-                return string.format(' %s ', vim.bo.filetype):upper()
+            local function filename()
+                local name = vim.fn.expand('%:t')
+                if name == '' then
+                    return '[No Name]'
+                end
+                return name
             end
+
+            local filetype = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+
+            local function lineinfo()
+                if vim.bo.filetype == 'alpha' then
+                    return ''
+                end
+                return string.format(' %d:%d', vim.fn.line('.'), vim.fn.col('.'))
+            end
+
 
             return MiniStatusline.combine_groups {
                 { hl = mode_hl,  strings = { mode:upper() } },
                 '%<', -- Mark general truncate point
                 { hl = 'Normal', strings = { branch_name(), '    ', lsp() } },
                 '%=', -- End left alignment
-                { hl = 'Normal', strings = { lineinfo(), filetype(), fileencoding() } },
+                { hl = 'Normal', strings = { filename(), "    ", filetype, fileencoding(), lineinfo() } },
             }
         end,
     },
