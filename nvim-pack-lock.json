@@ -38,10 +38,6 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'master'"
     },
-    "nvim-treesitter-pyfold": {
-      "rev": "f0d31fc70e8f8fed43ef745814317eab653454de",
-      "src": "https://github.com/eddiebergman/nvim-treesitter-pyfold"
-    },
     "oil.nvim": {
       "rev": "756dec855b4811f2d27f067a3aca477f368d99f5",
       "src": "https://github.com/stevearc/oil.nvim"
