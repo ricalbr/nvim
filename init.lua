@@ -6,7 +6,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- general
-vim.g.clipboard = 'osc52'
+vim.opt.clipboard = "unnamedplus"
+vim.g.clipboard = {
+    name = "OSC52",
+    copy = { ["+"] = require("vim.ui.clipboard.osc52").copy("+"), },
+    paste = { ["+"] = function() return { "" } end, },
+}
 vim.o.undofile = true
 vim.o.mouse = 'a'
 vim.o.winborder = 'rounded'
