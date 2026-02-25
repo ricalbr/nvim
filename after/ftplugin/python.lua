@@ -48,7 +48,7 @@ local function run_python()
     -- send command
     vim.fn.chansend(
         vim.b.terminal_job_id,
-        "python3 " .. vim.fn.fnameescape(file) .. "\n"
+        "python3 " .. vim.fn.shellescape(file) .. "\n"
     )
 
     -- scroll to bottom after output
